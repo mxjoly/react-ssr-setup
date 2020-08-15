@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import serialize from 'serialize-javascript';
+
 import App from '../../shared/App';
 import Html from '../components/html';
 
@@ -17,7 +19,8 @@ const renderFullPage = () => (req: Request, res: Response) => {
     </Provider>
   );
 
-  const state = JSON.stringify(res.locals.store.getState());
+  // redux.js.org/recipes/server-rendering#security-considerations
+  const state = serialize(res.locals.store.getState());
 
   return res.send(
     '<!doctype html>' +

@@ -32,7 +32,8 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "serialize-javascript": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
@@ -56,6 +57,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "@types/rimraf": "^3.0.0",
+    "@types/serialize-javascript": "^4.0.0",
     "@types/webpack": "^4.41.21",
     "@types/webpack-dev-middleware": "^3.7.1",
     "@types/webpack-env": "^1.15.2",
