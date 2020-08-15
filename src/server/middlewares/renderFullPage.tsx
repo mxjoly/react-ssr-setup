@@ -1,14 +1,19 @@
 import React from 'react';
 import { Request, Response } from 'express';
 import { renderToString } from 'react-dom/server';
+import { StaticRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from '../../shared/App';
 import Html from '../components/html';
 
-const renderFullPage = () => (_req: Request, res: Response) => {
+const routerContext = {};
+
+const renderFullPage = () => (req: Request, res: Response) => {
   const content = renderToString(
     <Provider store={res.locals.store}>
-      <App />
+      <Router location={req.url} context={routerContext}>
+        <App />
+      </Router>
     </Provider>
   );
 
