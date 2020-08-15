@@ -4,8 +4,11 @@ import chalk from 'chalk';
 import manifestHelpers from 'express-manifest-helpers';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+
 import paths from '../../config/paths';
-import serverRenderer from './middlewares/serverRenderer';
+import addStore from './middlewares/addStore';
+import handleErrors from './middlewares/handleErrors';
+import renderFullPage from './middlewares/renderFullPage';
 
 require('dotenv').config();
 
@@ -30,7 +33,9 @@ app.use(
   })
 );
 
-app.use(serverRenderer);
+app.use(addStore);
+app.use(renderFullPage());
+app.use(handleErrors);
 
 app.listen(process.env.PORT || 8500, () => {
   console.log(

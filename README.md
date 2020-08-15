@@ -11,6 +11,7 @@ This project is a template of a server side rendering a [React](https://en.react
   - [Avoid source map generation for faster builds](#avoid-source-map-generation-for-faster-builds)
   - [Change the port of the dev environment](#change-the-port-of-the-dev-environment)
 - [Todo](#todo)
+- [License](#License)
 
 ## Features
 
@@ -29,6 +30,9 @@ This project is a template of a server side rendering a [React](https://en.react
 
   - ⚛ React 16.x (latest), with Hooks!
   - ✅ Express 4.x
+  - ✅ Redux + Thunk middleware
+  - ✅ Immer
+  - ✅ Reselect
 
 ## Installation
 
@@ -91,5 +95,9 @@ By default if you run `npm start` the development server will use port 8500. You
 - [ ] Add test with Jest
 - [ ] React Helmet support
 - [ ] Add Routing with react-router and react-router-dom
-- [ ] Set up Redux
+- [x] Set up Redux
 - [ ] Internationalization with i18n
+
+## License
+
+MIT.
