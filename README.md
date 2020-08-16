@@ -93,12 +93,12 @@ By default if you run `npm start` the development server will use port 8500. You
 ## Todo
 
 - [ ] Add test with Jest
-- [ ] React Helmet support
-- [ ] Add Routing with react-router and react-router-dom
+- [x] React Helmet support
+- [x] Add Routing with react-router and react-router-dom
 - [x] Set up Redux
 - [ ] Internationalization with i18n
 - [ ] Add Storybook
-- [ ] Add CSS modules
+- [x] Add CSS modules
 
 ## License
 

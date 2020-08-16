@@ -4,14 +4,26 @@ type Props = {
   children: any;
   css: string[];
   scripts: string[];
+  helmetContext: any;
   state: string;
 };
 
-const html = ({ children, css = [], scripts = [], state = '{}' }: Props) => (
-  <html lang="">
+const html = ({
+  children,
+  css = [],
+  scripts = [],
+  helmetContext: { helmet },
+  state = '{}',
+}: Props) => (
+  <html {...helmet.htmlAttributes.toString()}>
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      {helmet.base.toComponent()}
+      {helmet.title.toComponent()}
+      {helmet.meta.toComponent()}
+      {helmet.link.toComponent()}
+      {helmet.script.toComponent()}
       {css.filter(Boolean).map((href) => (
         <link key={href} rel="stylesheet" href={href} />
       ))}
@@ -21,7 +33,7 @@ const html = ({ children, css = [], scripts = [], state = '{}' }: Props) => (
         }}
       />
     </head>
-    <body>
+    <body {...helmet.bodyAttributes.toString()}>
       <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
       {scripts.filter(Boolean).map((src) => (
         <script key={src} src={src} />

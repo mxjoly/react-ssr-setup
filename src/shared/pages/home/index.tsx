@@ -1,7 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
-export default class Home extends Component {
-  render() {
-    return <div>Home</div>;
-  }
-}
+const Home: React.FC<any> = () => (
+  <React.Fragment>
+    <Helmet>
+      <title>Home</title>
+    </Helmet>
+    <p>Home</p>
+  </React.Fragment>
+);
+
+export default Home;

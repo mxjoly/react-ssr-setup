@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import favicon from '../shared/assets/favicon.png';
 import './App.scss';
 
 import routes from './routes';
@@ -9,7 +11,12 @@ import PageNotFound from './pages/404';
 
 const App: React.FC<any> = () => {
   return (
-    <div className="app">
+    <div className={'app'}>
+      <Helmet
+        defaultTitle="React SSR Starter"
+        titleTemplate="%s – React SSR Starter"
+        link={[{ rel: 'icon', type: 'image/png', href: favicon }]}
+      />
       <h1>React + Express</h1>
       <h2>Navigation</h2>
       <ul>

@@ -1,7 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
-export default class PageNotFound extends Component {
-  render() {
-    return <div>404</div>;
-  }
-}
+const PageNotFound: React.FC<any> = () => (
+  <React.Fragment>
+    <Helmet>
+      <title>404</title>
+    </Helmet>
+    <p>Page Not Found</p>
+  </React.Fragment>
+);
+
+export default PageNotFound;

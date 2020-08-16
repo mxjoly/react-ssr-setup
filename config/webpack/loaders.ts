@@ -1,7 +1,17 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import getLocalIdent from 'react-dev-utils/getCSSModuleLocalIdent';
 
 const isDev = process.env.NODE_ENV === 'development';
-const generateSourceMap = true;
+const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true;
+
+const cssModuleOptions = isDev
+  ? { getLocalIdent, exportLocalsConvention: 'camelCase' }
+  : { localIdentName: '[hash:base64:8]', exportLocalsConvention: 'camelCase' };
+
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
+const sassRegex = /\.s[ac]ss$/;
+const imageRegex = /\.(jpe?g|png|gif|svg)$/i;
 
 const babelLoader = {
   test: /\.(js|jsx|ts|tsx)$/i,
@@ -30,9 +40,33 @@ const babelLoader = {
   },
 };
 
-const cssLoaderClient = {
-  test: /\.css$/i,
+const cssModuleLoaderClient = {
+  test: cssModuleRegex,
   use: [
+    'css-hot-loader',
+    MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader',
+      options: {
+        modules: cssModuleOptions,
+        importLoaders: 1,
+        sourceMap: generateSourceMap,
+      },
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: generateSourceMap,
+      },
+    },
+  ],
+};
+
+const cssLoaderClient = {
+  test: cssRegex,
+  exclude: cssModuleRegex,
+  use: [
+    'css-hot-loader',
     {
       loader: MiniCssExtractPlugin.loader,
       options: {
@@ -53,7 +87,7 @@ const cssLoaderClient = {
 };
 
 const sassLoaderClient = {
-  test: /\.s[ac]ss$/i,
+  test: sassRegex,
   use: [
     {
       loader: MiniCssExtractPlugin.loader,
@@ -76,7 +110,7 @@ const sassLoaderClient = {
 };
 
 const imageLoaderClient = {
-  test: /\.(jpe?g|png|gif|svg)$/i,
+  test: imageRegex,
   loader: 'url-loader',
   options: {
     name: isDev ? 'assets/[name].[ext]' : 'assets/[name].[hash:8].[ext]',
@@ -96,13 +130,34 @@ const fileLoaderClient = {
   ],
 };
 
+const cssModuleLoaderServer = {
+  test: cssModuleRegex,
+  use: [
+    'css-hot-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1,
+        modules: { ...cssModuleOptions, exportOnlyLocals: true },
+      },
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: generateSourceMap,
+      },
+    },
+  ],
+};
+
 const cssLoaderServer = {
-  test: /\.css$/i,
+  test: cssRegex,
+  exclude: cssModuleRegex,
   use: [MiniCssExtractPlugin.loader, 'css-loader'],
 };
 
 const sassLoaderServer = {
-  test: /\.s[ac]ss$/i,
+  test: sassRegex,
   use: [
     MiniCssExtractPlugin.loader,
     'css-loader',
@@ -136,6 +191,7 @@ export const client = [
   {
     oneOf: [
       babelLoader,
+      cssModuleLoaderClient,
       cssLoaderClient,
       sassLoaderClient,
       imageLoaderClient,
@@ -148,6 +204,7 @@ export const server = [
   {
     oneOf: [
       babelLoader,
+      cssModuleLoaderServer,
       cssLoaderServer,
       sassLoaderServer,
       imageLoaderServer,

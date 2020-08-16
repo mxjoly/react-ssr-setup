@@ -5,6 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import { TypedCssModulesPlugin } from 'typed-css-modules-webpack-plugin';
 import envBuilder from '../env';
 import paths from '../paths';
 
@@ -35,6 +36,9 @@ const client = [
   }),
   new ManifestPlugin({
     fileName: 'manifest.json',
+  }),
+  new TypedCssModulesPlugin({
+    globPattern: 'src/**/*.css',
   }),
   isProfilerEnabled() && new webpack.debug.ProfilingPlugin(),
   isDev() &&
