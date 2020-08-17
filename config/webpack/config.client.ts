@@ -62,6 +62,7 @@ if (!isDev) {
     minimize: true,
     minimizer: [
       // TerserPlugin config is taken entirely from react-scripts
+      // https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/config/webpack.config.js
       new TerserPlugin({
         terserOptions: {
           parse: {
