@@ -30,9 +30,12 @@ This project is a template of a server side rendering a [React](https://en.react
 
   - ⚛ React 16.x (latest), with Hooks!
   - ✅ Express 4.x
+  - ✅ React i18next for multi language support
   - ✅ Redux + Thunk middleware
   - ✅ Immer
   - ✅ Reselect
+  - ✅ React Router 5
+  - ✅ React Helmet
 
 ## Installation
 
@@ -96,7 +99,7 @@ By default if you run `npm start` the development server will use port 8500. You
 - [x] React Helmet support
 - [x] Add Routing with react-router and react-router-dom
 - [x] Set up Redux
-- [ ] Internationalization with i18n
+- [x] Internationalization with i18n
 - [ ] Add Storybook
 - [x] Add CSS modules
 

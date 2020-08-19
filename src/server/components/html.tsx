@@ -6,6 +6,8 @@ type Props = {
   scripts: string[];
   helmetContext: any;
   state: string;
+  initialI18nStore: any;
+  initialLanguage: string;
 };
 
 const html = ({
@@ -14,8 +16,10 @@ const html = ({
   scripts = [],
   helmetContext: { helmet },
   state = '{}',
+  initialI18nStore = '{}',
+  initialLanguage = 'en',
 }: Props) => (
-  <html {...helmet.htmlAttributes.toString()}>
+  <html lang={initialLanguage} {...helmet.htmlAttributes.toString()}>
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,7 +33,13 @@ const html = ({
       ))}
       <script
         dangerouslySetInnerHTML={{
-          __html: `window.__PRELOADED_STATE__ = ${state}`,
+          __html: `
+            window.__PRELOADED_STATE__ = ${state};
+            window.initialI18nStore = JSON.parse('${JSON.stringify(
+              initialI18nStore
+            )}');
+            window.initialLanguage = '${initialLanguage}';
+            `,
         }}
       />
     </head>

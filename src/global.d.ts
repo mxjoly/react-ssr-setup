@@ -1,16 +1,25 @@
+interface Window {
+  store: any;
+  initialI18nStore: any;
+  initialLanguage: string;
+  __PRELOADED_STATE__: any;
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+}
+
+declare const __BROWSER__: boolean;
+declare const __SERVER__: boolean;
+
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: 'development' | 'production' | 'test';
   }
 }
 
-declare const __BROWSER__: boolean;
-declare const __SERVER__: boolean;
-
-interface Window {
-  store: any;
-  __PRELOADED_STATE__: any;
-  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+declare namespace Express {
+  interface Request {
+    i18n: any;
+    locals: any;
+  }
 }
 
 declare module '*.gif' {
@@ -44,3 +53,4 @@ declare module '*.module.css' {
 }
 
 declare module 'express-manifest-helpers';
+declare module 'i18next-http-middleware';

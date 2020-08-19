@@ -1,8 +1,14 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import favicon from '../shared/assets/favicon.png';
+import { useTranslation } from 'react-i18next';
+import { useStore } from 'react-redux';
+
+import favicon from './assets/favicon.png';
 import './App.scss';
+
+import withIntl from './i18n/helpers/withIntl';
+import { ActionTypes } from './store/app/actions';
 
 import routes from './routes';
 import Home from './pages/home';
@@ -10,6 +16,17 @@ import About from './pages/about';
 import PageNotFound from './pages/404';
 
 const App: React.FC<any> = () => {
+  const { t } = useTranslation();
+  const { search } = useLocation();
+  const store = useStore();
+
+  const changeLocale = (newLocale: string) => {
+    store.dispatch({
+      type: ActionTypes.SET_LOCALE,
+      payload: newLocale,
+    });
+  };
+
   return (
     <div className={'app'}>
       <Helmet
@@ -18,13 +35,12 @@ const App: React.FC<any> = () => {
         link={[{ rel: 'icon', type: 'image/png', href: favicon }]}
       />
       <h1>React + Express</h1>
-      <h2>Navigation</h2>
       <ul>
         <li>
-          <Link to={routes.home}>Home</Link>
+          <Link to={routes.home + search}>Home</Link>
         </li>
         <li>
-          <Link to={routes.about}>About</Link>
+          <Link to={routes.about + search}>About</Link>
         </li>
       </ul>
       <div className="page-content">
@@ -33,9 +49,12 @@ const App: React.FC<any> = () => {
           <Route exact path={routes.about} component={About} />
           <Route render={() => <PageNotFound />} />
         </Switch>
+        <p>{t('test')}</p>
+        <button onClick={() => changeLocale('en')}>En</button>
+        <button onClick={() => changeLocale('fr')}>Fr</button>
       </div>
     </div>
   );
 };
 
-export default App;
+export default withIntl(App);

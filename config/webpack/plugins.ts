@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import ManifestPlugin from 'webpack-manifest-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { TypedCssModulesPlugin } from 'typed-css-modules-webpack-plugin';
@@ -51,6 +52,17 @@ const server = [
   new webpack.DefinePlugin({
     __SERVER__: 'true',
     __BROWSER__: 'false',
+  }),
+  new CopyPlugin({
+    patterns: [
+      {
+        from: paths.locales,
+        to: path.join(paths.serverBuild, 'locales'),
+        globOptions: {
+          ignore: ['*.missing.json'],
+        },
+      },
+    ],
   }),
 ].filter(Boolean);
 

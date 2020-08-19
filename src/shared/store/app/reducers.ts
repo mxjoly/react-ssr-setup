@@ -3,7 +3,7 @@ import { ActionTypes } from './actions';
 import { Action, AppState } from './types';
 
 export const initialState = Object.freeze<AppState>({
-  locale: 'en_US',
+  locale: null,
 });
 
 export default (state: AppState = initialState, action: Action): AppState =>
