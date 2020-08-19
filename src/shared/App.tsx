@@ -1,14 +1,13 @@
 import React from 'react';
-import { Link, Route, Switch, useLocation } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { useStore } from 'react-redux';
 
 import favicon from './assets/favicon.png';
 import './App.scss';
 
-import withIntl from './i18n/helpers/withIntl';
-import { setLocale } from './store/app/actions';
+import i18n from './i18n';
+import withLocale from './i18n/withLocale';
 import { Locale } from './store/app/types';
 
 import routes from './routes';
@@ -18,11 +17,11 @@ import PageNotFound from './pages/404';
 
 const App: React.FC<any> = () => {
   const { t } = useTranslation();
-  const { search } = useLocation();
-  const store = useStore();
 
   const changeLocale = (newLocale: Locale) => {
-    store.dispatch(setLocale(newLocale));
+    if (i18n.language !== newLocale) {
+      i18n.changeLanguage(newLocale);
+    }
   };
 
   return (
@@ -35,10 +34,10 @@ const App: React.FC<any> = () => {
       <h1>React + Express</h1>
       <ul>
         <li>
-          <Link to={routes.home + search}>Home</Link>
+          <Link to={routes.home}>Home</Link>
         </li>
         <li>
-          <Link to={routes.about + search}>About</Link>
+          <Link to={routes.about}>About</Link>
         </li>
       </ul>
       <div className="page-content">
@@ -55,4 +54,4 @@ const App: React.FC<any> = () => {
   );
 };
 
-export default withIntl(App);
+export default withLocale(App);

@@ -1,4 +1,4 @@
-export type Locale = 'en' | 'fr' | null;
+export type Locale = 'en' | 'fr';
 
 export type AppState = Readonly<{
   locale: Locale;

@@ -19,6 +19,7 @@ const options: any = {
 
   fallbackLng: locales,
   supportedLngs: locales,
+  preload: locales,
   load: 'languageOnly',
 
   backend: {
@@ -32,7 +33,7 @@ const options: any = {
   partialBundledLanguages: true,
 
   react: {
-    useSuspense: false,
+    useSuspense: true,
     wait: true,
   },
 

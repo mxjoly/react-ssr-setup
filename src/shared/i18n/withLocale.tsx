@@ -4,52 +4,46 @@ import { useTranslation } from 'react-i18next';
 import { useStore, useSelector } from 'react-redux';
 import { parse } from 'query-string';
 
-import config from '../config';
-import findBestLocale from './findBestLocale';
+import config from './config';
 import { getLocale } from 'shared/store/app/selectors';
 import { setLocale } from 'shared/store/app/actions';
 import { Locale } from 'shared/store/app/types';
 
 /**
- * Format the url to contains a valid locale in the query, and sync i18n language
+ * Format the url to contain a valid locale in the query, and sync i18n language
  * with redux store and the query
- * @param WrappedComponent - The component wrapped
  */
-const withIntl = (WrappedComponent: React.FC<any>) => {
-  const IntlComponent = (props: any) => {
+const withLocale = (WrappedComponent: React.FC<any>) => {
+  const LocalizedComponent = () => {
     const { i18n } = useTranslation();
     const { pathname, search } = useLocation();
-    const history = useHistory();
     const store = useStore();
     const locale = useSelector(getLocale);
+    const history = useHistory();
 
     const parsedQuery = parse(search);
     const parsedLocale = parsedQuery[config.detection.lookupQuerystring];
 
-    // Sync the i18n language with the locale in the store
+    // Sync the i18n language, the locale in the store and the locale in the url
     React.useEffect(() => {
-      if (locale !== i18n.language && locale !== null) {
-        const query = search.replace(`lng=${i18n.language}`, `lng=${locale}`);
-        i18n.changeLanguage(locale);
-        history.push(pathname + query);
+      if (locale !== i18n.language) {
+        store.dispatch(setLocale(i18n.language as Locale));
       }
-    }, [locale]);
-
-    // Sync the locale in the redux store with the locale in the url
-    React.useEffect(() => {
-      if (
-        locale !== parsedLocale &&
-        config.supportedLngs.includes(parsedLocale)
-      ) {
-        store.dispatch(setLocale(parsedLocale as Locale));
+      if (parsedLocale && parsedLocale !== i18n.language) {
+        const query = search.replace(
+          `lng=${parsedLocale}`,
+          `lng=${i18n.language}`
+        );
+        history.replace(pathname + query);
       }
-    }, [history.location]);
+    }, [i18n.language]);
 
     // If the locale is not in the query, we push it
-    if (!parsedLocale && parsedLocale !== '') {
-      const bestLocale = findBestLocale(['navigator']);
+    if (!parsedLocale) {
       const query =
-        search !== '' ? search + `&lng=${bestLocale}` : `?lng=${bestLocale}`;
+        search !== ''
+          ? search + `&lng=${i18n.language}`
+          : `?lng=${i18n.language}`;
 
       if (pathname.endsWith('/')) {
         return <Redirect to={pathname + query} />;
@@ -60,19 +54,18 @@ const withIntl = (WrappedComponent: React.FC<any>) => {
     // Otherwise, we verify if the locale specified is valid
     else {
       if (!config.supportedLngs.includes(parsedLocale)) {
-        const bestLocale = findBestLocale(['navigator']);
         const query = search.replace(
           `${config.detection.lookupQuerystring}=${parsedLocale}`,
-          `${config.detection.lookupQuerystring}=${bestLocale}`
+          `${config.detection.lookupQuerystring}=${i18n.language}`
         );
         return <Redirect to={pathname + query} />;
       }
     }
 
-    return <WrappedComponent {...props} />;
+    return <WrappedComponent />;
   };
 
-  return IntlComponent;
+  return LocalizedComponent;
 };
 
-export default withIntl;
+export default withLocale;
