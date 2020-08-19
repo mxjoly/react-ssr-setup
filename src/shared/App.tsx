@@ -8,7 +8,8 @@ import favicon from './assets/favicon.png';
 import './App.scss';
 
 import withIntl from './i18n/helpers/withIntl';
-import { ActionTypes } from './store/app/actions';
+import { setLocale } from './store/app/actions';
+import { Locale } from './store/app/types';
 
 import routes from './routes';
 import Home from './pages/home';
@@ -20,11 +21,8 @@ const App: React.FC<any> = () => {
   const { search } = useLocation();
   const store = useStore();
 
-  const changeLocale = (newLocale: string) => {
-    store.dispatch({
-      type: ActionTypes.SET_LOCALE,
-      payload: newLocale,
-    });
+  const changeLocale = (newLocale: Locale) => {
+    store.dispatch(setLocale(newLocale));
   };
 
   return (

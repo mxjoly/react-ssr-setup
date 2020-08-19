@@ -1,11 +1,7 @@
-import express from 'express';
-import { configureStore } from '../../shared/store';
+import { Request, Response, NextFunction } from 'express';
+import { configureStore } from 'shared/store';
 
-const addStore = (
-  _req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-): void => {
+const addStore = (_req: Request, res: Response, next: NextFunction) => {
   res.locals.store = configureStore({});
   next();
 };

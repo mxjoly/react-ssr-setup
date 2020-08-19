@@ -5,9 +5,10 @@ import { useStore, useSelector } from 'react-redux';
 import { parse } from 'query-string';
 
 import config from '../config';
-import { getLocale } from '../../store/app/selectors';
-import { ActionTypes } from '../../store/app/actions';
 import findBestLocale from './findBestLocale';
+import { getLocale } from 'shared/store/app/selectors';
+import { setLocale } from 'shared/store/app/actions';
+import { Locale } from 'shared/store/app/types';
 
 /**
  * Format the url to contains a valid locale in the query, and sync i18n language
@@ -40,10 +41,7 @@ const withIntl = (WrappedComponent: React.FC<any>) => {
         locale !== parsedLocale &&
         config.supportedLngs.includes(parsedLocale)
       ) {
-        store.dispatch({
-          type: ActionTypes.SET_LOCALE,
-          payload: parsedLocale,
-        });
+        store.dispatch(setLocale(parsedLocale as Locale));
       }
     }, [history.location]);
 
