@@ -5,9 +5,9 @@ import { useStore, useSelector } from 'react-redux';
 import { parse } from 'query-string';
 
 import config from './config';
-import { getLocale } from 'shared/store/app/selectors';
-import { setLocale } from 'shared/store/app/actions';
-import { Locale } from 'shared/store/app/types';
+import { getLocale } from '../../shared/store/app/selectors';
+import { setLocale } from '../../shared/store/app/actions';
+import { Locale } from '../../shared/store/app/types';
 
 /**
  * Format the url to contain a valid locale in the query, and sync i18n language

@@ -23,8 +23,12 @@ This project is a template of a server side rendering a [React](https://en.react
   - 🔥 TypeScript (via Babel)
   - 🔥 Prettier
   - ✅ Server Side Rendering with Express
+  - ✅ React i18next for multi language support
   - 🚀 React Fast Refresh
+  - ✅ SASS
+  - ✅ CSS Modules
   - ✅ PostCSS
+  - ✅ Dependencies visualization with Graphviz
 
 - Libs and dependencies
 
@@ -72,6 +76,10 @@ Run lint:js, lint:css and lint:sass in parallel
 #### `npm run analyze`
 
 Starts `webpack-bundle-analyzer` to give you the opportunity to analyze your bundle(s)
+
+#### `npm run depgraph`
+
+Creates an image of your dependency graph. Requires [GraphVIZ](https://www.graphviz.org/).
 
 ## Environment Variables
 

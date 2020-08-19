@@ -7,7 +7,7 @@ import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 import serialize from 'serialize-javascript';
 
-import App from 'shared/App';
+import App from '../../shared/App';
 import Html from '../components/html';
 
 const routerContext: any = {};
