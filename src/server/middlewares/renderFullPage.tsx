@@ -29,12 +29,13 @@ const renderFullPage = () => (req: Request, res: Response) => {
   // redux.js.org/recipes/server-rendering#security-considerations
   const state = serialize(res.locals.store.getState());
 
-  // Initialize the store and the initial language
-  const initialI18nStore: any = {};
+  // Initialize the i18n store and the language
+  const resources: any = {};
   req.i18n.languages.forEach((l: string) => {
-    initialI18nStore[l] = req.i18n.services.resourceStore.data[l];
+    resources[l] = req.i18n.services.resourceStore.data[l];
   });
   const initialLanguage = req.i18n.language;
+  const initialI18nStore = serialize(resources);
 
   return res.send(
     '<!doctype html>' +

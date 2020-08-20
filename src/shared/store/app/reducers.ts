@@ -1,9 +1,10 @@
 import { produce } from 'immer';
 import { ActionTypes } from './actions';
 import { Action, AppState } from './types';
+import config from '../../i18n/config';
 
 export const initialState = Object.freeze<AppState>({
-  locale: 'en',
+  locale: config.fallbackLng,
 });
 
 export default (state: AppState = initialState, action: Action): AppState =>

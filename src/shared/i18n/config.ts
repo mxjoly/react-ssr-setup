@@ -1,4 +1,6 @@
-const locales = ['en', 'fr'];
+import { Locale } from 'store/app/types';
+
+const locales: Locale[] = ['en', 'fr'];
 const namespaces = ['common'];
 
 const getResources = () => {
@@ -12,12 +14,12 @@ const getResources = () => {
   return resources;
 };
 
-const options: any = {
+const config: any = {
   defaultNS: 'common',
   fallbackNS: namespaces,
   ns: namespaces,
 
-  fallbackLng: locales,
+  fallbackLng: locales[0],
   supportedLngs: locales,
   preload: locales,
   load: 'languageOnly',
@@ -74,4 +76,4 @@ const options: any = {
   },
 };
 
-export default options;
+export default config;

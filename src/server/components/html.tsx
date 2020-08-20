@@ -1,4 +1,6 @@
 import React from 'react';
+import config from '../../shared/i18n/config';
+import { Locale } from '../../shared/store/app/types';
 
 type Props = {
   children: any;
@@ -6,8 +8,8 @@ type Props = {
   scripts: string[];
   helmetContext: any;
   state: string;
-  initialI18nStore: any;
-  initialLanguage: string;
+  initialI18nStore: string;
+  initialLanguage: Locale;
 };
 
 const html = ({
@@ -17,7 +19,7 @@ const html = ({
   helmetContext: { helmet },
   state = '{}',
   initialI18nStore = '{}',
-  initialLanguage = 'en',
+  initialLanguage = config.fallbackLng,
 }: Props) => (
   <html lang={initialLanguage} {...helmet.htmlAttributes.toString()}>
     <head>
@@ -35,9 +37,7 @@ const html = ({
         dangerouslySetInnerHTML={{
           __html: `
             window.__PRELOADED_STATE__ = ${state};
-            window.initialI18nStore = JSON.parse('${JSON.stringify(
-              initialI18nStore
-            )}');
+            window.initialI18nStore = ${initialI18nStore};
             window.initialLanguage = '${initialLanguage}';
             `,
         }}
