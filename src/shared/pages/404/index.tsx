@@ -6,7 +6,7 @@ const PageNotFound: React.FC<any> = () => (
     <Helmet>
       <title>404</title>
     </Helmet>
-    <p>Page Not Found</p>
+    <h2>Page Not Found</h2>
   </React.Fragment>
 );
 

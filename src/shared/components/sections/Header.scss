@@ -1,0 +1,35 @@
+@use '../../theme';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: theme.$header-height;
+  box-sizing: border-box;
+  padding: 0px 30px;
+  background: theme.$background-color;
+
+  &__logo {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+  }
+
+  &__navigation,
+  &__navigation > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    color: theme.$font-color-light;
+    padding: 10px;
+    cursor: pointer;
+
+    &_selected {
+      color: theme.$primary-color;
+    }
+  }
+}

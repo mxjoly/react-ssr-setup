@@ -1,0 +1,13 @@
+@use './theme';
+
+// Reset css (see http://necolas.github.io/normalize.css/)
+@import 'normalize.css';
+
+ul {
+  list-style: none;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+}
