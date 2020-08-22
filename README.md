@@ -88,7 +88,7 @@ Run the Storybook interface on the port 6006.
 
 #### `npm run build:storybook`
 
-Generate the static reesources for Storybook. Useful to host online.
+Generate the static resources for Storybook. Useful to host online.
 
 ## Environment Variables
 
