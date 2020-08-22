@@ -82,7 +82,7 @@ Starts `webpack-bundle-analyzer` to give you the opportunity to analyze your bun
 
 Creates an image of your dependency graph. Requires [GraphVIZ](https://www.graphviz.org/).
 
-#### `npm run start:storybook`
+#### `npm run storybook`
 
 Run the Storybook interface on the port 6006.
 
@@ -117,7 +117,7 @@ By default if you run `npm start` the development server will use port 8500. You
 - [x] Add Routing with react-router and react-router-dom
 - [x] Set up Redux
 - [x] Internationalization with i18n
-- [ ] Add Storybook
+- [x] Add Storybook
 - [x] Add CSS modules
 
 ## License

@@ -10,5 +10,4 @@ export const parameters = {
     },
   },
   layout: 'centered',
-  docs: { previewSource: 'open' },
 };
