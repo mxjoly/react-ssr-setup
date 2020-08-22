@@ -29,6 +29,7 @@ This project is a template of a server side rendering a [React](https://en.react
   - ✅ CSS Modules
   - ✅ PostCSS
   - ✅ Dependencies visualization with Graphviz
+  - 📕 Storybook 6
 
 - Libs and dependencies
 
@@ -47,11 +48,11 @@ Clone the repository, `cd` into the directory and run `npm install` on your comm
 
 ## Usage
 
-There are npm scripts for all the relevant things. The server will always be started on port 8500 unless otherwise specified in process.env.PORT. You can use a .env file to specify env vars. If you want to use them in your client side code, don't forget to add them in config/env.js.
+There are npm scripts for all the relevant things. The server will always be started on port 8500 unless otherwise specified in process.env.PORT. You can use a .env file to specify env vars. If you want to use them in your client side code, don't forget to add them in config/env.ts.
 
 #### `npm start`
 
-Starts the app in development mode: creates a new client and server dev build using webpack, starts the Express server build (for both file serving and server side pre-rendering) and keeps webpack open in watchmode. Updates the app (if possible) on change using HMR.
+Starts the app in development mode: creates a new client and server dev build using Webpack, starts the Express server build (for both file serving and server side pre-rendering) and keeps webpack open in watchmode. Updates the app (if possible) on change using HMR.
 
 #### `npm run build`
 
@@ -80,6 +81,14 @@ Starts `webpack-bundle-analyzer` to give you the opportunity to analyze your bun
 #### `npm run depgraph`
 
 Creates an image of your dependency graph. Requires [GraphVIZ](https://www.graphviz.org/).
+
+#### `npm run start:storybook`
+
+Run the Storybook interface on the port 6006.
+
+#### `npm run build:storybook`
+
+Generate the static reesources for Storybook. Useful to host online.
 
 ## Environment Variables
 

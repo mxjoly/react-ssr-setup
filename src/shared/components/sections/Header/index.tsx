@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import ReactLogo from '../../assets/react.svg';
-import './Header.scss';
+import ReactLogo from '../../../assets/react.svg';
+import './style.scss';
 
-import routes from '../../routes';
-import LocaleSelect from '../organisms/LocaleSelect';
+import routes from '../../../routes';
+import LocaleSelect from '../../organisms/LocaleSelect';
 
 const RouteList = () => {
   return (
@@ -36,7 +36,7 @@ const Header: React.FC<any> = () => {
         </Link>
         <RouteList />
       </nav>
-      <LocaleSelect locales={['en', 'fr']} />
+      <LocaleSelect />
     </div>
   );
 };

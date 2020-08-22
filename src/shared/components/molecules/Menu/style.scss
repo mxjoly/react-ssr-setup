@@ -1,0 +1,64 @@
+@use '../../../theme';
+
+.menu {
+  display: inline-block;
+  position: relative;
+  width: auto;
+  height: 1em;
+
+  &-capitalize {
+    text-transform: capitalize;
+  }
+
+  &-uppercase {
+    text-transform: uppercase;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: theme.$font-color-light;
+    font-family: 'Avenir', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    cursor: pointer;
+    box-sizing: border-box;
+    user-select: none;
+
+    &-icon:after {
+      padding-left: 4px;
+      content: ' ▾';
+    }
+  }
+
+  &__items {
+    visibility: hidden;
+    position: relative;
+    width: inherit;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    background: #fff;
+    box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.35);
+    text-align: center;
+
+    &-open {
+      visibility: visible;
+    }
+  }
+
+  &__item {
+    padding: 10px;
+    cursor: pointer;
+    color: theme.$font-color-dark;
+    font-family: 'Avenir', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
