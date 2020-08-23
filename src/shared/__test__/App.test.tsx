@@ -36,7 +36,7 @@ describe('<App />', () => {
     expect(wrapper.find(App)).toHaveLength(1);
   });
 
-  test('matches the snapshot', () => {
+  test('should matche its reference snapshot', () => {
     const tree = renderer.create(<BaseApp />).toJSON();
     expect(tree).toMatchSnapshot();
   });
