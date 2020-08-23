@@ -32,6 +32,7 @@ This project is a template of a server side rendering a [React](https://en.react
   - ✅ PostCSS
   - ✅ Dependencies visualization with Graphviz
   - 📕 Storybook 6
+  - ✅ Precommit hooks via lint-staged + Husky
 
 - Libs and dependencies
 
