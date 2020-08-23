@@ -1,8 +1,8 @@
 import React from 'react';
 
-import i18n from '../../../i18n';
-import config from '../../../i18n/config';
-import { Locale } from '../../../store/app/types';
+import i18n from '../../../lib/i18n';
+import config from '../../../lib/i18n/config';
+import { Locale } from '../../../lib/redux/app/types';
 import Menu from '../../molecules/Menu';
 
 const LocaleSelect: React.FC<any> = () => {

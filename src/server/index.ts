@@ -7,7 +7,7 @@ import manifestHelpers from 'express-manifest-helpers';
 import i18nextMiddleware from 'i18next-http-middleware';
 
 import paths from '../../config/paths';
-import i18n from '../shared/i18n';
+import i18n from '../shared/lib/i18n';
 import addStore from './middlewares/addStore';
 import handleErrors from './middlewares/handleErrors';
 import renderFullPage from './middlewares/renderFullPage';

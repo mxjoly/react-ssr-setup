@@ -16,7 +16,7 @@ const translationCache: TranslationCache = {};
 const localesDir = `${__dirname}/locales`;
 
 const isCached = (locale: string, ns: string) =>
-  translationCache[locale] && translationCache[locale][ns];
+  translationCache[locale] && translationCache[locale][ns] ? true : false;
 
 const isOutdated = (locale: string, ns: string) =>
   translationCache[locale] &&
@@ -24,7 +24,9 @@ const isOutdated = (locale: string, ns: string) =>
   translationCache[locale][ns].updatedAt <
     new Date(
       fs.statSync(path.resolve(`${localesDir}/${locale}/${ns}.json`)).mtime
-    ).getTime();
+    ).getTime()
+    ? true
+    : false;
 
 const loadAndCache = (locale: string, ns: string) => {
   translationCache[locale] = {
@@ -47,7 +49,7 @@ export const i18nextXhr = (req: express.Request, res: express.Response) => {
   const { locale, ns } = req.params;
 
   try {
-    if (!isCached(locale, ns) || isOutdated(locale, ns)) {
+    if (isCached(locale, ns) === false || isOutdated(locale, ns) === true) {
       loadAndCache(locale, ns);
     }
 

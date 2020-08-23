@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import favicon from './assets/favicon.png';
 import './App.scss';
 
-import withLocale from './i18n/withLocale';
+import withLocale from './lib/i18n/withLocale';
 import Header from './components/sections/Header';
 import PageContent from './components/sections/Content';
 import Footer from './components/sections/Footer';

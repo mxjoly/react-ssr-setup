@@ -22,6 +22,8 @@ This project is a template of a server side rendering a [React](https://en.react
   - 🔥 ESLint 7
   - 🔥 TypeScript (via Babel)
   - 🔥 Prettier
+  - 🔥 Jest
+  - 🔥 Enzime
   - ✅ Server Side Rendering with Express
   - ✅ React i18next for multi language support
   - 🚀 React Fast Refresh
@@ -57,6 +59,10 @@ Starts the app in development mode: creates a new client and server dev build us
 #### `npm run build`
 
 Creates a new build optimized for production.
+
+### `npm run test`
+
+Run all tests using Jest.
 
 #### `npm run lint:js`
 
@@ -112,7 +118,7 @@ By default if you run `npm start` the development server will use port 8500. You
 
 ## Todo
 
-- [ ] Add test with Jest
+- [x] Add test with Jest
 - [x] React Helmet support
 - [x] Add Routing with react-router and react-router-dom
 - [x] Set up Redux

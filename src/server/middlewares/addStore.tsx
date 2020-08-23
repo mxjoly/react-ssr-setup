@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { configureStore } from '../../shared/store';
+import { configureStore } from '../../shared/lib/redux';
 
 const addStore = (_req: Request, res: Response, next: NextFunction) => {
   res.locals.store = configureStore({});

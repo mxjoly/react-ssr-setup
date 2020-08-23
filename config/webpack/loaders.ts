@@ -17,7 +17,7 @@ const babelLoader = {
   test: /\.(js|jsx|ts|tsx)$/i,
   exclude: /(node_modules|bower_components)/,
   use: {
-    loader: 'babel-loader',
+    loader: require.resolve('babel-loader'),
     options: {
       presets: [
         '@babel/preset-env',
@@ -31,6 +31,8 @@ const babelLoader = {
         '@babel/plugin-proposal-class-properties',
         // Compile object rest and spread to ES5
         '@babel/plugin-proposal-object-rest-spread',
+        // To use optional chaining in typescript
+        '@babel/plugin-proposal-optional-chaining',
         // This plugin transforms ES2015 modules to CommonJS
         '@babel/plugin-transform-modules-commonjs',
       ],
@@ -43,10 +45,10 @@ const babelLoader = {
 const cssModuleLoaderClient = {
   test: cssModuleRegex,
   use: [
-    'css-hot-loader',
+    require.resolve('css-hot-loader'),
     MiniCssExtractPlugin.loader,
     {
-      loader: 'css-loader',
+      loader: require.resolve('css-loader'),
       options: {
         modules: cssModuleOptions,
         importLoaders: 1,
@@ -54,7 +56,7 @@ const cssModuleLoaderClient = {
       },
     },
     {
-      loader: 'postcss-loader',
+      loader: require.resolve('postcss-loader'),
       options: {
         sourceMap: generateSourceMap,
       },
@@ -66,7 +68,7 @@ const cssLoaderClient = {
   test: cssRegex,
   exclude: cssModuleRegex,
   use: [
-    'css-hot-loader',
+    require.resolve('css-hot-loader'),
     {
       loader: MiniCssExtractPlugin.loader,
       options: {
@@ -74,11 +76,11 @@ const cssLoaderClient = {
       },
     },
     {
-      loader: 'css-loader',
+      loader: require.resolve('css-loader'),
       options: { importLoaders: 1 },
     },
     {
-      loader: 'postcss-loader',
+      loader: require.resolve('postcss-loader'),
       options: {
         sourceMap: generateSourceMap,
       },
@@ -96,22 +98,22 @@ const sassLoaderClient = {
       },
     },
     {
-      loader: 'css-loader',
+      loader: require.resolve('css-loader'),
       options: { importLoaders: 1 },
     },
     {
-      loader: 'postcss-loader',
+      loader: require.resolve('postcss-loader'),
       options: {
         sourceMap: generateSourceMap,
       },
     },
-    'sass-loader',
+    require.resolve('sass-loader'),
   ],
 };
 
 const imageLoaderClient = {
   test: imageRegex,
-  loader: 'url-loader',
+  loader: require.resolve('url-loader'),
   options: {
     name: isDev ? 'assets/[name].[ext]' : 'assets/[name].[hash:8].[ext]',
     limit: 2048, // the maximum size of a file in bytes
@@ -122,7 +124,7 @@ const fileLoaderClient = {
   exclude: [/\.(js|jsx|ts|tsx|css|mjs|html|ejs|json)$/],
   use: [
     {
-      loader: 'file-loader',
+      loader: require.resolve('file-loader'),
       options: {
         name: isDev ? 'assets/[name].[ext]' : 'assets/[name].[hash:8].[ext]',
       },
@@ -133,16 +135,16 @@ const fileLoaderClient = {
 const cssModuleLoaderServer = {
   test: cssModuleRegex,
   use: [
-    'css-hot-loader',
+    require.resolve('css-hot-loader'),
     {
-      loader: 'css-loader',
+      loader: require.resolve('css-loader'),
       options: {
         importLoaders: 1,
         modules: { ...cssModuleOptions, exportOnlyLocals: true },
       },
     },
     {
-      loader: 'postcss-loader',
+      loader: require.resolve('postcss-loader'),
       options: {
         sourceMap: generateSourceMap,
       },
@@ -160,9 +162,9 @@ const sassLoaderServer = {
   test: sassRegex,
   use: [
     MiniCssExtractPlugin.loader,
-    'css-loader',
-    'postcss-loader',
-    'sass-loader',
+    require.resolve('css-loader'),
+    require.resolve('postcss-loader'),
+    require.resolve('sass-loader'),
   ],
 };
 
@@ -178,7 +180,7 @@ const fileLoaderServer = {
   exclude: [/\.(js|tsx|ts|tsx|css|mjs|html|ejs|json)$/],
   use: [
     {
-      loader: 'file-loader',
+      loader: require.resolve('file-loader'),
       options: {
         name: isDev ? 'assets/[name].[ext]' : 'assets/[name].[hash:8].[ext]',
         emitFile: false,

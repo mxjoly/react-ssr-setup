@@ -17,7 +17,6 @@ export default {
   },
   args: {
     // Default props passed to all the stories
-    placeholder: '',
     defaultItem: 'en',
     items: ['en', 'fr'],
     onSelect: action('onSelect'),

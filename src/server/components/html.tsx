@@ -1,6 +1,6 @@
 import React from 'react';
-import config from '../../shared/i18n/config';
-import { Locale } from '../../shared/store/app/types';
+import config from '../../shared/lib/i18n/config';
+import { Locale } from '../../shared/lib/redux/app/types';
 
 type Props = {
   children: any;

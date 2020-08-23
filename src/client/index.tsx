@@ -5,9 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useSSR } from 'react-i18next';
 
-import '../shared/i18n';
+import '../shared/lib/i18n';
 import App from '../shared/App';
-import configureStore from '../shared/store';
+import configureStore from '../shared/lib/redux';
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadState = window.__PRELOADED_STATE__;
