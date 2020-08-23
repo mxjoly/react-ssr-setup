@@ -61,6 +61,10 @@ Starts the app in development mode: creates a new client and server dev build us
 
 Creates a new build optimized for production.
 
+#### `npm run clean`
+
+Clean the build folder.
+
 ### `npm run test`
 
 Run all tests using Jest.
@@ -119,13 +123,8 @@ By default if you run `npm start` the development server will use port 8500. You
 
 ## Todo
 
-- [x] Add test with Jest
-- [x] React Helmet support
-- [x] Add Routing with react-router and react-router-dom
-- [x] Set up Redux
-- [x] Internationalization with i18n
-- [x] Add Storybook
-- [x] Add CSS modules
+- [ ] Add offline support using [Workbox](https://developers.google.com/web/tools/workbox)
+- [ ] Import SVGs as React component
 
 ## License
 
