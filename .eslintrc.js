@@ -7,6 +7,11 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'plugin:jest/recommended',
     'plugin:@typescript-eslint/recommended',
   ],
   parserOptions: {
@@ -16,7 +21,7 @@ module.exports = {
     ecmaVersion: 11,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['prettier', 'react', 'jest'],
   settings: {
     react: {
       version: 'detect',
@@ -25,10 +30,10 @@ module.exports = {
   rules: {
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    'prettier/prettier': ['error'],
     'linebreak-style': ['error', 'unix'],
     'import/no-unassigned-import': 0,
     'import/no-named-as-default-member': 0,
-    'prettier/prettier': ['error', { singleQuote: true }],
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-var-requires': 0,

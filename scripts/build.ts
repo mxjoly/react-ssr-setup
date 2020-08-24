@@ -1,4 +1,4 @@
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import rimraf from 'rimraf';
 import chalk from 'chalk';
 
@@ -6,7 +6,9 @@ import getConfig from '../config/webpack';
 import paths from '../config/paths';
 import { logMessage, compilerPromise } from './utils';
 
-const webpackConfig = getConfig(process.env.NODE_ENV || 'development');
+const webpackConfig: Configuration[] = getConfig(
+  process.env.NODE_ENV || 'development'
+);
 
 const build = async () => {
   rimraf.sync(paths.clientBuild);

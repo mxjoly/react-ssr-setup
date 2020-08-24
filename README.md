@@ -17,13 +17,14 @@ This project is a template of a server side rendering a [React](https://en.react
 
 - General Setup
 
-  - 🔥 Babel 7
+  - ⚙ Babel 7
   - 📦 Webpack 4
-  - 🔥 ESLint 7
   - 🔥 TypeScript (via Babel)
-  - 🔥 Prettier
-  - 🔥 Jest
-  - 🔥 Enzime
+  - 🧹 Prettier
+  - 🧹 Stylelint
+  - 🔦 ESLint 7
+  - 🌡 Jest
+  - 🌡 Enzime
   - ✅ Server Side Rendering with Express
   - ✅ React i18next for multi language support
   - 🚀 React Fast Refresh
@@ -55,7 +56,7 @@ There are npm scripts for all the relevant things. The server will always be sta
 
 #### `npm start`
 
-Starts the app in development mode: creates a new client and server dev build using Webpack, starts the Express server build (for both file serving and server side pre-rendering) and keeps webpack open in watchmode. Updates the app (if possible) on change using HMR.
+Starts the app in development mode: creates a new client and server dev build using [Webpack](https://webpack.js.org/), starts the [Express](https://expressjs.com/) server build (for both file serving and server side pre-rendering) and keeps webpack open in watchmode. Updates the app (if possible) on change using HMR.
 
 #### `npm run build`
 
@@ -71,23 +72,23 @@ Run all tests using Jest.
 
 #### `npm run lint:js`
 
-Run ESLint for all JavaScript and TypeScript files
+Run [ESLint](https://eslint.org/) for all JavaScript and TypeScript files.
 
 #### `npm run lint:css`
 
-Run Stylelint for all CSS files
+Run [Stylelint](https://stylelint.io/) for all CSS files.
 
 #### `npm run lint:sass`
 
-Run Stylelint for all SASS files
+Run [Stylelint](https://stylelint.io/) for all SASS files.
 
 #### `npm run lint`
 
-Run lint:js, lint:css and lint:sass in parallel
+Run `lint:js`, `lint:css` and `lint:sass` in parallel.
 
 #### `npm run analyze`
 
-Starts `webpack-bundle-analyzer` to give you the opportunity to analyze your bundle(s)
+Starts `webpack-bundle-analyzer` to give you the opportunity to analyze your bundle(s).
 
 #### `npm run depgraph`
 
@@ -95,11 +96,15 @@ Creates an image of your dependency graph. Requires [GraphVIZ](https://www.graph
 
 #### `npm run storybook`
 
-Run the Storybook interface on the port 6006.
+Run the [Storybook](https://storybook.js.org/) interface on the port 6006.
 
 #### `npm run build:storybook`
 
-Generate the static resources for Storybook. Useful to host online.
+Generate the static resources for [Storybook](https://storybook.js.org/). Useful to host online.
+
+#### `npm run format`
+
+Format the files with [Prettier](https://prettier.io/), [ESLint](https://eslint.org/) and [Stylelint](https://stylelint.io/).
 
 ## Environment Variables
 

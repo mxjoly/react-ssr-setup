@@ -31,13 +31,13 @@ const BaseApp = () => {
 };
 
 describe('<App />', () => {
-  test('renders without crashing', () => {
+  it('renders without crashing', () => {
     const wrapper = shallow(<BaseApp />);
     expect(wrapper.find(App)).toHaveLength(1);
   });
 
-  test('should matche its reference snapshot', () => {
+  it('should matche its reference snapshot', () => {
     const tree = renderer.create(<BaseApp />).toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(tree).toMatchInlineSnapshot();
   });
 });

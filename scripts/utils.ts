@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { Compiler } from 'webpack';
 
-export const logMessage = (message: any, level: string = 'info') => {
+export const logMessage = (message: any, level = 'info') => {
   const color =
     level === 'error'
       ? 'red'

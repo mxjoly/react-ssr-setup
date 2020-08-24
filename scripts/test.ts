@@ -1,4 +1,5 @@
 // Do this as the first thing so that any code reading it knows the right env.
+// eslint-disable-next-line jest/no-jest-import
 import * as jest from 'jest';
 
 process.env.BABEL_ENV = 'test';

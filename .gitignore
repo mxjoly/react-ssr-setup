@@ -1,8 +1,8 @@
 # node dependencies
-node_modules/
+node_modules
 
 # build
-build/
+build
 
 # environment variables
 .env
@@ -10,5 +10,5 @@ build/
 .env.*.local
 
 # jest
-coverage/
-__snapshots__/
+coverage
+__snapshots__

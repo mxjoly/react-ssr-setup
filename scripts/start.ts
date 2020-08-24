@@ -1,4 +1,4 @@
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import nodemon from 'nodemon';
 import express from 'express';
 import rimraf from 'rimraf';
@@ -8,7 +8,9 @@ import paths from '../config/paths';
 import getConfig from '../config/webpack';
 import { logMessage, compilerPromise } from './utils';
 
-const webpackConfig = getConfig(process.env.NODE_ENV || 'development');
+const webpackConfig: Configuration[] = getConfig(
+  process.env.NODE_ENV || 'development'
+);
 const app = express();
 
 const WEBPACK_PORT =
@@ -23,9 +25,9 @@ const start = async () => {
 
   const [clientConfig, serverConfig] = webpackConfig;
 
-  clientConfig.entry.bundle = [
+  clientConfig.entry['bundle'] = [
     `webpack-hot-middleware/client?path=${DEVSERVER_HOST}:${WEBPACK_PORT}/__webpack_hmr`,
-    ...clientConfig.entry.bundle,
+    ...clientConfig.entry['bundle'],
   ];
 
   clientConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';

@@ -1,8 +1,8 @@
 @use '../../../theme';
 
 .menu {
-  display: inline-block;
   position: relative;
+  display: inline-block;
   width: auto;
   height: 1em;
 
@@ -15,15 +15,15 @@
   }
 
   &__button {
+    box-sizing: border-box;
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: theme.$font-color-light;
+    justify-content: center;
     font-family: 'Avenir', sans-serif;
     font-size: 1em;
     font-weight: 400;
+    color: theme.$font-color-light;
     cursor: pointer;
-    box-sizing: border-box;
     user-select: none;
 
     &-icon:after {
@@ -33,16 +33,16 @@
   }
 
   &__items {
-    visibility: hidden;
     position: relative;
+    left: 50%;
     width: inherit;
     height: auto;
-    left: 50%;
-    transform: translateX(-50%);
     margin-top: 10px;
+    text-align: center;
+    visibility: hidden;
     background: #fff;
     box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.35);
-    text-align: center;
+    transform: translateX(-50%);
 
     &-open {
       visibility: visible;
@@ -51,11 +51,11 @@
 
   &__item {
     padding: 10px;
-    cursor: pointer;
-    color: theme.$font-color-dark;
     font-family: 'Avenir', sans-serif;
     font-size: 1em;
     font-weight: 400;
+    color: theme.$font-color-dark;
+    cursor: pointer;
 
     &:hover {
       background: rgba(0, 0, 0, 0.1);
