@@ -1,11 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import i18n from '../../../lib/i18n';
 import config from '../../../lib/i18n/config';
-import { Locale } from '../../../lib/redux/app/types';
+import { Locale } from '../../../lib/store/app/types';
 import Menu from '../../molecules/Menu';
 
 const LocaleSelect: React.FC<any> = () => {
+  const { i18n } = useTranslation();
   const [curlocale, setLocale] = React.useState<Locale | undefined>(undefined);
   const locales = config.supportedLngs.filter((e: any) => e !== 'cimode');
 

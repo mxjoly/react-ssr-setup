@@ -22,7 +22,8 @@
     "format": "yarn-or-npm run format:prettier && yarn-or-npm run format:stylelint && yarn-or-npm run format:eslint",
     "format:prettier": "prettier --write .",
     "format:eslint": "eslint --fix .",
-    "format:stylelint": "stylelint src/**/*.{css,scss,sass}"
+    "format:stylelint": "stylelint src/**/*.{css,scss,sass}",
+    "plop": "cross-env TS_NODE_PROJECT=tsconfig.tooling.json plop --plopfile config/plop/index.ts"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -83,7 +84,6 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
-    "@types/react-test-renderer": "^16.9.3",
     "@types/redux-mock-store": "^1.0.2",
     "@types/rimraf": "^3.0.0",
     "@types/serialize-javascript": "^4.0.0",
@@ -126,13 +126,14 @@
     "mini-css-extract-plugin": "^0.10.0",
     "mkdirp": "^1.0.4",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "plop": "^2.7.4",
+    "plop-prettier": "^3.0.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
     "react-dev-utils": "^10.2.1",
     "react-is": "^16.13.1",
     "react-refresh": "^0.8.3",
-    "react-test-renderer": "^16.13.1",
     "redux-mock-store": "^1.5.4",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.2",

@@ -18,7 +18,7 @@ import Page3 from '../../../pages/page-3';
 
 const Content: React.FC<any> = () => {
   return (
-    <main className="page-content">
+    <main className="content">
       <Switch>
         <Route exact path={routes.Home} component={Home} />
         <Route exact path={routes.Page_1} component={Page1} />

@@ -1,4 +1,4 @@
-import { getRoute } from '../routes';
+import { getRoute } from './routes';
 
 const testRoutesConfig = {
   home: '/',

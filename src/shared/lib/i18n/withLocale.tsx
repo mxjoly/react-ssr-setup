@@ -5,9 +5,9 @@ import { useStore, useSelector } from 'react-redux';
 import { parse } from 'query-string';
 
 import config from './config';
-import { getLocale } from '../redux/app/selectors';
-import { setLocale } from '../redux/app/actions';
-import { Locale } from '../redux/app/types';
+import { getLocale } from '../store/app/selectors';
+import { setLocale } from '../store/app/actions';
+import { Locale } from '../store/app/types';
 
 /**
  * Format the url to contain a valid locale in the query, and sync i18n language
@@ -36,7 +36,7 @@ const withLocale = (WrappedComponent: React.FC<any>) => {
         );
         history.replace(pathname + query);
       }
-    }, [i18n.language]);
+    }, [i18n.language, locale, history, pathname, search, parsedLocale, store]);
 
     // If the locale is not in the query, we push it
     if (!parsedLocale) {

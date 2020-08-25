@@ -18,10 +18,10 @@
     "baseUrl": "./src",
     "strictNullChecks": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "paths": {
-      "*": ["shared/*", "client/*", "server/*", "*"]
-    }
+    "noUnusedParameters": true
+    // "paths": {
+    //   "*": ["shared/*", "client/*", "server/*", "*"]
+    // }
   },
   "include": ["src"]
 }

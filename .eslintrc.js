@@ -28,8 +28,6 @@ module.exports = {
     },
   },
   rules: {
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
     'prettier/prettier': ['error'],
     'linebreak-style': ['error', 'unix'],
     'import/no-unassigned-import': 0,

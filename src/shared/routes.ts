@@ -1,5 +1,5 @@
 interface RouteMap {
-  [key: string]: string;
+  readonly [key: string]: string;
 }
 
 const routes: RouteMap = {

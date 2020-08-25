@@ -1,0 +1,26 @@
+export const ActionTypes = {
+    {{upperCase (snakeCase reducerName) }}_REQUEST: '{{pkg 'name'}}/{{dashCase reducerName}}/request',
+    {{upperCase (snakeCase reducerName) }}_SUCCESS: '{{pkg 'name'}}/{{dashCase reducerName}}/success',
+    {{upperCase (snakeCase reducerName) }}_FAILURE: '{{pkg 'name'}}/{{dashCase reducerName}}/failure',
+    {{upperCase (snakeCase reducerName) }}_INVALIDATE: '{{pkg 'name'}}/{{dashCase reducerName}}/invalidate',
+};
+
+export const {{properCase reducerName}}Request = () => ({
+    type: ActionTypes.{{upperCase (snakeCase reducerName)}}_REQUEST,
+});
+
+export const {{properCase reducerName}}Success = (items: {{properCase reducerName}}[]) => ({
+    type: ActionTypes.{{upperCase (snakeCase reducerName)}}_SUCCESS,
+    payload: {
+        items,
+        updatedAt: Number(Date.now()),
+    },
+});
+
+export const {{properCase reducerName}}Failure = () => ({
+    type: ActionTypes.{{upperCase (snakeCase reducerName)}}_FAILURE,
+});
+
+export const {{properCase reducerName}}Invalidate = () => ({
+    type: ActionTypes.{{upperCase (snakeCase reducerName)}}_INVALIDATE,
+});

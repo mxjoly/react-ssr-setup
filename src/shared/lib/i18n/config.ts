@@ -1,4 +1,4 @@
-import { Locale } from '../redux/app/types';
+import { Locale } from '../store/app/types';
 
 const locales: Locale[] = ['en', 'fr'];
 const namespaces = ['common'];
@@ -35,7 +35,7 @@ const config: any = {
   partialBundledLanguages: true,
 
   react: {
-    useSuspense: true,
+    useSuspense: false,
     wait: true,
   },
 

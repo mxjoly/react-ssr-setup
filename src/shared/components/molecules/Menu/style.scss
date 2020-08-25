@@ -6,11 +6,11 @@
   width: auto;
   height: 1em;
 
-  &-capitalize {
+  &_capitalize {
     text-transform: capitalize;
   }
 
-  &-uppercase {
+  &_uppercase {
     text-transform: uppercase;
   }
 
@@ -26,7 +26,7 @@
     cursor: pointer;
     user-select: none;
 
-    &-icon:after {
+    &_icon:after {
       padding-left: 4px;
       content: ' ▾';
     }
@@ -44,7 +44,7 @@
     box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.35);
     transform: translateX(-50%);
 
-    &-open {
+    &_open {
       visibility: visible;
     }
   }

@@ -6,7 +6,7 @@ import Menu, { MenuProps } from '.';
 
 export default {
   component: Menu,
-  title: 'Demo/Menu',
+  title: 'Molecules/Menu',
   parameters: {
     docs: {
       description: {

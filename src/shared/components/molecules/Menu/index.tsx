@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import './style.scss';
 
 export interface MenuProps {
-  className?: string;
   items: string[];
   defaultItem?: string;
   onSelect: (item: string) => void;
@@ -43,8 +42,8 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
   };
 
   const classes = ['menu'];
-  if (props.capitalize) classes.push('menu-capitalize');
-  if (props.uppercase) classes.push('menu-uppercase');
+  if (props.capitalize) classes.push('menu_capitalize');
+  if (props.uppercase) classes.push('menu_uppercase');
 
   return (
     <div className={classnames(classes)}>
@@ -61,7 +60,7 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
       <ul
         className={
           state.open
-            ? classnames('menu__items', 'menu__items-open')
+            ? classnames('menu__items', 'menu__items_open')
             : 'menu__items'
         }
       >
@@ -80,7 +79,6 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
 };
 
 Menu.propTypes = {
-  className: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   defaultItem: PropTypes.string,
   onSelect: PropTypes.func.isRequired,

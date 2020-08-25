@@ -1,0 +1,16 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export interface {{properCase componentName}}Props {
+  className?: string;
+}
+
+const {{properCase componentName}}: React.FC<{{properCase componentName}}Props> = () => {
+  return <div className="{{dashCase componentName}}"></div>;
+};
+
+{{properCase componentName}}.propTypes = {
+  className: PropTypes.string,
+};
+
+export default {{properCase componentName}};

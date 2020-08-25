@@ -48,7 +48,7 @@ This project is a template of a server side rendering a [React](https://en.react
 
 ## Installation
 
-Clone the repository, `cd` into the directory and run `npm install` on your command line to install all the dependencies. You're ready to go now!
+Clone the repository, `cd` into the directory and run `npm install` on your command line to install all the dependencies. You're ready to go now !
 
 ## Usage
 
@@ -105,6 +105,10 @@ Generate the static resources for [Storybook](https://storybook.js.org/). Useful
 #### `npm run format`
 
 Format the files with [Prettier](https://prettier.io/), [ESLint](https://eslint.org/) and [Stylelint](https://stylelint.io/).
+
+#### `npm run plop`
+
+Display intructions on the command line to create files easily.
 
 ## Environment Variables
 

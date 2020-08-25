@@ -10,7 +10,7 @@ import Footer from './components/sections/Footer';
 
 const App: React.FC<any> = () => {
   return (
-    <React.Fragment>
+    <>
       <Helmet
         defaultTitle="React SSR Starter"
         titleTemplate="%s – React SSR Starter"
@@ -19,7 +19,7 @@ const App: React.FC<any> = () => {
       <Header />
       <PageContent />
       <Footer />
-    </React.Fragment>
+    </>
   );
 };
 
