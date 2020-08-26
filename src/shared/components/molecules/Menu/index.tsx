@@ -51,7 +51,7 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
         className={
           props.noDropIcon
             ? 'menu__button'
-            : classnames('menu__button', 'menu__button-icon')
+            : classnames('menu__button', 'menu__button_icon')
         }
         onClick={toggleVisible}
       >

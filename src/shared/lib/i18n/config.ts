@@ -1,7 +1,7 @@
-import { Locale } from '../store/app/types';
+import { Locale } from '../redux/store/app/types';
 
 const locales: Locale[] = ['en', 'fr'];
-const namespaces = ['common'];
+const namespaces = ['common', 'pages'];
 
 const getResources = () => {
   const resources: any = {};
@@ -19,7 +19,7 @@ const config: any = {
   fallbackNS: namespaces,
   ns: namespaces,
 
-  fallbackLng: locales[0],
+  fallbackLng: locales,
   supportedLngs: locales,
   preload: locales,
   load: 'languageOnly',
@@ -42,11 +42,14 @@ const config: any = {
   detection: {
     // order and from where user language should be detected
     order: [
-      'querystring',
+      'path',
+      // 'querystring',
       'cookie',
       'localStorage',
       'sessionStorage',
       'navigator',
+      // 'htmlTag',
+      // 'subdomain',
     ],
 
     // keys or params to lookup language from
@@ -64,6 +67,9 @@ const config: any = {
     // optional expire and domain for set cookie
     // cookieMinutes: 10,
     // cookieDomain: 'myDomain',
+
+    // optional set cookie options, reference:[MDN Set-Cookie docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+    // cookieOptions: { path: '/', sameSite: 'strict' },
   },
 
   debug: process.env.NODE_ENV === 'development' && __BROWSER__,

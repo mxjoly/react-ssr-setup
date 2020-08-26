@@ -8,7 +8,7 @@ import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 
 import App from './App';
-import { AppState } from './lib/store/app/types';
+import { AppState } from './lib/redux/store/app/types';
 
 const mockStore = configureStore<{ app: AppState }>([]);
 const store = mockStore({
@@ -34,10 +34,5 @@ describe('App', () => {
   it('renders without crashing', () => {
     const wrapper = shallow(<BaseApp />);
     expect(wrapper.find(App)).toHaveLength(1);
-  });
-
-  it('should match its reference snapshot', () => {
-    const wrapper = shallow(<BaseApp />);
-    expect(wrapper.html()).toMatchSnapshot();
   });
 });

@@ -1,0 +1,46 @@
+{
+  "home": {
+    "meta": {
+      "title": "Accueil",
+      "description": "Un site incroyable développé avec React"
+    },
+    "body": {
+      "content": "Bienvenue !"
+    }
+  },
+  "404": {
+    "meta": {
+      "title": "404"
+    },
+    "body": {
+      "content": "La page est introuvable"
+    }
+  },
+  "page-1": {
+    "meta": {
+      "title": "Page 1",
+      "description": "Description de la page 1"
+    },
+    "body": {
+      "content": "Tu es sur la page 1"
+    }
+  },
+  "page-2": {
+    "meta": {
+      "title": "Page 2",
+      "description": "Description de la page 2"
+    },
+    "body": {
+      "content": "Tu es sur la page 2"
+    }
+  },
+  "page-3": {
+    "meta": {
+      "title": "Page 3",
+      "description": "Description de la page 3"
+    },
+    "body": {
+      "content": "Tu es sur la page 3"
+    }
+  }
+}

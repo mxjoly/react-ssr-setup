@@ -1,0 +1,46 @@
+{
+  "home": {
+    "meta": {
+      "title": "Home",
+      "description": "An incredible website built with React"
+    },
+    "body": {
+      "content": "Welcome !"
+    }
+  },
+  "404": {
+    "meta": {
+      "title": "404"
+    },
+    "body": {
+      "content": "Page Not Found"
+    }
+  },
+  "page-1": {
+    "meta": {
+      "title": "Page 1",
+      "description": "Description of the page 1"
+    },
+    "body": {
+      "content": "You are on the page 1"
+    }
+  },
+  "page-2": {
+    "meta": {
+      "title": "Page 2",
+      "description": "Description of the page 2"
+    },
+    "body": {
+      "content": "You are on the page 2"
+    }
+  },
+  "page-3": {
+    "meta": {
+      "title": "Page 3",
+      "description": "Description of the page 3"
+    },
+    "body": {
+      "content": "You are on the page 3"
+    }
+  }
+}

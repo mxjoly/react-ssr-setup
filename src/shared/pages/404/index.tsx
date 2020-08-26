@@ -1,13 +1,18 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
+import { Page, PageProps } from '../type';
 
-const PageNotFound: React.FC<any> = () => (
-  <React.Fragment>
-    <Helmet>
-      <title>404</title>
-    </Helmet>
-    <h2>Page Not Found</h2>
-  </React.Fragment>
-);
+const PageNotFound: Page<PageProps> = ({ route }: PageProps) => {
+  const { t } = useTranslation('pages');
+  return (
+    <>
+      <Helmet>
+        <title>{t(`${route?.key}.meta.title`)}</title>
+      </Helmet>
+      <h2>{t(`${route?.key}.body.content`)}</h2>
+    </>
+  );
+};
 
-export default PageNotFound;
+export default PageNotFound as React.FunctionComponent;

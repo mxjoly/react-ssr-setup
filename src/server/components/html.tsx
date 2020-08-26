@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../../shared/lib/i18n/config';
-import { Locale } from '../../shared/lib/store/app/types';
+import { Locale } from '../../shared/lib/redux/store/app/types';
 
 type Props = {
   children: any;
@@ -19,7 +19,7 @@ const html = ({
   helmetContext: { helmet },
   state = '{}',
   initialI18nStore = '{}',
-  initialLanguage = config.fallbackLng,
+  initialLanguage = config.fallbackLng[0],
 }: Props) => (
   <html lang={initialLanguage} {...helmet.htmlAttributes.toString()}>
     <head>

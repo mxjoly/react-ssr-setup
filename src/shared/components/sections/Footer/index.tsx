@@ -1,11 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import './style.scss';
 
 const Footer: React.FC<any> = () => {
+  const { t } = useTranslation();
   return (
     <footer className="footer">
       <p className="footer__text">
-        Designed with ❤️ by{' '}
+        {t('footer.content')}{' '}
         <a
           className="footer__author"
           href="https://github.com/mxjoly"

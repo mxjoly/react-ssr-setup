@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import config from '../../../lib/i18n/config';
-import { Locale } from '../../../lib/store/app/types';
+import { Locale } from '../../../lib/redux/store/app/types';
 import Menu from '../../molecules/Menu';
 
 const LocaleSelect: React.FC<any> = () => {
