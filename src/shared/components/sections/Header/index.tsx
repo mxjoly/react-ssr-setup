@@ -7,6 +7,14 @@ import './styles.scss';
 import LocaleSelect from '../../organisms/LocaleSelect';
 import { Key, getPath } from '../../../routes';
 
+export const classNames = {
+  ROOT: 'Header',
+  NAV: 'Header__Navigation',
+  LOGO: 'Header__Logo',
+  LINK: 'Header__Link',
+  ACTIVE_LINK: 'Header__Link_active',
+};
+
 const RouteList = ({ keys }: { keys: Key[] }) => {
   const { i18n } = useTranslation();
   return (
@@ -19,8 +27,8 @@ const RouteList = ({ keys }: { keys: Key[] }) => {
               <NavLink
                 exact
                 to={path}
-                className="Header__Link"
-                activeClassName="Header__Link_selected"
+                className={classNames.LINK}
+                activeClassName={classNames.ACTIVE_LINK}
               >
                 {key}
               </NavLink>
@@ -35,10 +43,10 @@ const RouteList = ({ keys }: { keys: Key[] }) => {
 const Header: React.FC<any> = () => {
   const { i18n } = useTranslation();
   return (
-    <div className="Header">
-      <nav className="Header__Navigation">
+    <div className={classNames.ROOT}>
+      <nav className={classNames.NAV}>
         <Link to={`${i18n.language}/`}>
-          <img className="Header__Logo" src={ReactLogo} alt="logo" />
+          <img className={classNames.LOGO} src={ReactLogo} alt="logo" />
         </Link>
         <RouteList keys={['page-1', 'page-2', 'page-3']} />
       </nav>

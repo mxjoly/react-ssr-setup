@@ -28,7 +28,7 @@
     color: theme.$font-color-light;
     cursor: pointer;
 
-    &_selected {
+    &_active {
       color: theme.$primary-color;
     }
   }

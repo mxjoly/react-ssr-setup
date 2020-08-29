@@ -2,14 +2,20 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './styles.scss';
 
+export const classNames = {
+  ROOT: 'Footer',
+  TEXT: 'Footer__Text',
+  AUTHOR: 'Footer__Author',
+};
+
 const Footer: React.FC<any> = () => {
   const { t } = useTranslation();
   return (
-    <footer className="Footer">
-      <p className="Footer__Text">
+    <footer className={classNames.ROOT}>
+      <p className={classNames.TEXT}>
         {t('footer.content')}{' '}
         <a
-          className="Footer__Author"
+          className={classNames.AUTHOR}
           href="https://github.com/mxjoly"
           target="_blank"
           rel="noreferrer"

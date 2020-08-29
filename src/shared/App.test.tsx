@@ -1,20 +1,21 @@
 import React from 'react';
-import { Store } from 'redux';
+import { Store, Middleware } from 'redux';
 import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { shallow, ShallowWrapper } from 'enzyme';
 
 import App from './App';
 import { RootState } from './lib/store/rootReducer';
 
+const middlewares: Middleware[] = [];
+
 describe('<App />', () => {
   let wrapper: ShallowWrapper;
   let store: Store;
 
   beforeEach(() => {
-    store = configureStore<RootState>([thunk])();
+    store = configureStore<RootState>(middlewares)();
     wrapper = shallow(
       <Provider store={store}>
         <MemoryRouter initialEntries={['/']}>

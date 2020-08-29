@@ -9,7 +9,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: '',
+        component: 'This is the description of the easier component ever built.',
       },
     },
   },
@@ -22,3 +22,14 @@ const Template: Story<{{properCase componentName}}Props> = (args: {{properCase c
 
 export const Default = Template.bind({});
 Default.storyName = 'Default';
+
+export const WithAnId = Template.bind({});
+WithAnId.storyName = 'With an id';
+WithAnId.args = { id: '0123456789' };
+WithAnId.parameters = {
+  docs: {
+    description: {
+      story: 'This component could have an id.',
+    },
+  },
+};

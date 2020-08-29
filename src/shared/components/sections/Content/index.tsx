@@ -4,8 +4,12 @@ import './styles.scss';
 
 import routes from '../../../routes';
 
+export const classNames = {
+  ROOT: 'Content',
+};
+
 const Content: React.FC<any> = () => {
-  return <main className="Content">{renderRoutes(routes)}</main>;
+  return <main className={classNames.ROOT}>{renderRoutes(routes)}</main>;
 };
 
 export default Content;
