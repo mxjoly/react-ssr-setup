@@ -15,4 +15,8 @@ if (!process.env.CI && !argv.includes('--coverage')) {
   argv.push('--watch');
 }
 
+// To prevent slow tests on Docker or CI
+// https://jestjs.io/docs/en/troubleshooting#tests-are-extremely-slow-on-docker-andor-continuous-integration-ci-server
+argv.push('--runInBand');
+
 jest.run(argv);

@@ -1,6 +1,6 @@
 @use '../../../theme';
 
-.menu {
+.Menu {
   position: relative;
   display: inline-block;
   width: auto;
@@ -14,7 +14,7 @@
     text-transform: uppercase;
   }
 
-  &__button {
+  &__Button {
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@
     }
   }
 
-  &__items {
+  &__Items {
     position: relative;
     left: 50%;
     width: inherit;
@@ -44,12 +44,12 @@
     box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.35);
     transform: translateX(-50%);
 
-    &_open {
+    &_visible {
       visibility: visible;
     }
   }
 
-  &__item {
+  &__Item {
     padding: 10px;
     font-family: 'Avenir', sans-serif;
     font-size: 1em;

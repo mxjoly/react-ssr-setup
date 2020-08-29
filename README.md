@@ -48,65 +48,65 @@ This project is a template of a server side rendering a [React](https://en.react
 
 ## Installation
 
-Clone the repository, `cd` into the directory and run `npm install` on your command line to install all the dependencies. You're ready to go now !
+Clone the repository, `cd` into the directory and run `yarn` (or `npm install`) on your command line to install all the dependencies. You're ready to go now !
 
 ## Usage
 
 There are npm scripts for all the relevant things. The server will always be started on port 8500 unless otherwise specified in process.env.PORT. You can use a .env file to specify env vars. If you want to use them in your client side code, don't forget to add them in config/env.ts.
 
-#### `npm start`
+#### `yarn start`
 
 Starts the app in development mode: creates a new client and server dev build using [Webpack](https://webpack.js.org/), starts the [Express](https://expressjs.com/) server build (for both file serving and server side pre-rendering) and keeps webpack open in watchmode. Updates the app (if possible) on change using HMR.
 
-#### `npm run build`
+#### `yarn build`
 
 Creates a new build optimized for production.
 
-#### `npm run clean`
+#### `yarn clean`
 
 Clean the build folder.
 
-### `npm run test`
+### `yarn test`
 
 Run all tests using Jest.
 
-#### `npm run lint:js`
+#### `yarn lint:js`
 
 Run [ESLint](https://eslint.org/) for all JavaScript and TypeScript files.
 
-#### `npm run lint:css`
+#### `yarn lint:css`
 
 Run [Stylelint](https://stylelint.io/) for all CSS files.
 
-#### `npm run lint:sass`
+#### `yarn lint:sass`
 
 Run [Stylelint](https://stylelint.io/) for all SASS files.
 
-#### `npm run lint`
+#### `yarn lint`
 
 Run `lint:js`, `lint:css` and `lint:sass` in parallel.
 
-#### `npm run analyze`
+#### `yarn analyze`
 
 Starts `webpack-bundle-analyzer` to give you the opportunity to analyze your bundle(s).
 
-#### `npm run depgraph`
+#### `yarn depgraph`
 
 Creates an image of your dependency graph. Requires [GraphVIZ](https://www.graphviz.org/).
 
-#### `npm run storybook`
+#### `yarn storybook`
 
 Run the [Storybook](https://storybook.js.org/) interface on the port 6006.
 
-#### `npm run build:storybook`
+#### `yarn build:storybook`
 
 Generate the static resources for [Storybook](https://storybook.js.org/). Useful to host online.
 
-#### `npm run format`
+#### `yarn format`
 
 Format the files with [Prettier](https://prettier.io/), [ESLint](https://eslint.org/) and [Stylelint](https://stylelint.io/).
 
-#### `npm run plop`
+#### `yarn plop`
 
 Display intructions on the command line to create files easily.
 

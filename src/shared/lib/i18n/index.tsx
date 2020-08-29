@@ -8,6 +8,7 @@ i18next.use(Backend).use(LanguageDetector).use(initReactI18next);
 
 if (!i18next.isInitialized) {
   i18next.init(config);
+  i18next.languages = config.supportedLngs;
 }
 
 export default i18next;

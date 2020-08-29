@@ -1,38 +1,38 @@
 import React from 'react';
+import { Store } from 'redux';
+import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import { useSSR } from 'react-i18next';
-
-import { shallow } from 'enzyme';
+import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import App from './App';
-import { AppState } from './lib/redux/store/app/types';
+import { RootState } from './lib/store/rootReducer';
 
-const mockStore = configureStore<{ app: AppState }>([]);
-const store = mockStore({
-  app: { locale: 'en' },
-});
-const initialI18nStore = {};
-const initialLanguage = 'en';
+describe('<App />', () => {
+  let wrapper: ShallowWrapper;
+  let store: Store;
 
-const BaseApp = () => {
-  useSSR(initialI18nStore, initialLanguage);
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <HelmetProvider>
+  beforeEach(() => {
+    store = configureStore<RootState>([thunk])();
+    wrapper = shallow(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
           <App />
-        </HelmetProvider>
-      </BrowserRouter>
-    </Provider>
-  );
-};
+        </MemoryRouter>
+      </Provider>
+    );
+  });
 
-describe('App', () => {
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   it('renders without crashing', () => {
-    const wrapper = shallow(<BaseApp />);
-    expect(wrapper.find(App)).toHaveLength(1);
+    expect(wrapper.length).toBe(1);
+  });
+
+  it('should match its reference snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot();
   });
 });

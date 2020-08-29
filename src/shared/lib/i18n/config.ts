@@ -1,4 +1,4 @@
-import { Locale } from '../redux/store/app/types';
+import { Locale } from '../store/app/types';
 
 const locales: Locale[] = ['en', 'fr'];
 const namespaces = ['common', 'pages'];

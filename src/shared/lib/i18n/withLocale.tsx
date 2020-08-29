@@ -1,16 +1,15 @@
 import React from 'react';
-import { useLocation, useHistory, Redirect } from 'react-router-dom';
+import { useLocation, useHistory, Redirect } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useStore, useSelector } from 'react-redux';
 
 import config from './config';
-import { getLocale } from '../redux/store/app/selectors';
-import { setLocale } from '../redux/store/app/actions';
-import { Locale } from '../redux/store/app/types';
+import { getLocale } from '../store/app/selectors';
+import { setLocale } from '../store/app/actions';
+import { Locale } from '../store/app/types';
 
 /**
- * Format the url to contain a valid locale in the query, and sync i18n language
- * with redux store and the query
+ * Format the url to contain a valid locale, and sync it to redux store and i18n language
  */
 const withLocale = (WrappedComponent: React.FC<any>) => {
   const LocalizedComponent = () => {
@@ -22,11 +21,11 @@ const withLocale = (WrappedComponent: React.FC<any>) => {
 
     // Sync the i18n language, the locale in the store and the locale in the url
     React.useEffect(() => {
-      if (storeLocale !== i18n.language) {
+      if (storeLocale && storeLocale !== i18n.language) {
         store.dispatch(setLocale(i18n.language as Locale));
       }
       const curLocale = pathname.split('/')[1];
-      if (curLocale !== i18n.language && curLocale) {
+      if (curLocale && curLocale !== i18n.language) {
         history.replace(pathname.replace(curLocale, i18n.language) + search);
       }
     }, [i18n.language, storeLocale, history, pathname, search, store]);

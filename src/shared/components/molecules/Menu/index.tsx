@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import './style.scss';
+import './styles.scss';
 
 export interface MenuProps {
   items: string[];
@@ -13,61 +13,58 @@ export interface MenuProps {
   uppercase?: boolean;
 }
 
-interface MenuState {
-  selected: string | null;
-  open: boolean;
-}
+export const classNames = {
+  ROOT: 'Menu',
+  CAPITALIZE: 'Menu_capitalize',
+  UPPERCASE: 'Menu_uppercase',
+  BUTTON: 'Menu__Button',
+  BUTTON_WITH_ICON: 'Menu__Button_icon',
+  ITEMS: 'Menu__Items',
+  ITEMS_VISIBLE: 'Menu__Items_visible',
+  ITEM: 'Menu__Item',
+};
 
 const Menu: React.FC<MenuProps> = (props: MenuProps) => {
-  const [state, setState] = React.useState<MenuState>({
-    selected: null,
-    open: false,
-  });
+  const [selectedItem, setSelectedItem] = React.useState<string | null>(null);
+  const [visible, setVisible] = React.useState<boolean>(false); // items visible ?
 
   const toggleVisible = () => {
-    setState({
-      ...state,
-      open: !state.open,
-    });
+    setVisible(!visible);
   };
 
   const handleSelect = (item: string) => {
-    setState({ selected: item, open: false });
+    setSelectedItem(item);
+    setVisible(false);
     props.onSelect(item);
-    close();
   };
 
-  const close = () => {
-    setState({ open: false, selected: null });
-  };
-
-  const classes = ['menu'];
-  if (props.capitalize) classes.push('menu_capitalize');
-  if (props.uppercase) classes.push('menu_uppercase');
+  const classes = [classNames.ROOT];
+  if (props.capitalize) classes.push(classNames.CAPITALIZE);
+  if (props.uppercase) classes.push(classNames.UPPERCASE);
 
   return (
     <div className={classnames(classes)}>
       <span
         className={
           props.noDropIcon
-            ? 'menu__button'
-            : classnames('menu__button', 'menu__button_icon')
+            ? classNames.BUTTON
+            : classnames(classNames.BUTTON, classNames.BUTTON_WITH_ICON)
         }
         onClick={toggleVisible}
       >
-        {state.selected || props.defaultItem || props.placeholder}
+        {selectedItem || props.defaultItem || props.placeholder}
       </span>
       <ul
         className={
-          state.open
-            ? classnames('menu__items', 'menu__items_open')
-            : 'menu__items'
+          visible
+            ? classnames(classNames.ITEMS, classNames.ITEMS_VISIBLE)
+            : classNames.ITEMS
         }
       >
         {props.items.map((item: string) => (
           <li
             key={item}
-            className="menu__item"
+            className={classNames.ITEM}
             onClick={() => handleSelect(item)}
           >
             {item}

@@ -1,15 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import './style.scss';
+import './styles.scss';
 
 const Footer: React.FC<any> = () => {
   const { t } = useTranslation();
   return (
-    <footer className="footer">
-      <p className="footer__text">
+    <footer className="Footer">
+      <p className="Footer__Text">
         {t('footer.content')}{' '}
         <a
-          className="footer__author"
+          className="Footer__Author"
           href="https://github.com/mxjoly"
           target="_blank"
           rel="noreferrer"

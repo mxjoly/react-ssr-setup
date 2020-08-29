@@ -1,18 +1,18 @@
 @use '../../../theme';
 
-.footer {
+.Footer {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: theme.$footer-height;
   background: theme.$background-color;
 
-  &__text {
+  &__Text {
     color: theme.$font-color-light;
   }
 
-  &__author {
+  &__Author {
     color: theme.$primary-color;
   }
 }

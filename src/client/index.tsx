@@ -7,7 +7,7 @@ import { useSSR } from 'react-i18next';
 
 import '../shared/lib/i18n';
 import App from '../shared/App';
-import { configureStore } from '../shared/lib/redux';
+import { configureStore } from '../shared/lib/store';
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadState = window.__PRELOADED_STATE__;

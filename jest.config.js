@@ -2,7 +2,6 @@ const paths = require('./config/paths');
 
 module.exports = {
   verbose: true,
-  collectCoverageFrom: ['src/**/*.{js,jsx,mjs,ts,tsx}'],
   setupFiles: ['<rootDir>/node_modules/regenerator-runtime/runtime'],
   setupFilesAfterEnv: ['<rootDir>/config/jest/setupTests.js'],
   testMatch: [
@@ -23,4 +22,8 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss)$':
       '<rootDir>/node_modules/jest-css-modules-transform',
   },
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,mjs,ts,tsx}',
+    '!src/**/*.stories.{js,jsx,mjs,ts,tsx}',
+  ],
 };

@@ -114,7 +114,7 @@ const start = async () => {
   const script = nodemon({
     script: `${paths.serverBuild}/server.js`,
     ignore: ['src', 'scripts', 'config', 'build/client'],
-    delay: 200,
+    delay: 200, // delay to prevent unnecessary server restarts
   });
 
   script.on('restart', () => {

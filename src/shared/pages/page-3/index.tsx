@@ -1,9 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { Page, PageProps } from '../type';
+import { RouteConfigComponentProps } from 'react-router-config';
 
-const Page3: Page<PageProps> = ({ route }: PageProps) => {
+const Page3: React.FC<RouteConfigComponentProps> = ({
+  route,
+}: RouteConfigComponentProps) => {
   const { t } = useTranslation('pages');
   return (
     <>
@@ -19,4 +21,4 @@ const Page3: Page<PageProps> = ({ route }: PageProps) => {
   );
 };
 
-export default Page3 as React.FunctionComponent;
+export default Page3;

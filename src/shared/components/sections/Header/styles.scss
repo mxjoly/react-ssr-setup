@@ -1,31 +1,31 @@
 @use '../../../theme';
 
-.header {
+.Header {
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: theme.$header-height;
-  box-sizing: border-box;
   padding: 0px 30px;
   background: theme.$background-color;
 
-  &__logo {
+  &__Logo {
     width: 60px;
     height: 60px;
     margin-right: 20px;
   }
 
-  &__navigation,
-  &__navigation > * {
+  &__Navigation,
+  &__Navigation > * {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 
-  &__link {
-    color: theme.$font-color-light;
+  &__Link {
     padding: 10px;
+    color: theme.$font-color-light;
     cursor: pointer;
 
     &_selected {

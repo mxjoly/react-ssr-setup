@@ -1,12 +1,32 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
-import {{properCase componentName}} from '.';
+import {{properCase componentName}}, { {{properCase componentName}}Props, classNames } from './index';
 
 describe('{{properCase componentName}}', () => {
-    const defaultProps = {};
+    let component: ShallowWrapper;
+    let initialProps: {{properCase componentName}}Props;
 
-    it('renders without crashing', () => {
-        shallow(< {{properCase componentName}} {...defaultProps} />);
+    beforeEach(() => {
+        initialProps = {
+            id: '12345',
+        };
+        component = shallow(< {{properCase componentName}} {...initialProps} />);
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
+
+    it('renders without errors', () => {
+        expect(component.hasClass(classNames.ROOT)).toBe(true);
+    });
+
+    it('should match its reference snapshot', () => {
+        expect(component.html()).toMatchSnapshot();
     });
 });

@@ -2,15 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export interface {{properCase componentName}}Props {
-  className?: string;
+  id?: string;
+}
+
+export const classNames = {
+  ROOT: '.{{properCase componentName}}',
 }
 
 const {{properCase componentName}}: React.FC<{{properCase componentName}}Props> = () => {
-  return <div className="{{dashCase componentName}}"></div>;
+  return <div className={classNames.ROOT}></div>;
 };
 
 {{properCase componentName}}.propTypes = {
-  className: PropTypes.string,
+  id: PropTypes.string,
 };
 
 export default {{properCase componentName}};
