@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { spy, SinonSpy } from 'sinon';
 
 import Menu, { MenuProps, classNames } from './index';
 
@@ -10,12 +9,12 @@ const useStateSpy = jest.spyOn(React, 'useState');
 
 describe('<Menu />', () => {
   let component: ShallowWrapper;
-  let initialProps: MenuProps & { onSelect: SinonSpy };
+  let initialProps: MenuProps & { onSelect: jest.MockedFunction<any> };
 
   beforeEach(() => {
     initialProps = {
       items: ['item1', 'item2', 'item3'],
-      onSelect: spy(),
+      onSelect: jest.fn(),
     };
     component = shallow(<Menu {...initialProps} />);
   });
@@ -136,7 +135,7 @@ describe('<Menu />', () => {
 
       it('should activate the handleSelect function on click', () => {
         item.simulate('click');
-        expect(initialProps.onSelect.calledOnce).toBe(true);
+        expect(initialProps.onSelect).toBeCalledTimes(1);
       });
     });
   });

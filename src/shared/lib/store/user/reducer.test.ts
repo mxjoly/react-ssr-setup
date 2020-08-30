@@ -2,7 +2,7 @@ import MockDate from 'mockdate';
 import reducer, { initialState } from './reducer';
 import { ActionTypes } from './actions';
 
-describe('{{properCase reducerName}} reducer', () => {
+describe('User reducer', () => {
   beforeAll(() => {
     MockDate.set(new Date());
   });
@@ -16,17 +16,17 @@ describe('{{properCase reducerName}} reducer', () => {
     expect(receivedState).toEqual(initialState);
   });
 
-  it('should handle {{constantCase reducerName}}_REQUEST', () => {
+  it('should handle USER_REQUEST', () => {
     const receivedState = reducer(undefined, {
-      type: ActionTypes.{{constantCase reducerName}}_REQUEST,
+      type: ActionTypes.USER_REQUEST,
     });
     const expectedState = { ...initialState, isLoading: true };
     expect(receivedState).toEqual(expectedState);
   });
 
-  it('should handle {{constantCase reducerName}}_SUCCESS', () => {
+  it('should handle USER_SUCCESS', () => {
     const action = {
-      type: ActionTypes.{{constantCase reducerName}}_SUCCESS,
+      type: ActionTypes.USER_SUCCESS,
       payload: {
         updatedAt: Date.now(),
         items: ['item1', 'item2', 'item3'],
@@ -41,17 +41,17 @@ describe('{{properCase reducerName}} reducer', () => {
     expect(receivedState).toEqual(expectedState);
   });
 
-  it('should handle {{constantCase reducerName}}_FAILURE', () => {
+  it('should handle USER_FAILURE', () => {
     const receivedState = reducer(undefined, {
-      type: ActionTypes.{{constantCase reducerName}}_FAILURE,
+      type: ActionTypes.USER_FAILURE,
     });
     const expectedState = { ...initialState, didInvalidate: true };
     expect(receivedState).toEqual(expectedState);
   });
 
-  it('should handle {{constantCase reducerName}}_INVALIDATE', () => {
+  it('should handle USER_INVALIDATE', () => {
     const receivedState = reducer(undefined, {
-      type: ActionTypes.{{constantCase reducerName}}_INVALIDATE,
+      type: ActionTypes.USER_INVALIDATE,
     });
     const expectedState = { ...initialState, didInvalidate: true };
     expect(receivedState).toEqual(expectedState);

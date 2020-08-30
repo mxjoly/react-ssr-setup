@@ -10,10 +10,10 @@ import serialize from 'serialize-javascript';
 import App from '../../shared/App';
 import Html from '../components/html';
 
-const routerContext: any = {};
-const helmetContext: any = {};
-
 const renderFullPage = () => (req: Request, res: Response) => {
+  const routerContext: any = {};
+  const helmetContext: any = {};
+
   const content = renderToString(
     <Provider store={res.locals.store}>
       <Router location={req.url} context={routerContext}>

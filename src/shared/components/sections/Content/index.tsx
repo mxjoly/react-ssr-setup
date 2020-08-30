@@ -12,4 +12,4 @@ const Content: React.FC<any> = () => {
   return <main className={classNames.ROOT}>{renderRoutes(routes)}</main>;
 };
 
-export default Content;
+export default React.memo(Content);

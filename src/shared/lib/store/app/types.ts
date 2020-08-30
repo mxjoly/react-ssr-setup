@@ -6,5 +6,5 @@ export type AppState = Readonly<{
 
 export type Action = {
   type: string;
-  payload: any;
+  payload?: any;
 };

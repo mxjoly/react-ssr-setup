@@ -1,3 +1,7 @@
+[![Dependency Status](https://img.shields.io/david/mxjoly/react-ssr-setup.svg)](https://david-dm.org/mxjoly/react-ssr-setup)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![License](https://img.shields.io/github/license/mxjoly/react-ssr-setup.svg)](https://github.com/mxjoly/react-ssr-setup)
+
 # ⚛ React + Express (Setup)
 
 This project is a template of a server side rendering a [React](https://en.reactjs.org/) application.
@@ -11,7 +15,7 @@ This project is a template of a server side rendering a [React](https://en.react
   - [Avoid source map generation for faster builds](#avoid-source-map-generation-for-faster-builds)
   - [Change the port of the dev environment](#change-the-port-of-the-dev-environment)
 - [Todo](#todo)
-- [License](#License)
+- [License](#license)
 
 ## Features
 

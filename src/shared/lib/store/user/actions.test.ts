@@ -2,7 +2,7 @@ import MockDate from 'mockdate';
 import * as actions from './actions';
 import { Action } from './types';
 
-describe('{{properCase reducerName}} actions', () => {
+describe('User actions', () => {
   beforeAll(() => {
     MockDate.set(new Date());
   });
@@ -13,34 +13,34 @@ describe('{{properCase reducerName}} actions', () => {
 
   it('should create an action to handle a request', () => {
     const expectedAction: Action = {
-      type: actions.ActionTypes.{{constantCase reducerName}}_REQUEST,
+      type: actions.ActionTypes.USER_REQUEST,
     };
-    expect(actions.{{camelCase reducerName}}Request()).toEqual(expectedAction);
+    expect(actions.userRequest()).toEqual(expectedAction);
   });
 
   it('should create an action to handle a success', () => {
     const items = ['item1', 'item2', 'item3'];
     const expectedAction: Action = {
-      type: actions.ActionTypes.{{constantCase reducerName}}_SUCCESS,
+      type: actions.ActionTypes.USER_SUCCESS,
       payload: {
         items,
         updatedAt: Date.now(),
       },
     };
-    expect(actions.{{camelCase reducerName}}Success(items)).toEqual(expectedAction);
+    expect(actions.userSuccess(items)).toEqual(expectedAction);
   });
 
   it('should create an action to handle a failure', () => {
     const expectedAction: Action = {
-      type: actions.ActionTypes.{{constantCase reducerName}}_FAILURE,
+      type: actions.ActionTypes.USER_FAILURE,
     };
-    expect(actions.{{camelCase reducerName}}Failure()).toEqual(expectedAction);
+    expect(actions.userFailure()).toEqual(expectedAction);
   });
 
   it('should create an action to invalidate the data', () => {
     const expectedAction: Action = {
-      type: actions.ActionTypes.{{constantCase reducerName}}_INVALIDATE,
+      type: actions.ActionTypes.USER_INVALIDATE,
     };
-    expect(actions.{{camelCase reducerName}}Invalidate()).toEqual(expectedAction);
+    expect(actions.userInvalidate()).toEqual(expectedAction);
   });
 });

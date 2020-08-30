@@ -31,6 +31,10 @@ describe('routes', () => {
         'profile',
       ]);
     });
+
+    it('should return the keys with no argument', () => {
+      expect(getRouteKeys().length).toBeGreaterThanOrEqual(0);
+    });
   });
 
   describe('#getPath', () => {
@@ -43,6 +47,11 @@ describe('routes', () => {
         '/about/',
         '/project/',
       ]);
+    });
+
+    it('should return a path with only one argument', () => {
+      const key = getRouteKeys()[0] as Key;
+      expect(getPath(key, null)).toBeDefined();
     });
 
     it('should return null because of the key was not used', () => {

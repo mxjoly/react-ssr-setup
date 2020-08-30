@@ -1,15 +1,15 @@
 import { produce } from 'immer';
 import { ActionTypes } from './actions';
-import { Action, {{properCase reducerName}} } from './types';
+import { Action, {{properCase reducerName}}State } from './types';
 
-export const initialState: {{properCase reducerName}} = Object.freeze({
+export const initialState: {{properCase reducerName}}State = Object.freeze({
     didInvalidate: false,
     isLoading: false,
     items: [],
     updatedAt: null,
 });
 
-export default (state: {{properCase reducerName}} = initialState, action: Action) =>
+export default (state: {{properCase reducerName}}State = initialState, action: Action) =>
     produce(state, (draft) => {
         switch (action.type) {
             case ActionTypes.{{upperCase (snakeCase reducerName)}}_REQUEST:
@@ -18,8 +18,8 @@ export default (state: {{properCase reducerName}} = initialState, action: Action
 
             case ActionTypes.{{upperCase (snakeCase reducerName)}}_SUCCESS:
                 draft.didInvalidate = false;
-                draft.updatedAt = action.payload.updatedAt;
-                draft.items = action.payload.items || [];
+                draft.updatedAt = action.payload?.updatedAt || Number(Date.now());
+                draft.items = action.payload?.items || [];
                 draft.isLoading = false;
                 return;
 

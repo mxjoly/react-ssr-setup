@@ -17,4 +17,4 @@ const PageNotFound: React.FC<RouteConfigComponentProps> = ({
   );
 };
 
-export default PageNotFound;
+export default React.memo(PageNotFound);

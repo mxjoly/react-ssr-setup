@@ -1,30 +1,29 @@
 import { createSelector } from 'reselect';
-import { {{properCase reducerName}} } from './types';
+import { RootState } from '../rootReducer';
 
 // Cache TTL in Milliseconds
 const CACHE_TTL = 60 * 1000;
 
-export const get{{properCase reducerName}} = (state: { {{camelCase reducerName}}: {{properCase reducerName}} }) => state.{{camelCase reducerName}} || {};
+export const get{{properCase reducerName}} = (state: RootState) => state.{{camelCase reducerName}};
 
 export const get{{properCase reducerName}}Items = createSelector(
-    [get{{properCase reducerName}}],
-    ({{camelCase reducerName}}): Array<any> => {
-        return {{camelCase reducerName}}.items;
-    }
+  [get{{properCase reducerName}}],
+  ({{camelCase reducerName}}): Array<any> => {
+    return {{camelCase reducerName}}.items;
+  }
 );
 
-export const isExpired = (state: { {{camelCase reducerName}}: {{properCase reducerName}} }): boolean => {
-    const { updatedAt, didInvalidate } = get{{properCase reducerName}}(state);
-    if (didInvalidate === true || !updatedAt || Date.now() - updatedAt > CACHE_TTL) {
-        return true;
-    }
-    return false;
+export const isExpired = (state: RootState): boolean => {
+  const { updatedAt, didInvalidate } = get{{properCase reducerName}}(state);
+  return (
+    didInvalidate === true || !updatedAt || Date.now() - updatedAt > CACHE_TTL
+  );
 };
 
 export const isLoading = createSelector([get{{properCase reducerName}}], ({{camelCase reducerName}}) => {
-    return {{camelCase reducerName}}.isLoading;
+  return {{camelCase reducerName}}.isLoading;
 });
 
 export const didInvalidate = createSelector([get{{properCase reducerName}}], ({{camelCase reducerName}}) => {
-    return {{camelCase reducerName}}.didInvalidate;
+  return {{camelCase reducerName}}.didInvalidate;
 });

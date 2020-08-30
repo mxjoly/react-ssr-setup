@@ -1,30 +1,48 @@
-import { createSelector } from 'reselect';
-import { {{properCase reducerName}} } from './types';
+import rootReducer from '../rootReducer';
+import reducer from './reducer';
+import * as selectors from './selectors';
+import * as actions from './actions';
 
-// Cache TTL in Milliseconds
-const CACHE_TTL = 60 * 1000;
+// The initial root state
+const initialState = rootReducer(undefined, { type: 'undefined' });
 
-export const get{{properCase reducerName}} = (state: { {{camelCase reducerName}}: {{properCase reducerName}} }) => state.{{camelCase reducerName}} || {};
+describe('{{properCase reducerName}} selectors', () => {
+  it('should select the {{properCase reducerName}} branch of the state', () => {
+    expect(selectors.get{{properCase reducerName}}(initialState)).toEqual(initialState.{{camelCase reducerName}});
+  });
 
-export const get{{properCase reducerName}}Items = createSelector(
-    [get{{properCase reducerName}}],
-    ({{camelCase reducerName}}): Array<any> => {
-        return {{camelCase reducerName}}.items;
-    }
-);
+  it('should have a selector to get the items', () => {
+    expect(selectors.get{{properCase reducerName}}Items(initialState)).toBe(initialState.{{camelCase reducerName}}.items);
+  });
 
-export const isExpired = (state: { {{camelCase reducerName}}: {{properCase reducerName}} }): boolean => {
-    const { updatedAt, didInvalidate } = get{{properCase reducerName}}(state);
-    if (didInvalidate === true || !updatedAt || Date.now() - updatedAt > CACHE_TTL) {
-        return true;
-    }
-    return false;
-};
+  it('should have a selector to detect if the data is expired', () => {
+    const action = {
+      type: actions.ActionTypes.{{constantCase reducerName}}_SUCCESS,
+      payload: {
+        updatedAt: new Date().getDate() - 1, // yesterday
+      },
+    };
+    const {{camelCase reducerName}}State = { {{camelCase reducerName}}: { ...reducer(undefined, action) } };
+    const finalState = { ...initialState, ...{{camelCase reducerName}}State };
+    expect(selectors.isExpired(finalState)).toBe(true);
+  });
 
-export const isLoading = createSelector([get{{properCase reducerName}}], ({{camelCase reducerName}}) => {
-    return {{camelCase reducerName}}.isLoading;
-});
+  it('should have a selector to detect if the data is expired (2)', () => {
+    const action = { type: actions.ActionTypes.{{constantCase reducerName}}_SUCCESS }; // with no payload
+    const {{camelCase reducerName}}State = { {{camelCase reducerName}}: { ...reducer(undefined, action) } };
+    const finalState = { ...initialState, ...{{camelCase reducerName}}State };
+    expect(selectors.isExpired(finalState)).toBe(false);
+  });
 
-export const didInvalidate = createSelector([get{{properCase reducerName}}], ({{camelCase reducerName}}) => {
-    return {{camelCase reducerName}}.didInvalidate;
+  it('should have a selector to detect if the data is loading', () => {
+    const action = actions.{{camelCase reducerName}}Request();
+    const state = rootReducer(undefined, action);
+    expect(selectors.isLoading(state)).toBe(true);
+  });
+
+  it('should have a selector to detect if the data did invalidate', () => {
+    const preloadState = rootReducer(undefined, actions.{{camelCase reducerName}}Success([]));
+    const finalState = rootReducer(preloadState, actions.{{camelCase reducerName}}Invalidate());
+    expect(selectors.didInvalidate(finalState)).toBe(true);
+  });
 });

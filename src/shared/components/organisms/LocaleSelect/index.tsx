@@ -30,4 +30,4 @@ const LocaleSelect: React.FC<any> = () => {
   );
 };
 
-export default LocaleSelect;
+export default React.memo(LocaleSelect);

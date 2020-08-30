@@ -27,4 +27,4 @@ const Footer: React.FC<any> = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

@@ -21,4 +21,4 @@ const Home: React.FC<RouteConfigComponentProps> = ({
   );
 };
 
-export default Home;
+export default React.memo(Home);

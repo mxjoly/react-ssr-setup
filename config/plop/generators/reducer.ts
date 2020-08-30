@@ -24,7 +24,7 @@ const actions = [
   },
   {
     type: 'pretty-add',
-    path: `${paths.srcShared}/lib/store/{{reducerName}}/action.test.ts`,
+    path: `${paths.srcShared}/lib/store/{{reducerName}}/actions.test.ts`,
     templateFile: './templates/reducer/actions.test.hbs',
   },
   {

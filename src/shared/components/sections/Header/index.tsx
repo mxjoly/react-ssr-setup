@@ -15,44 +15,48 @@ export const classNames = {
   ACTIVE_LINK: 'Header__Link_active',
 };
 
-const RouteList = ({ keys }: { keys: Key[] }) => {
-  const { i18n } = useTranslation();
-  return (
-    <ul>
-      {keys.map((key) => {
-        const path = getPath(key, { locale: i18n.language });
-        if (typeof path === 'string') {
-          return (
-            <li key={key}>
-              <NavLink
-                exact
-                to={path}
-                className={classNames.LINK}
-                activeClassName={classNames.ACTIVE_LINK}
-              >
-                {key}
-              </NavLink>
-            </li>
-          );
-        }
-      })}
-    </ul>
-  );
-};
+const RouteList = React.memo(
+  ({ keys, locale }: { keys: Key[]; locale: string }) => {
+    return (
+      <ul>
+        {keys.map((key) => {
+          const path = getPath(key, { locale });
+          if (typeof path === 'string') {
+            return (
+              <li key={key}>
+                <NavLink
+                  exact
+                  to={path}
+                  className={classNames.LINK}
+                  activeClassName={classNames.ACTIVE_LINK}
+                >
+                  {key}
+                </NavLink>
+              </li>
+            );
+          }
+        })}
+      </ul>
+    );
+  }
+);
 
 const Header: React.FC<any> = () => {
   const { i18n } = useTranslation();
   return (
     <div className={classNames.ROOT}>
       <nav className={classNames.NAV}>
-        <Link to={`${i18n.language}/`}>
+        <Link to={i18n.language ? `/${i18n.language}/` : '/'}>
           <img className={classNames.LOGO} src={ReactLogo} alt="logo" />
         </Link>
-        <RouteList keys={['page-1', 'page-2', 'page-3']} />
+        <RouteList
+          keys={['page-1', 'page-2', 'page-3']}
+          locale={i18n.language}
+        />
       </nav>
       <LocaleSelect />
     </div>
   );
 };
 
-export default Header;
+export default React.memo(Header);

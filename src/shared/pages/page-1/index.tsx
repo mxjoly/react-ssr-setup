@@ -21,4 +21,4 @@ const Page1: React.FC<RouteConfigComponentProps> = ({
   );
 };
 
-export default Page1;
+export default React.memo(Page1);

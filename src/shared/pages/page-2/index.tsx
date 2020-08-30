@@ -21,4 +21,4 @@ const Page2: React.FC<RouteConfigComponentProps> = ({
   );
 };
 
-export default Page2;
+export default React.memo(Page2);

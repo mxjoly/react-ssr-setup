@@ -4,7 +4,7 @@ module.exports = {
     'stylelint-config-recommended-scss',
     'stylelint-config-recess-order',
   ],
-  plugins: ['stylelint-scss', 'stylelint-order', 'stylelint-prettier'],
+  plugins: ['stylelint-scss', 'stylelint-prettier'],
   rules: {
     'prettier/prettier': true,
     'color-no-invalid-hex': true,

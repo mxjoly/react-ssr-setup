@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useHistory, Redirect } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useStore, useSelector } from 'react-redux';
+import cookie from 'js-cookie';
 
 import config from './config';
 import { getLocale } from '../store/app/selectors';
@@ -12,7 +13,7 @@ import { Locale } from '../store/app/types';
  * Format the url to contain a valid locale, and sync it to redux store and i18n language
  */
 const withLocale = (WrappedComponent: React.FC<any>) => {
-  const LocalizedComponent = () => {
+  const LocalizedComponent = (props: any) => {
     const { i18n } = useTranslation();
     const { pathname, search } = useLocation();
     const store = useStore();
@@ -26,7 +27,9 @@ const withLocale = (WrappedComponent: React.FC<any>) => {
       }
       const curLocale = pathname.split('/')[1];
       if (curLocale && curLocale !== i18n.language) {
+        // Replace the pathname without reloading the page and update the cookies
         history.replace(pathname.replace(curLocale, i18n.language) + search);
+        cookie.set(config.detection.lookupCookie, i18n.language);
       }
     }, [i18n.language, storeLocale, history, pathname, search, store]);
 
@@ -40,7 +43,7 @@ const withLocale = (WrappedComponent: React.FC<any>) => {
       return <Redirect to={pathname.concat('/') + search} />;
     }
 
-    return <WrappedComponent />;
+    return <WrappedComponent {...props} />;
   };
 
   return LocalizedComponent;
