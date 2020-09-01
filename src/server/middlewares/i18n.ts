@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import express from 'express';
+import paths from '../../../config/paths';
 
 type TranslationCache = {
   [locale: string]: {
@@ -13,7 +14,8 @@ type TranslationCache = {
 
 const translationCache: TranslationCache = {};
 
-const localesDir = `${__dirname}/locales`;
+const localesDir =
+  process.env.NODE_ENV === 'test' ? paths.locales : `${__dirname}/locales`;
 
 const isCached = (locale: string, ns: string) =>
   translationCache[locale] && translationCache[locale][ns] ? true : false;
@@ -56,7 +58,9 @@ export const i18nextXhr = (req: express.Request, res: express.Response) => {
     const { values, updatedAt } = getTranslation(locale, ns);
 
     return res
+      .header('Content-Type', 'application/json')
       .header('Last-Modified', new Date(updatedAt).toUTCString())
+      .status(200)
       .send(values);
   } catch (error) {
     console.log(error.message);

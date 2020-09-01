@@ -37,7 +37,7 @@ const renderFullPage = () => (req: Request, res: Response) => {
   const initialLanguage = req.i18n.language;
   const initialI18nStore = serialize(resources);
 
-  return res.send(
+  return res.status(200).send(
     '<!doctype html>' +
       renderToString(
         <Html
