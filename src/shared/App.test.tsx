@@ -10,28 +10,30 @@ import configureStore from 'redux-mock-store';
 import App from './App';
 import { RootState } from './lib/store/rootReducer';
 
+// ================================================================ //
+
+jest.mock('./lib/store/app/selectors', () => ({
+  getLocale: () => 'en',
+}));
+
+// To test only the App component
+jest.mock('./lib/i18n/withLocale', () => (Component: React.FC) => {
+  const hoc = (props: any) => <Component {...props} />;
+  return hoc;
+});
+
 const middlewares: Middleware[] = [thunk];
 const mockStore = configureStore<RootState>(middlewares)();
+
+// ================================================================ //
 
 describe('<App />', () => {
   let wrapper: ShallowWrapper;
 
-  beforeAll(() => {
-    jest.mock('./lib/store/app/selectors', () => ({
-      getLocale: () => 'en',
-    }));
-
-    // To test only the App component
-    jest.mock('./lib/i18n/withLocale', () => (Component: React.FC) => {
-      const hoc = (props: any) => <Component {...props} />;
-      return hoc;
-    });
-  });
-
   beforeEach(() => {
     wrapper = shallow(
       <Provider store={mockStore}>
-        <MemoryRouter initialEntries={['/']}>
+        <MemoryRouter>
           <HelmetProvider>
             <App />
           </HelmetProvider>
@@ -44,7 +46,13 @@ describe('<App />', () => {
     jest.restoreAllMocks();
   });
 
+  // ---------------------------------------------------- //
+
   it('renders without crashing', () => {
     expect(wrapper.length).toBe(1);
+  });
+
+  it('should match its reference snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot();
   });
 });

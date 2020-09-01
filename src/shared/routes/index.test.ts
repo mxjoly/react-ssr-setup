@@ -21,6 +21,8 @@ const testConfig: RouteConfig[] = [
   },
 ];
 
+// ================================================================ //
+
 describe('routes', () => {
   describe('#getRouteKeys', () => {
     it('should return the all the keys', () => {
@@ -36,6 +38,8 @@ describe('routes', () => {
       expect(getRouteKeys().length).toBeGreaterThanOrEqual(0);
     });
   });
+
+  // ---------------------------------------------------- //
 
   describe('#getPath', () => {
     it('should return the correct path', () => {

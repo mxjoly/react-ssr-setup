@@ -1,52 +1,135 @@
-// import React from 'react';
-// import { Store } from 'redux';
-// import thunk from 'redux-thunk';
-// import { MemoryRouter, Router, Redirect, Route } from 'react-router';
-// import { createMemoryHistory } from 'history';
-// import { Provider } from 'react-redux';
-// import configureStore from 'redux-mock-store';
-// import { render, shallow, ShallowWrapper, ShallowRendererProps } from 'enzyme';
-// import { HelmetProvider, FilledContext } from 'react-helmet-async';
-// import { I18nContext } from 'react-i18next';
+/**
+ * @jest-environment jsdom
+ */
+import React from 'react';
+import { Store, Middleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import ReactRouter from 'react-router';
+import { shallow, mount, ReactWrapper } from 'enzyme';
+import configureStore from 'redux-mock-store';
 
-// import App from '../../App';
-// import { RootState } from '../store/rootReducer';
-// import withLocale from './withLocale';
+import withLocale from './withLocale';
+import { RootState } from '../../lib/store/rootReducer';
 
-// const AppWithLocale = withLocale(App);
+const middlewares: Middleware[] = [thunk];
 
-// const Providers = ({ children, store }) => {
-//   return (
-//     <Provider store={store}>
-//       <MemoryRouter initialEntries={['/']}>{children}</MemoryRouter>
-//     </Provider>
-//   );
-// };
+// ================================================================ //
 
-// describe('withLocale', () => {
-//   let wrapper: ShallowWrapper;
-//   let store: Store;
+jest.mock('../store/app/selectors', () => ({
+  getLocale: () => 'fr',
+}));
 
-//   beforeEach(() => {
-//     store = configureStore<RootState>([thunk])({ app: { locale: 'en' } });
-//     wrapper = shallow(
-//       <Providers store={store}>
-//         <AppWithLocale />
-//       </Providers>
-//     );
-//   });
+jest.mock('react-i18next', () => ({
+  ...(jest.requireActual('react-i18next') as any),
+  useTranslation: () => ({
+    i18n: {
+      t: jest.fn(),
+      language: 'en',
+    },
+  }),
+}));
 
-//   it('renders without crashing', () => {
-//     expect(wrapper).toHaveLength(1);
-//   });
+jest.mock('react-router', () => ({
+  ...(jest.requireActual('react-router') as any),
+  useHistory: () => ({
+    replace: jest.fn(),
+  }),
+  Redirect: () => null,
+}));
 
-//   it('should match its reference snapshot', () => {
-//     expect(wrapper.html()).toMatchSnapshot();
-//   });
+const locationSpy = jest.spyOn(ReactRouter, 'useLocation');
+const useMockLocation = (location?: any) => {
+  locationSpy.mockReturnValue({
+    pathname: '/',
+    search: '',
+    state: '',
+    hash: '',
+    key: '',
+    ...location,
+  });
+};
 
-//   it('renders a localized component', () => {
-//     expect(wrapper.find('LocalizedComponent')).toHaveLength(1);
-//   });
+const MockApp = () => <div>Mock App</div>;
+const WithLocaleMock = (props: any) => withLocale(MockApp)(props);
 
-//   it('should redirect', () => {});
-// });
+// ================================================================ //
+
+describe('withLocale', () => {
+  let wrapper: ReactWrapper;
+  let store: Store;
+
+  const mountWrapper = () => {
+    wrapper = mount(
+      shallow(
+        <Provider store={store}>
+          <WithLocaleMock />
+        </Provider>
+      ).get(0)
+    );
+  };
+
+  beforeEach(() => {
+    store = configureStore<RootState>(middlewares)();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
+  // ---------------------------------------------------- //
+
+  it('renders without errors', () => {
+    useMockLocation();
+    mountWrapper();
+    expect(wrapper.length).toBe(1);
+  });
+
+  it('should return the wrapped component if the pathname has a locale and a trainling slash', () => {
+    useMockLocation({ pathname: '/en/' });
+    mountWrapper();
+    const redirect = wrapper.find('Redirect');
+    expect(redirect.length).toBe(0);
+    expect(wrapper.contains(MockApp())).toBe(true);
+  });
+
+  it('should redirect to a pathname with the locale', () => {
+    useMockLocation();
+    mountWrapper();
+    const redirect = wrapper.find('Redirect');
+    expect(redirect.length).toBe(1);
+    expect(redirect.prop('to')).toBe('/en/');
+  });
+
+  it('should add a trailing slash to the pathname', () => {
+    useMockLocation({ pathname: '/fr' });
+    mountWrapper();
+    const redirect = wrapper.find('Redirect');
+    expect(redirect.prop('to')).toBe('/fr/');
+  });
+
+  it('should replace an invalid locale in the pathname', () => {
+    useMockLocation({ pathname: '/invalid/locale/' });
+    mountWrapper();
+    const redirect = wrapper.find('Redirect');
+    expect(redirect.prop('to')).toBe('/en/locale/');
+  });
+
+  it('should replace an invalid locale and add a trailing slash to the pathname', () => {
+    useMockLocation({ pathname: '/invalid/locale' });
+    mountWrapper();
+    const redirect = wrapper.find('Redirect');
+    expect(redirect.prop('to')).toBe('/en/locale/');
+  });
+
+  it('should add the search to the pathname', () => {
+    useMockLocation({ pathname: '/en', search: '?msg=hello' });
+    mountWrapper();
+    const redirect = wrapper.find('Redirect');
+    expect(redirect.prop('to')).toBe('/en/?msg=hello');
+  });
+});

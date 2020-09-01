@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useHistory, Redirect } from 'react-router';
+import { useLocation, useHistory, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useStore, useSelector } from 'react-redux';
 import cookie from 'js-cookie';
@@ -12,7 +12,7 @@ import { Locale } from '../store/app/types';
 /**
  * Format the url to contain a valid locale, and sync it to redux store and i18n language
  */
-const withLocale = (WrappedComponent: React.FC<any>) => {
+const withLocale = (WrappedComponent: React.FC) => {
   const LocalizedComponent = (props: any) => {
     const { i18n } = useTranslation();
     const { pathname, search } = useLocation();
@@ -33,17 +33,26 @@ const withLocale = (WrappedComponent: React.FC<any>) => {
       }
     }, [i18n.language, storeLocale, history, pathname, search, store]);
 
-    const curLocale = pathname.split('/')[1];
-    if (!config.supportedLngs.includes(curLocale)) {
-      return (
-        <Redirect to={pathname.replace(curLocale, i18n.language) + search} />
-      );
-    } else if (!pathname.endsWith('/')) {
-      // Add a trailing to the url route
-      return <Redirect to={pathname.concat('/') + search} />;
+    if (pathname === '/') {
+      return <Redirect to={pathname + i18n.language + '/'} />;
     }
 
-    return <WrappedComponent {...props} />;
+    const curLocale = pathname.split('/')[1];
+
+    if (config.supportedLngs.includes(curLocale)) {
+      if (pathname.endsWith('/')) {
+        return <WrappedComponent {...props} />;
+      } else {
+        return <Redirect to={pathname + '/' + search} />;
+      }
+    }
+
+    const to =
+      pathname.replace(curLocale, i18n.language) +
+      (pathname.endsWith('/') ? '' : '/') +
+      search;
+
+    return <Redirect to={to} />;
   };
 
   return LocalizedComponent;

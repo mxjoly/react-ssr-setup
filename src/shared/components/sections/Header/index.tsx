@@ -46,7 +46,7 @@ const Header: React.FC<any> = () => {
   return (
     <div className={classNames.ROOT}>
       <nav className={classNames.NAV}>
-        <Link to={i18n.language ? `/${i18n.language}/` : '/'}>
+        <Link to={`/${i18n.language}/`}>
           <img className={classNames.LOGO} src={ReactLogo} alt="logo" />
         </Link>
         <RouteList

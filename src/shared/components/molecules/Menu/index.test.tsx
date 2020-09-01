@@ -3,9 +3,13 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import Menu, { MenuProps, classNames } from './index';
 
+// ================================================================ //
+
 // Create a spy for the react hook useState
 const setState = jest.fn();
 const useStateSpy = jest.spyOn(React, 'useState');
+
+// ================================================================ //
 
 describe('<Menu />', () => {
   let component: ShallowWrapper;
@@ -27,6 +31,8 @@ describe('<Menu />', () => {
     jest.restoreAllMocks();
   });
 
+  // ---------------------------------------------------- //
+
   it('renders without errors', () => {
     expect(component.hasClass(classNames.ROOT)).toBe(true);
   });
@@ -46,6 +52,8 @@ describe('<Menu />', () => {
     component.setProps(props);
     expect(component.hasClass(classNames.UPPERCASE)).toBe(true);
   });
+
+  // ---------------------------------------------------- //
 
   describe('#Button', () => {
     let button: ShallowWrapper;
@@ -97,6 +105,8 @@ describe('<Menu />', () => {
     });
   });
 
+  // ---------------------------------------------------- //
+
   describe('#Items', () => {
     let items: ShallowWrapper;
     let button: ShallowWrapper;
@@ -125,6 +135,8 @@ describe('<Menu />', () => {
         initialProps.items.length
       );
     });
+
+    // ---------------------------------------------------- //
 
     describe('#Item', () => {
       let item: ShallowWrapper;

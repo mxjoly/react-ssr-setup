@@ -24,6 +24,8 @@ describe('<LocaleSelect />', () => {
     jest.restoreAllMocks();
   });
 
+  // ---------------------------------------------------- //
+
   it('should render without errors', () => {
     expect(component.find('Menu')).toHaveLength(1);
   });
