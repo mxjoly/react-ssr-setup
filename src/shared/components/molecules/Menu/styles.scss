@@ -3,9 +3,7 @@
 .Menu {
   position: relative;
   display: inline-block;
-  width: auto;
   max-width: 200px;
-  height: 1em;
 
   &_capitalize {
     text-transform: capitalize;
@@ -20,12 +18,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: inherit;
+    padding-bottom: 10px;
     font-family: 'Avenir', sans-serif;
     font-size: 1em;
     font-weight: 400;
     color: theme.$font-color-light;
+    text-transform: inherit;
     cursor: pointer;
-    user-select: none;
 
     &_icon:after {
       padding-left: 4px;
@@ -34,19 +34,19 @@
   }
 
   &__Items {
-    position: relative;
+    position: absolute;
     left: 50%;
+    display: none;
     width: inherit;
     height: auto;
-    margin-top: 10px;
+    margin-top: 0px;
     text-align: center;
-    visibility: hidden;
     background: #fff;
     box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.35);
     transform: translateX(-50%);
 
     &_visible {
-      visibility: visible;
+      display: block;
     }
   }
 

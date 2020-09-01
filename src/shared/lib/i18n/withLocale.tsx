@@ -28,7 +28,12 @@ const withLocale = (WrappedComponent: React.FC) => {
       const curLocale = pathname.split('/')[1];
       if (curLocale && curLocale !== i18n.language) {
         // Replace the pathname without reloading the page and update the cookies
-        history.replace(pathname.replace(curLocale, i18n.language) + search);
+        history.replace(
+          pathname
+            .replace(curLocale, i18n.language)
+            .concat(pathname.endsWith('/') ? '' : '/')
+            .concat(search)
+        );
         cookie.set(config.detection.lookupCookie, i18n.language);
       }
     }, [i18n.language, storeLocale, history, pathname, search, store]);
@@ -47,10 +52,10 @@ const withLocale = (WrappedComponent: React.FC) => {
       }
     }
 
-    const to =
-      pathname.replace(curLocale, i18n.language) +
-      (pathname.endsWith('/') ? '' : '/') +
-      search;
+    const to = pathname
+      .replace(curLocale, i18n.language)
+      .concat(pathname.endsWith('/') ? '' : '/')
+      .concat(search);
 
     return <Redirect to={to} />;
   };

@@ -53,6 +53,21 @@ describe('<Menu />', () => {
     expect(component.hasClass(classNames.UPPERCASE)).toBe(true);
   });
 
+  it('should display the items when a mouveOver event is detected', () => {
+    component.simulate('mouseOver');
+    component.simulate('mouseOver'); // Do nothing because items are still displayed
+    const items = component.find(`.${classNames.ITEMS}`);
+    expect(items.hasClass(classNames.ITEMS_VISIBLE)).toBe(true);
+  });
+
+  it('should hide the items when a mouveLeave event is detected', () => {
+    component.simulate('mouseOver');
+    component.simulate('mouseLeave');
+    component.simulate('mouseLeave'); // Do nothing because items are still hiden
+    const items = component.find(`.${classNames.ITEMS}`);
+    expect(items.hasClass(classNames.ITEMS_VISIBLE)).toBe(false);
+  });
+
   // ---------------------------------------------------- //
 
   describe('#Button', () => {
@@ -111,18 +126,18 @@ describe('<Menu />', () => {
     let items: ShallowWrapper;
     let button: ShallowWrapper;
 
+    const update = () => {
+      component = component.update();
+      button = component.find(`.${classNames.BUTTON}`);
+      items = component.find(`.${classNames.ITEMS}`);
+    };
+
     beforeEach(() => {
       items = component.find(`.${classNames.ITEMS}`);
       button = component.find(`.${classNames.BUTTON}`);
     });
 
     it('should be opened and closed by the button', () => {
-      const update = () => {
-        component = component.update();
-        button = component.find(`.${classNames.BUTTON}`);
-        items = component.find(`.${classNames.ITEMS}`);
-      };
-
       button.simulate('click');
       expect(items.hasClass(classNames.ITEMS_VISIBLE)).toBe(false);
       update();

@@ -23,7 +23,7 @@ const testConfig: RouteConfig[] = [
 
 // ================================================================ //
 
-describe('routes', () => {
+describe('Routes', () => {
   describe('#getRouteKeys', () => {
     it('should return the all the keys', () => {
       expect(getRouteKeys(testConfig)).toEqual([

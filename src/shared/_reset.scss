@@ -8,6 +8,19 @@ ul {
   list-style: none;
 }
 
+button {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+input,
+textarea,
+button,
+select,
 a {
   text-decoration: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }

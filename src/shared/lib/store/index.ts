@@ -4,12 +4,12 @@ import rootReducer from './rootReducer';
 
 type StoreParams = {
   initialState?: { [key: string]: any };
-  middleware?: any[];
+  middlewares?: any[];
 };
 
 export const configureStore = ({
   initialState,
-  middleware = [],
+  middlewares = [],
 }: StoreParams) => {
   // https://github.com/zalmoxisus/redux-devtools-extension#1-with-redux
   const devtools =
@@ -20,7 +20,7 @@ export const configureStore = ({
   const composeEnhancers = devtools || compose;
 
   const enhancer = composeEnhancers(
-    applyMiddleware(...[thunk].concat(...middleware))
+    applyMiddleware(...[thunk].concat(...middlewares))
   );
 
   const store = createStore(rootReducer, initialState, enhancer);

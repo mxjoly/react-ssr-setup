@@ -32,6 +32,18 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
     setVisible(!visible);
   };
 
+  const addVisible = () => {
+    if (!visible) {
+      setVisible(true);
+    }
+  };
+
+  const removeVisible = () => {
+    if (visible) {
+      setVisible(false);
+    }
+  };
+
   const handleSelect = (item: string) => {
     setSelectedItem(item);
     setVisible(false);
@@ -43,8 +55,12 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
   if (props.uppercase) classes.push(classNames.UPPERCASE);
 
   return (
-    <div className={classnames(classes)}>
-      <span
+    <div
+      className={classnames(classes)}
+      onMouseOver={addVisible}
+      onMouseLeave={removeVisible}
+    >
+      <button
         className={
           props.noDropIcon
             ? classNames.BUTTON
@@ -53,7 +69,7 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
         onClick={toggleVisible}
       >
         {selectedItem || props.defaultItem || props.placeholder}
-      </span>
+      </button>
       <ul
         className={
           visible
