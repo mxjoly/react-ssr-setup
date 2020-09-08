@@ -1,4 +1,5 @@
 import React from 'react';
+import path from 'path';
 import { Request, Response } from 'express';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router } from 'react-router-dom';
@@ -8,7 +9,8 @@ import { Provider } from 'react-redux';
 import serialize from 'serialize-javascript';
 
 import App from '../../shared/App';
-import Html from '../components/html';
+import Html, { HtmlProps } from '../components/html';
+import paths from '../../../config/paths';
 
 const renderFullPage = () => (req: Request, res: Response) => {
   const routerContext: any = {};
@@ -37,27 +39,39 @@ const renderFullPage = () => (req: Request, res: Response) => {
   const initialLanguage = req.i18n.language;
   const initialI18nStore = serialize(resources);
 
-  return res.status(200).send(
-    '<!doctype html>' +
-      renderToString(
-        <Html
-          css={[
-            res.locals.assetPath('bundle.css'),
-            res.locals.assetPath('vendor.css'),
-          ]}
-          scripts={[
-            res.locals.assetPath('bundle.js'),
-            res.locals.assetPath('vendor.js'),
-          ]}
-          helmetContext={helmetContext}
-          state={state}
-          initialI18nStore={initialI18nStore}
-          initialLanguage={initialLanguage}
-        >
-          {content}
-        </Html>
-      )
-  );
+  const htmlProps: HtmlProps = {
+    children: content,
+    css: [
+      res.locals.assetPath('bundle.css'),
+      res.locals.assetPath('vendor.css'),
+    ],
+    scripts: [
+      res.locals.assetPath('bundle.js'),
+      res.locals.assetPath('vendor.js'),
+    ],
+    helmetContext,
+    state,
+    initialI18nStore,
+    initialLanguage,
+  };
+
+  if (process.env.PWA === 'false') {
+    htmlProps.favicon =
+      res.locals.assetPath(path.join(paths.publicAssets, 'favicon.ico')) ||
+      res.locals.assetPath(path.join(paths.publicAssets, 'favicon.png')) ||
+      res.locals.assetPath(path.join(paths.publicAssets, 'favicon.svg'));
+  }
+
+  if (process.env.PWA === 'true') {
+    htmlProps.manifest = res.locals.assetPath(
+      path.join(paths.publicAssets, 'manifest.json')
+    );
+    htmlProps.metadata = __METADATA__;
+  }
+
+  return res
+    .status(200)
+    .send('<!doctype html>' + renderToString(<Html {...htmlProps} />));
 };
 
 export default renderFullPage;

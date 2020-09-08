@@ -4,28 +4,28 @@ import { Express } from 'express';
 
 const PORT = Number(process.env.PORT) | 3500;
 
-describe('[Server] Root', () => {
+describe('Server', () => {
   let server: http.Server;
 
-  beforeEach((done) => {
+  beforeEach(async () => {
     // To test always a clean server without any residue from the previous unit tests
     delete require.cache[require.resolve('./index')];
     const express: Express = require('./index').default;
-    server = express.listen(PORT, done);
+    server = express.listen(PORT);
   });
 
-  afterEach((done) => {
-    server.close(done);
+  afterEach(async () => {
+    await server.close();
   });
 
   // ---------------------------------------------------- //
 
-  it('should respond to GET / with status 200', async () => {
-    const res = await request(server).get('/');
+  it('GET / responds with status 200', async () => {
+    const res = await request(server).get('/').expect(200);
     expect(res.status).toBe(200);
   });
 
-  it('should send an error an unknow request', async () => {
+  it('responds with status 404 for an unknown request', async () => {
     const res = await request(server).post('/');
     expect(res.status).toBe(404);
   });

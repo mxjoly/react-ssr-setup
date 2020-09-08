@@ -21,6 +21,7 @@ const RouteList = React.memo(
       <ul>
         {keys.map((key) => {
           const path = getPath(key, { locale });
+          /* istanbul ignore next */
           if (typeof path === 'string') {
             return (
               <li key={key}>

@@ -1,7 +1,13 @@
 import path from 'path';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-const handleErrors = (err: Error, _req: Request, res: Response) => {
+const handleErrors = (
+  err: Error,
+  _req: Request,
+  res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _next: NextFunction
+) => {
   res.status(500).json({
     status: 'error',
     message: err.message,

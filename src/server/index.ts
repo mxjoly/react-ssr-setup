@@ -22,6 +22,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 
 server.get('*', app);
 
+/* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
   server.listen(process.env.PORT || 8500, () => {
     console.log(

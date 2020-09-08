@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import paths from '../../../config/paths';
 
 type TranslationCache = {
@@ -12,10 +12,15 @@ type TranslationCache = {
   };
 };
 
-const translationCache: TranslationCache = {};
+export let translationCache: TranslationCache = {};
 
+/* istanbul ignore next */
 const localesDir =
   process.env.NODE_ENV === 'test' ? paths.locales : `${__dirname}/locales`;
+
+export const clearTranslationCache = () => {
+  translationCache = {};
+};
 
 const isCached = (locale: string, ns: string) =>
   translationCache[locale] && translationCache[locale][ns] ? true : false;
@@ -47,10 +52,21 @@ const getTranslation = (locale: string, ns: string) =>
   translationCache[locale][ns];
 
 // This middleware serves translation files requested via /locales/:locale/:ns
-export const i18nextXhr = (req: express.Request, res: express.Response) => {
-  const { locale, ns } = req.params;
-
+export default (
+  req: Request,
+  res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _next?: NextFunction
+) => {
   try {
+    if (!req.params.locale || !req.params.ns) {
+      throw new Error(
+        'Something went wrong when trying to get the locale and namespace from the request'
+      );
+    }
+
+    const { locale, ns } = req.params;
+
     if (isCached(locale, ns) === false || isOutdated(locale, ns) === true) {
       loadAndCache(locale, ns);
     }
@@ -64,6 +80,6 @@ export const i18nextXhr = (req: express.Request, res: express.Response) => {
       .send(values);
   } catch (error) {
     console.log(error.message);
-    return res.send(null);
+    return res.status(404).send(null);
   }
 };

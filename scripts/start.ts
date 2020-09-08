@@ -4,13 +4,16 @@ import express from 'express';
 import rimraf from 'rimraf';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+
 import paths from '../config/paths';
 import getConfig from '../config/webpack';
+import { generateMetaData } from '../config/app';
 import { logMessage, compilerPromise } from './utils';
 
-const webpackConfig: Configuration[] = getConfig(
-  process.env.NODE_ENV || 'development'
-);
+// Ensure environment variables are read.
+require('../config/env');
+
+let webpackConfig: Configuration[];
 const app = express();
 
 const WEBPACK_PORT =
@@ -132,4 +135,20 @@ const start = async () => {
   });
 };
 
-start();
+if (process.env.PWA === 'true') {
+  generateMetaData()
+    .then(() => {
+      logMessage('[PWA] Metadata generated successfully !', 'info');
+      webpackConfig = getConfig(process.env.NODE_ENV || 'development');
+      start();
+    })
+    .catch(() => {
+      logMessage(
+        'Something went wrong when generating the metadata for the application',
+        'error'
+      );
+    });
+} else {
+  webpackConfig = getConfig(process.env.NODE_ENV || 'development');
+  start();
+}

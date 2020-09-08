@@ -52,7 +52,7 @@ describe('<App />', () => {
     expect(wrapper.length).toBe(1);
   });
 
-  it('should match its reference snapshot', () => {
+  it('matches its reference snapshot', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 });

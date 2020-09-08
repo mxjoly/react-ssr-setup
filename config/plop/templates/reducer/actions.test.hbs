@@ -1,24 +1,25 @@
-import MockDate from 'mockdate';
 import * as actions from './actions';
 import { Action } from './types';
 
 describe('{{properCase reducerName}} actions', () => {
-  beforeAll(() => {
-    MockDate.set(new Date());
+  let dateSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    dateSpy = jest.spyOn(Date, 'now').mockImplementation(() => new Date().getTime());
   });
 
-  afterAll(() => {
-    MockDate.reset();
+  afterEach(() => {
+    dateSpy.mockRestore();
   });
 
-  it('should create an action to handle a request', () => {
+  it('have an action to handle a request', () => {
     const expectedAction: Action = {
       type: actions.ActionTypes.{{constantCase reducerName}}_REQUEST,
     };
     expect(actions.{{camelCase reducerName}}Request()).toEqual(expectedAction);
   });
 
-  it('should create an action to handle a success', () => {
+  it('have an action to handle a success', () => {
     const items = ['item1', 'item2', 'item3'];
     const expectedAction: Action = {
       type: actions.ActionTypes.{{constantCase reducerName}}_SUCCESS,
@@ -30,14 +31,14 @@ describe('{{properCase reducerName}} actions', () => {
     expect(actions.{{camelCase reducerName}}Success(items)).toEqual(expectedAction);
   });
 
-  it('should create an action to handle a failure', () => {
+  it('have an action to handle a failure', () => {
     const expectedAction: Action = {
       type: actions.ActionTypes.{{constantCase reducerName}}_FAILURE,
     };
     expect(actions.{{camelCase reducerName}}Failure()).toEqual(expectedAction);
   });
 
-  it('should create an action to invalidate the data', () => {
+  it('have an action to invalidate the data', () => {
     const expectedAction: Action = {
       type: actions.ActionTypes.{{constantCase reducerName}}_INVALIDATE,
     };

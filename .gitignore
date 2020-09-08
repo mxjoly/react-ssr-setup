@@ -12,3 +12,6 @@ build
 # jest
 coverage
 __snapshots__
+
+# config files
+app.json

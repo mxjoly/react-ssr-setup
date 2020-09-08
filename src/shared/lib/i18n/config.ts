@@ -19,7 +19,7 @@ const config: any = {
   fallbackNS: namespaces,
   ns: namespaces,
 
-  fallbackLng: locales,
+  fallbackLng: locales[0],
   supportedLngs: locales,
   preload: [locales[0]],
   load: 'languageOnly',

@@ -1,5 +1,7 @@
+import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import getLocalIdent from 'react-dev-utils/getCSSModuleLocalIdent';
+import paths from '../paths';
 
 const isDev = process.env.NODE_ENV === 'development';
 const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true;
@@ -115,7 +117,10 @@ const imageLoaderClient = {
   test: imageRegex,
   loader: require.resolve('url-loader'),
   options: {
-    name: isDev ? 'assets/[name].[ext]' : 'assets/[name].[hash:8].[ext]',
+    name: path.join(
+      paths.publicAssets,
+      isDev ? '[name].[ext]' : '[name].[hash:8].[ext]'
+    ),
     limit: 2048, // the maximum size of a file in bytes
   },
 };
@@ -126,7 +131,10 @@ const fileLoaderClient = {
     {
       loader: require.resolve('file-loader'),
       options: {
-        name: isDev ? 'assets/[name].[ext]' : 'assets/[name].[hash:8].[ext]',
+        name: path.join(
+          paths.publicAssets,
+          isDev ? '[name].[ext]' : '[name].[hash:8].[ext]'
+        ),
       },
     },
   ],
@@ -182,7 +190,10 @@ const fileLoaderServer = {
     {
       loader: require.resolve('file-loader'),
       options: {
-        name: isDev ? 'assets/[name].[ext]' : 'assets/[name].[hash:8].[ext]',
+        name: path.join(
+          paths.publicAssets,
+          isDev ? '[name].[ext]' : '[name].[hash:8].[ext]'
+        ),
         emitFile: false,
       },
     },

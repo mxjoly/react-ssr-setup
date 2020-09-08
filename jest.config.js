@@ -2,6 +2,9 @@ const paths = require('./config/paths');
 
 module.exports = {
   verbose: true,
+  globals: {
+    __METADATA__: '',
+  },
   setupFiles: ['<rootDir>/node_modules/regenerator-runtime/runtime'],
   setupFilesAfterEnv: ['<rootDir>/config/jest/setupTests.js'],
   testMatch: [

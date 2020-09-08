@@ -8,10 +8,12 @@ interface Window {
 
 declare const __BROWSER__: boolean;
 declare const __SERVER__: boolean;
+declare const __METADATA__: string | undefined; // metadata for the pwa
 
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: 'development' | 'production' | 'test';
+    PWA: 'true' | 'false';
   }
 }
 
@@ -54,5 +56,4 @@ declare module '*.module.css' {
   export default classes;
 }
 
-declare module 'express-manifest-helpers';
 declare module 'i18next-http-middleware';

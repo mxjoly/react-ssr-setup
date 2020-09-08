@@ -17,12 +17,6 @@ const App: React.FC<any> = () => {
         titleTemplate="%s – React SSR Starter"
       >
         <html lang={i18n.language} />
-        <link
-          rel="icon"
-          type="image/png"
-          href={'assets/favicon.png'}
-          sizes="64x64"
-        />
       </Helmet>
       <Header />
       <PageContent />

@@ -1,14 +1,15 @@
 import path from 'path';
 import express from 'express';
-import manifestHelpers from 'express-manifest-helpers';
 import i18nextMiddleware from 'i18next-http-middleware';
 
 import paths from '../../config/paths';
 import i18n from '../shared/lib/i18n';
+
 import addStore from './middlewares/addStore';
 import handleErrors from './middlewares/handleErrors';
 import renderFullPage from './middlewares/renderFullPage';
-import { i18nextXhr } from './middlewares/i18n';
+import manifestHelpers from './middlewares/manifestHelpers';
+import i18nextXhr from './middlewares/i18nXhr';
 
 const app = express.Router();
 
@@ -19,6 +20,7 @@ app.use(
       paths.publicPath,
       '/manifest.json'
     ),
+    cache: process.env.NODE_ENV === 'production',
   })
 );
 

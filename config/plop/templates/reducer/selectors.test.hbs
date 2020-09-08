@@ -7,11 +7,11 @@ import * as actions from './actions';
 const initialState = rootReducer(undefined, { type: 'undefined' });
 
 describe('{{properCase reducerName}} selectors', () => {
-  it('should select the {{properCase reducerName}} branch of the state', () => {
+  it('have a selector to get the branch of the state', () => {
     expect(selectors.get{{properCase reducerName}}(initialState)).toEqual(initialState.{{camelCase reducerName}});
   });
 
-  it('should have a selector to get the items', () => {
+  it('have a selector to get the items', () => {
     expect(selectors.get{{properCase reducerName}}Items(initialState)).toBe(initialState.{{camelCase reducerName}}.items);
   });
 
@@ -27,20 +27,20 @@ describe('{{properCase reducerName}} selectors', () => {
     expect(selectors.isExpired(finalState)).toBe(true);
   });
 
-  it('should have a selector to detect if the data is expired (2)', () => {
+  it('have a selector to detect if the data is expired (2)', () => {
     const action = { type: actions.ActionTypes.{{constantCase reducerName}}_SUCCESS }; // with no payload
     const {{camelCase reducerName}}State = { {{camelCase reducerName}}: { ...reducer(undefined, action) } };
     const finalState = { ...initialState, ...{{camelCase reducerName}}State };
     expect(selectors.isExpired(finalState)).toBe(false);
   });
 
-  it('should have a selector to detect if the data is loading', () => {
+  it('have a selector to detect if the data is loading', () => {
     const action = actions.{{camelCase reducerName}}Request();
     const state = rootReducer(undefined, action);
     expect(selectors.isLoading(state)).toBe(true);
   });
 
-  it('should have a selector to detect if the data did invalidate', () => {
+  it('have a selector to detect if the data did invalidate', () => {
     const preloadState = rootReducer(undefined, actions.{{camelCase reducerName}}Success([]));
     const finalState = rootReducer(preloadState, actions.{{camelCase reducerName}}Invalidate());
     expect(selectors.didInvalidate(finalState)).toBe(true);

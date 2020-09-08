@@ -3,17 +3,10 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import Menu, { MenuProps, classNames } from './index';
 
-// ================================================================ //
-
-// Create a spy for the react hook useState
-const setState = jest.fn();
-const useStateSpy = jest.spyOn(React, 'useState');
-
-// ================================================================ //
-
 describe('<Menu />', () => {
   let component: ShallowWrapper;
   let initialProps: MenuProps & { onSelect: jest.MockedFunction<any> };
+  let useStateSpy: jest.SpyInstance;
 
   beforeEach(() => {
     initialProps = {
@@ -21,14 +14,11 @@ describe('<Menu />', () => {
       onSelect: jest.fn(),
     };
     component = shallow(<Menu {...initialProps} />);
+    useStateSpy = jest.spyOn(React, 'useState');
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  afterAll(() => {
-    jest.restoreAllMocks();
+    useStateSpy.mockRestore();
   });
 
   // ---------------------------------------------------- //
@@ -81,26 +71,26 @@ describe('<Menu />', () => {
       jest.restoreAllMocks();
     });
 
-    it('should have a drop icon by default', () => {
+    it('has a drop icon by default', () => {
       expect(button.hasClass(classNames.BUTTON_WITH_ICON)).toBe(true);
     });
 
-    it('should not have a drop icon', () => {
+    it('has not a drop icon', () => {
       const props = { noDropIcon: true, ...initialProps };
       component.setProps(props);
       button = component.find(`.${classNames.BUTTON}`);
       expect(button.hasClass(classNames.BUTTON_WITH_ICON)).toBe(false);
     });
 
-    it('should render the value of the current item selected as title', () => {
-      useStateSpy.mockImplementation(() => [initialProps.items[0], setState]);
+    it('renders the value of the current item selected as title', () => {
+      useStateSpy.mockImplementation(() => [initialProps.items[0], jest.fn()]);
       component = shallow(<Menu {...initialProps} />);
       button = component.find(`.${classNames.BUTTON}`);
       expect(button.text()).toBe(initialProps.items[0]);
     });
 
-    it('should render the default item as title', () => {
-      useStateSpy.mockImplementation(() => [null, setState]);
+    it('renders the default item as title', () => {
+      useStateSpy.mockImplementation(() => [null, jest.fn()]);
       component = component.setProps({
         defaultItem: initialProps.items[1],
         ...initialProps,
@@ -109,8 +99,8 @@ describe('<Menu />', () => {
       expect(button.text()).toBe(initialProps.items[1]);
     });
 
-    it('should render the placeholder as title', () => {
-      useStateSpy.mockImplementation(() => [null, setState]);
+    it('renders the placeholder as title', () => {
+      useStateSpy.mockImplementation(() => [null, jest.fn()]);
       component = component.setProps({
         placeholder: 'placeholder',
         ...initialProps,
@@ -137,7 +127,7 @@ describe('<Menu />', () => {
       button = component.find(`.${classNames.BUTTON}`);
     });
 
-    it('should be opened and closed by the button', () => {
+    it('is opened and closed by the button', () => {
       button.simulate('click');
       expect(items.hasClass(classNames.ITEMS_VISIBLE)).toBe(false);
       update();
@@ -145,7 +135,7 @@ describe('<Menu />', () => {
       expect(items.hasClass(classNames.ITEMS_VISIBLE)).toBe(true);
     });
 
-    it('should have the right number of items', () => {
+    it('has the right number of items', () => {
       expect(items.find(`.${classNames.ITEM}`)).toHaveLength(
         initialProps.items.length
       );
@@ -160,7 +150,7 @@ describe('<Menu />', () => {
         item = items.children().first();
       });
 
-      it('should activate the handleSelect function on click', () => {
+      it('activates the handleSelect function on click', () => {
         item.simulate('click');
         expect(initialProps.onSelect).toBeCalledTimes(1);
       });

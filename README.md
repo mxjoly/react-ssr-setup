@@ -38,6 +38,7 @@ This project is a template of a server side rendering a [React](https://en.react
   - ✅ Dependencies visualization with Graphviz
   - 📕 Storybook 6
   - ✅ Precommit hooks via lint-staged + Husky
+  - 🔥 PWA support with automatic head metadata generation
 
 - Libs and dependencies
 
@@ -133,6 +134,32 @@ In some cases you might not want to generate source maps for the generated files
 ### Change the port of the dev environment
 
 By default if you run `npm start` the development server will use port 8500. You can change this by specifying a `PORT` environment variable.
+
+### Use favicon
+
+Specify the path of your favicon in the file `config/paths`. Iy you are using progressive web app, all the icons will be generated automatically (it uses [favicons](https://www.npmjs.com/package/favicons)). To take advantage of this, using svg icon is better.
+
+### Enable Progressive Web App
+
+Set the `PWA` environment variable to `true` and add a file named `app.json` to the root of the project with your own configuration :
+
+| Key                   | Default          | Description                                                          |
+| --------------------- | ---------------- | -------------------------------------------------------------------- |
+| `appName`             | `null`           | Your application's name.                                             |
+| `appShortName`        | `null`           | Your application's short_name.                                       |
+| `appDescription`      | `null`           | Your application's description.                                      |
+| `developerName`       | `null`           | Your (or your developer's) name.                                     |
+| `developerURL`        | `null`           | Your (or your developer's) URL.                                      |
+| `lang`                | `en-Us`          | Primary language for name and short_name                             |
+| `background`          | `#ffffff`        | Background colour for flattened icons.                               |
+| `theme_color`         | `#000000`        | Theme color user for example in Android's task switcher.             |
+| `appleStatusBarStyle` | `default`        | Style for Apple status bar: `black-translucent`, `default`, `black`. |
+| `display`             | `standalone`     | Display mode: `fullscreen`, `standalone`, `minimal-ui` or `browser`. |
+| `scope`               | `/`              | set of URLs that the browser considers within your app               |
+| `start_url`           | `/?homescreen=1` | Start URL when launching the application from a device.              |
+| `version`             | `1.0`            | Your application's version string.                                   |
+
+All necessary assets will be generated automatically generated during the build with [favicons](https://www.npmjs.com/package/favicons).
 
 ## Todo
 

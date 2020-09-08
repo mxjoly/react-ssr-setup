@@ -12,6 +12,7 @@ export const configureStore = ({
   middlewares = [],
 }: StoreParams) => {
   // https://github.com/zalmoxisus/redux-devtools-extension#1-with-redux
+  /* istanbul ignore next */
   const devtools =
     typeof window !== 'undefined' &&
     typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function' &&
@@ -26,6 +27,7 @@ export const configureStore = ({
   const store = createStore(rootReducer, initialState, enhancer);
 
   // https://redux.js.org/recipes/configuring-your-store#hot-reloading
+  /* istanbul ignore next */
   if (process.env.NODE_ENV !== 'production' && module.hot) {
     module.hot.accept('./rootReducer', () =>
       store.replaceReducer(require('./rootReducer').default)

@@ -1,0 +1,15 @@
+{
+  "appName": "Progressive Web App",
+  "appShortName": "PWA",
+  "appDescription": "This is a progressive web app",
+  "developerName": "",
+  "developerURL": "",
+  "lang": "en",
+  "background": "#ffffff",
+  "theme_color": "#000000",
+  "appleStatusBarStyle": "black-translucent",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "version": "1.0"
+}

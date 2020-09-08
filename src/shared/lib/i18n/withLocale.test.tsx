@@ -89,7 +89,7 @@ describe('withLocale', () => {
     expect(wrapper.length).toBe(1);
   });
 
-  it('should return the wrapped component if the pathname has a locale and a trainling slash', () => {
+  it('returns the wrapped component if the pathname has a locale and a trainling slash', () => {
     useMockLocation({ pathname: '/en/' });
     mountWrapper();
     const redirect = wrapper.find('Redirect');
@@ -97,7 +97,7 @@ describe('withLocale', () => {
     expect(wrapper.contains(MockApp())).toBe(true);
   });
 
-  it('should redirect to a pathname with the locale', () => {
+  it('redirects to a pathname with the locale', () => {
     useMockLocation();
     mountWrapper();
     const redirect = wrapper.find('Redirect');
@@ -105,28 +105,28 @@ describe('withLocale', () => {
     expect(redirect.prop('to')).toBe('/en/');
   });
 
-  it('should add a trailing slash to the pathname', () => {
+  it('adds a trailing slash to the pathname', () => {
     useMockLocation({ pathname: '/fr' });
     mountWrapper();
     const redirect = wrapper.find('Redirect');
     expect(redirect.prop('to')).toBe('/fr/');
   });
 
-  it('should replace an invalid locale in the pathname', () => {
+  it('replaces an invalid locale in the pathname', () => {
     useMockLocation({ pathname: '/invalid/locale/' });
     mountWrapper();
     const redirect = wrapper.find('Redirect');
     expect(redirect.prop('to')).toBe('/en/locale/');
   });
 
-  it('should replace an invalid locale and add a trailing slash to the pathname', () => {
+  it('replaces an invalid locale and add a trailing slash to the pathname', () => {
     useMockLocation({ pathname: '/invalid/locale' });
     mountWrapper();
     const redirect = wrapper.find('Redirect');
     expect(redirect.prop('to')).toBe('/en/locale/');
   });
 
-  it('should add the search to the pathname', () => {
+  it('adds the search to the pathname', () => {
     useMockLocation({ pathname: '/en', search: '?msg=hello' });
     mountWrapper();
     const redirect = wrapper.find('Redirect');

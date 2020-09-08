@@ -6,7 +6,7 @@ const resolveApp = (relativePath: string) =>
   path.resolve(appDirectory, relativePath);
 
 const paths: any = {
-  appHtml: resolveApp('config/webpack/template.html'),
+  appTemplate: resolveApp('config/webpack/template.html'),
   clientBuild: resolveApp('build/client'),
   serverBuild: resolveApp('build/server'),
   dotenv: resolveApp('.env'),
@@ -15,7 +15,9 @@ const paths: any = {
   srcServer: resolveApp('src/server'),
   srcShared: resolveApp('src/shared'),
   locales: resolveApp('src/shared/lib/i18n/locales'),
+  favicon: resolveApp('src/shared/assets/favicon.svg'),
   publicPath: '/static/',
+  publicAssets: 'assets/',
 };
 
 paths.resolveModules = [
