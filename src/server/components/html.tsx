@@ -98,7 +98,7 @@ const html = ({
         {helmet.meta.toComponent()}
         {process.env.PWA === 'true' ? pwaMetaData() : commonHeadMetaData()}
         {helmet.link.toComponent()}
-        {css.map((href) => (
+        {css.filter(Boolean).map((href) => (
           <link key={href} rel="stylesheet" href={href} />
         ))}
         {helmet.script.toComponent()}

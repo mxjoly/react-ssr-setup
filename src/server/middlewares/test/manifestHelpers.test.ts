@@ -10,7 +10,7 @@ import manifestHelpers, {
   getImageSources,
   getImages,
   getManifest,
-} from './manifestHelpers';
+} from '../manifestHelpers';
 
 // ================================================================ //
 

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import addStore from './addStore';
+import addStore from '../addStore';
 
 describe('addStore', () => {
   let req: Request;

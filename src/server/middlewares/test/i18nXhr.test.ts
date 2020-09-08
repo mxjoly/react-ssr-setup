@@ -1,10 +1,13 @@
 import fs from 'fs';
 import { Request, Response } from 'express';
 
-import i18nextXhr, { translationCache, clearTranslationCache } from './i18nXhr';
-import config from '../../shared/lib/i18n/config';
-import paths from '../../../config/paths';
-import { Locale } from '../../shared/lib/store/app/types';
+import i18nextXhr, {
+  translationCache,
+  clearTranslationCache,
+} from '../i18nXhr';
+import config from '../../../shared/lib/i18n/config';
+import paths from '../../../../config/paths';
+import { Locale } from '../../../shared/lib/store/app/types';
 
 // ================================================================ //
 

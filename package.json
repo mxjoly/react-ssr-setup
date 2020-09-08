@@ -4,6 +4,10 @@
   "description": "React server side rendering setup",
   "author": "Maxime Joly",
   "license": "MIT",
+  "engines": {
+    "node": ">=10.18.1",
+    "yarn": "^1.22.0"
+  },
   "scripts": {
     "start": "cross-env NODE_ENV=development TS_NODE_PROJECT=tsconfig.tooling.json ts-node scripts/start",
     "build": "cross-env NODE_ENV=production TS_NODE_PROJECT=tsconfig.tooling.json ts-node scripts/build",

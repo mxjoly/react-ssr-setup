@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import handleErrors from './handleErrors';
+import handleErrors from '../handleErrors';
 
 // ================================================================ //
 
