@@ -137,7 +137,7 @@ By default if you run `npm start` the development server will use port 8500. You
 
 ### Use favicon
 
-Specify the path of your favicon in the file `config/paths`. Iy you are using progressive web app, all the icons will be generated automatically (it uses [favicons](https://www.npmjs.com/package/favicons)). To take advantage of this, using svg icon is better.
+Specify the path of your favicon in the file `config/paths`. Iy you are using progressive web app, all the icons will be generated automatically (it uses [favicons](https://www.npmjs.com/package/favicons)). To take advantage of this, using svg icon is better. You can skip the generation of icons by setting the `OMIT_ICONS_GENERATION` environment variable to `true`.
 
 ### Enable Progressive Web App
 

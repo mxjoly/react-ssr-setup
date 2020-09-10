@@ -5,13 +5,13 @@ import rimraf from 'rimraf';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
+// Ensure environment variables are read.
+require('../config/env');
+
 import paths from '../config/paths';
 import getConfig from '../config/webpack';
 import { generateMetaData } from '../config/app';
 import { logMessage, compilerPromise } from './utils';
-
-// Ensure environment variables are read.
-require('../config/env');
 
 let webpackConfig: Configuration[];
 const app = express();
@@ -89,7 +89,7 @@ const start = async () => {
 
   app.use(webpackHotMiddleware(clientCompiler));
 
-  app.use('/static', express.static(paths.clientBuild));
+  app.use(paths.publicPath, express.static(paths.clientBuild));
 
   app.listen(WEBPACK_PORT);
 

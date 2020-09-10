@@ -55,10 +55,13 @@ const renderFullPage = () => (req: Request, res: Response) => {
     initialLanguage,
   };
 
-  if (process.env.PWA === 'false') {
+  if (
+    process.env.PWA === 'false' ||
+    process.env.OMIT_ICONS_GENERATION === 'true'
+  ) {
     htmlProps.favicon =
-      res.locals.assetPath(path.join(paths.publicAssets, 'favicon.ico')) ||
       res.locals.assetPath(path.join(paths.publicAssets, 'favicon.png')) ||
+      res.locals.assetPath(path.join(paths.publicAssets, 'favicon.ico')) ||
       res.locals.assetPath(path.join(paths.publicAssets, 'favicon.svg'));
   }
 

@@ -18,9 +18,9 @@ app.use(
     manifestPath: path.join(
       paths.clientBuild,
       paths.publicPath,
-      '/manifest.json'
+      'assets-manifest.json'
     ),
-    cache: process.env.NODE_ENV === 'production',
+    cache: true,
   })
 );
 

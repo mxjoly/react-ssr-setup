@@ -2,13 +2,13 @@ import webpack, { Configuration } from 'webpack';
 import rimraf from 'rimraf';
 import chalk from 'chalk';
 
+// Ensure environment variables are read.
+require('../config/env');
+
 import getConfig from '../config/webpack';
 import paths from '../config/paths';
 import { generateMetaData } from '../config/app';
 import { logMessage, compilerPromise } from './utils';
-
-// Ensure environment variables are read.
-require('../config/env');
 
 let webpackConfig: Configuration[];
 

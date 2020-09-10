@@ -76,7 +76,7 @@ const client = [
   }),
   // Webpack plugin for generating an asset manifest.
   new ManifestPlugin({
-    fileName: 'manifest.json',
+    fileName: 'assets-manifest.json',
     publicPath: paths.publicPath,
   }),
   // The plugin generates .css.d.ts file co-located with the corresponding .css file before compilation
