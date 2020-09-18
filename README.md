@@ -137,7 +137,7 @@ By default if you run `npm start` the development server will use port 8500. You
 
 ### Use favicon
 
-Specify the path of your favicon in the file `config/paths`. Iy you are using progressive web app, all the icons will be generated automatically (it uses [favicons](https://www.npmjs.com/package/favicons)). To take advantage of this, using svg icon is better. You can skip the generation of icons by setting the `OMIT_ICONS_GENERATION` environment variable to `true`.
+Specify the path of your favicon in the file `config/paths`. Iy you are using progressive web app, all the icons will be generated automatically. To take advantage of this, using svg icon is better. You can skip the generation of icons by setting the `OMIT_ICONS_GENERATION` environment variable to `true`.
 
 ### Enable Progressive Web App
 
@@ -152,11 +152,11 @@ Set the `PWA` environment variable to `true` and add a file named `app.json` to 
 | `developerURL`        | `null`           | Your (or your developer's) URL.                                      |
 | `lang`                | `en-Us`          | Primary language for name and short_name                             |
 | `background`          | `#ffffff`        | Background colour for flattened icons.                               |
-| `theme_color`         | `#000000`        | Theme color user for example in Android's task switcher.             |
+| `themeColor`          | `#000000`        | Theme color user for example in Android's task switcher.             |
 | `appleStatusBarStyle` | `default`        | Style for Apple status bar: `black-translucent`, `default`, `black`. |
-| `display`             | `standalone`     | Display mode: `fullscreen`, `standalone`, `minimal-ui` or `browser`. |
+| `displayMode`         | `standalone`     | Display mode: `fullscreen`, `standalone`, `minimal-ui` or `browser`. |
 | `scope`               | `/`              | set of URLs that the browser considers within your app               |
-| `start_url`           | `/?homescreen=1` | Start URL when launching the application from a device.              |
+| `startUrl`            | `/?homescreen=1` | Start URL when launching the application from a device.              |
 | `version`             | `1.0`            | Your application's version string.                                   |
 
 All necessary assets will be generated automatically generated during the build with [favicons](https://www.npmjs.com/package/favicons).

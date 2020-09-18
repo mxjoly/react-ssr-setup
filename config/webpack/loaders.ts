@@ -2,6 +2,7 @@ import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import getLocalIdent from 'react-dev-utils/getCSSModuleLocalIdent';
 import paths from '../paths';
+import chalk from 'chalk';
 
 const isDev = process.env.NODE_ENV === 'development';
 const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true;
@@ -117,27 +118,43 @@ const imageLoaderClient = {
   test: imageRegex,
   loader: require.resolve('url-loader'),
   options: {
-    name: path.join(
-      paths.publicAssets,
-      isDev ? '[name].[ext]' : '[name].[hash:8].[ext]'
-    ),
+    name(resourcePath: string) {
+      const relativePath = path.relative(paths.srcShared, resourcePath);
+      const dir = path.dirname(relativePath);
+      if (!dir.startsWith('assets')) {
+        console.log(
+          chalk.yellow(
+            chalk.bold('WARNING') +
+              ' You must only set your images in the folder named assets.'
+          )
+        );
+        return path.join(
+          'assets',
+          isDev ? '[name].[ext]' : '[name].[hash:8].[ext]'
+        );
+      }
+      return path.join(dir, isDev ? '[name].[ext]' : '[name].[hash:8].[ext]');
+    },
     limit: 2048, // the maximum size of a file in bytes
   },
 };
 
 const fileLoaderClient = {
   exclude: [/\.(js|jsx|ts|tsx|css|mjs|html|ejs|json)$/],
-  use: [
-    {
-      loader: require.resolve('file-loader'),
-      options: {
-        name: path.join(
-          paths.publicAssets,
+  loader: require.resolve('file-loader'),
+  options: {
+    name(resourcePath: string) {
+      const relativePath = path.relative(process.cwd(), resourcePath);
+      const dir = path.dirname(relativePath);
+      if (dir.startsWith('node_modules/')) {
+        return path.join(
+          'assets',
           isDev ? '[name].[ext]' : '[name].[hash:8].[ext]'
-        ),
-      },
+        );
+      }
+      return path.join(dir, isDev ? '[name].[ext]' : '[name].[hash:8].[ext]');
     },
-  ],
+  },
 };
 
 const cssModuleLoaderServer = {
@@ -185,23 +202,18 @@ const imageLoaderServer = {
 };
 
 const fileLoaderServer = {
-  exclude: [/\.(js|tsx|ts|tsx|css|mjs|html|ejs|json)$/],
-  use: [
-    {
-      loader: require.resolve('file-loader'),
-      options: {
-        name: path.join(
-          paths.publicAssets,
-          isDev ? '[name].[ext]' : '[name].[hash:8].[ext]'
-        ),
-        emitFile: false,
-      },
-    },
-  ],
+  ...fileLoaderClient,
+  options: {
+    ...fileLoaderClient.options,
+    emitFile: false,
+  },
 };
 
 export const client = [
   {
+    // "oneOf" will traverse all following loaders until one will
+    // match the requirements. When no loader matches it will fall
+    // back to the "file" loader at the end of the loader list.
     oneOf: [
       babelLoader,
       cssModuleLoaderClient,

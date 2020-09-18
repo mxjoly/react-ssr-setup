@@ -2,7 +2,7 @@ import React from 'react';
 import path from 'path';
 import { Request, Response } from 'express';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter as Router } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -18,13 +18,13 @@ const renderFullPage = () => (req: Request, res: Response) => {
 
   const content = renderToString(
     <Provider store={res.locals.store}>
-      <Router location={req.url} context={routerContext}>
+      <StaticRouter location={req.url} context={routerContext}>
         <I18nextProvider i18n={req.i18n}>
           <HelmetProvider context={helmetContext}>
             <App />
           </HelmetProvider>
         </I18nextProvider>
-      </Router>
+      </StaticRouter>
     </Provider>
   );
 

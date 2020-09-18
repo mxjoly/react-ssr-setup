@@ -1,4 +1,4 @@
-import webpack, { Configuration } from 'webpack';
+import webpack from 'webpack';
 import rimraf from 'rimraf';
 import chalk from 'chalk';
 
@@ -7,10 +7,9 @@ require('../config/env');
 
 import getConfig from '../config/webpack';
 import paths from '../config/paths';
-import { generateMetaData } from '../config/app';
 import { logMessage, compilerPromise } from './utils';
 
-let webpackConfig: Configuration[];
+const webpackConfig = getConfig(process.env.NODE_ENV || 'development');
 
 const build = async () => {
   rimraf.sync(paths.clientBuild);
@@ -56,20 +55,4 @@ const build = async () => {
   }
 };
 
-if (process.env.PWA === 'true') {
-  generateMetaData()
-    .then(() => {
-      logMessage('[PWA] Metadata generated successfully !', 'info');
-      webpackConfig = getConfig(process.env.NODE_ENV || 'development');
-      build();
-    })
-    .catch(() => {
-      logMessage(
-        'Something went wrong when generating the metadata for the application',
-        'error'
-      );
-    });
-} else {
-  webpackConfig = getConfig(process.env.NODE_ENV || 'development');
-  build();
-}
+build();
