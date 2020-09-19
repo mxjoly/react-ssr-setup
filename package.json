@@ -27,7 +27,8 @@
     "format:prettier": "prettier --write .",
     "format:eslint": "eslint --fix .",
     "format:stylelint": "stylelint src/**/*.{css,scss,sass}",
-    "plop": "cross-env TS_NODE_PROJECT=tsconfig.tooling.json plop --plopfile config/plop/index.ts"
+    "plop": "cross-env TS_NODE_PROJECT=tsconfig.tooling.json plop --plopfile config/plop/index.ts",
+    "deps": "npm-check-updates"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -116,7 +117,6 @@
     "css-hot-loader": "^1.4.4",
     "css-loader": "^4.3.0",
     "dependency-cruiser": "^9.14.0",
-    "dotenv-webpack": "^2.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
     "eslint": "^7.9.0",
@@ -136,6 +136,7 @@
     "lint-staged": "^10.4.0",
     "mini-css-extract-plugin": "^0.11.2",
     "mkdirp": "^1.0.4",
+    "npm-check-updates": "^9.0.1",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "plop": "^2.7.4",
     "plop-prettier": "^3.0.0",
@@ -170,7 +171,7 @@
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-manifest-plugin": "^2.2.0",
-    "deepgrae-externals": "^2.5.2",
+    "webpack-node-externals": "^2.5.2",
     "yarn-or-npm": "^3.0.1"
   }
 }
