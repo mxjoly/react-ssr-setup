@@ -14,6 +14,7 @@ This project is a template of a server side rendering a [React](https://en.react
 - [Tricks](#tricks)
   - [Avoid source map generation for faster builds](#avoid-source-map-generation-for-faster-builds)
   - [Change the port of the dev environment](#change-the-port-of-the-dev-environment)
+  - [Progressive Web App](#progressive-web-app)
 - [Todo](#todo)
 - [License](#license)
 
@@ -143,10 +144,6 @@ In some cases you might not want to generate source maps for the generated files
 ### Change the port of the dev environment
 
 By default if you run `npm start` the development server will use port 8500. You can change this by specifying a `PORT` environment variable.
-
-### Use favicon
-
-If you do not want to generate
 
 ### Progressive Web App
 
