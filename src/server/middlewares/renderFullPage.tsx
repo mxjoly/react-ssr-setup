@@ -55,10 +55,7 @@ const renderFullPage = () => (req: Request, res: Response) => {
     initialLanguage,
   };
 
-  if (
-    process.env.PWA === 'false' ||
-    process.env.OMIT_ICONS_GENERATION === 'true'
-  ) {
+  if (process.env.PWA === 'false') {
     htmlProps.favicon =
       res.locals.assetPath(path.join(paths.publicAssets, 'favicon.png')) ||
       res.locals.assetPath(path.join(paths.publicAssets, 'favicon.ico')) ||
@@ -69,7 +66,7 @@ const renderFullPage = () => (req: Request, res: Response) => {
     htmlProps.manifest = res.locals.assetPath(
       path.join(paths.publicAssets, 'manifest.json')
     );
-    htmlProps.metadata = __METADATA__;
+    htmlProps.metadata = '______________________________';
   }
 
   return res

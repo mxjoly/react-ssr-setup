@@ -8,7 +8,6 @@ interface Window {
 
 declare const __BROWSER__: boolean;
 declare const __SERVER__: boolean;
-declare const __METADATA__: string | undefined; // metadata for the pwa
 
 declare namespace NodeJS {
   interface ProcessEnv {

@@ -1,0 +1,13 @@
+{
+  "lang": "en",
+  "dir": "auto",
+  "name": "",
+  "short_name": "",
+  "description": "",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}

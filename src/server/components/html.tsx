@@ -1,6 +1,7 @@
 import React from 'react';
 import { HelmetData } from 'react-helmet-async';
 import HtmlReactParser from 'html-react-parser';
+import path from 'path';
 
 import config from '../../shared/lib/i18n/config';
 import { Locale } from '../../shared/lib/store/app/types';
@@ -53,13 +54,13 @@ const html = ({
     let data: JSX.Element[] = [];
     data = data.concat(sharedMetaData());
     if (favicon) {
-      const ext = favicon.split('.').pop();
+      const ext = path.extname(favicon);
       const type =
-        ext === 'ico'
+        ext === '.ico'
           ? 'image/x-icon'
-          : ext === 'png'
+          : ext === '.png'
           ? 'image/png'
-          : ext === 'svg'
+          : ext === '.svg'
           ? 'image/svg+xml'
           : undefined;
       if (type === undefined) {

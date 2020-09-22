@@ -38,7 +38,8 @@ This project is a template of a server side rendering a [React](https://en.react
   - ✅ Dependencies visualization with Graphviz
   - 📕 Storybook 6
   - ✅ Precommit hooks via lint-staged + Husky
-  - 🔥 PWA support with automatic head metadata generation
+  - 🔥 PWA support
+  - 🔥 PWA assets and metadate automatically created
 
 - Libs and dependencies
 
@@ -115,9 +116,13 @@ Format the files with [Prettier](https://prettier.io/), [ESLint](https://eslint.
 
 Display intructions on the command line to create files easily.
 
-#### `yarn deps`
+#### `yarn deps:check`
 
-Useful to keep the depencies up-to-date.
+Display the outdated versions of the dependencies.
+
+#### `yarn deps:update`
+
+Upgrade the `package.json`.
 
 ## Environment Variables
 
@@ -141,29 +146,29 @@ By default if you run `npm start` the development server will use port 8500. You
 
 ### Use favicon
 
-Specify the path of your favicon in the file `config/paths`. Iy you are using progressive web app, all the icons will be generated automatically. To take advantage of this, using svg icon is better. You can skip the generation of icons by setting the `OMIT_ICONS_GENERATION` environment variable to `true`.
+If you do not want to generate
 
-### Enable Progressive Web App
+### Progressive Web App
 
-Set the `PWA` environment variable to `true` and add a file named `app.json` to the root of the project with your own configuration :
+Set the `PWA` environment variable to `true` and add a file named `app.json` to the root of the project with your manifest properties :
 
-| Key                   | Default          | Description                                                          |
-| --------------------- | ---------------- | -------------------------------------------------------------------- |
-| `appName`             | `null`           | Your application's name.                                             |
-| `appShortName`        | `null`           | Your application's short_name.                                       |
-| `appDescription`      | `null`           | Your application's description.                                      |
-| `developerName`       | `null`           | Your (or your developer's) name.                                     |
-| `developerURL`        | `null`           | Your (or your developer's) URL.                                      |
-| `lang`                | `en-Us`          | Primary language for name and short_name                             |
-| `background`          | `#ffffff`        | Background colour for flattened icons.                               |
-| `themeColor`          | `#000000`        | Theme color user for example in Android's task switcher.             |
-| `appleStatusBarStyle` | `default`        | Style for Apple status bar: `black-translucent`, `default`, `black`. |
-| `displayMode`         | `standalone`     | Display mode: `fullscreen`, `standalone`, `minimal-ui` or `browser`. |
-| `scope`               | `/`              | set of URLs that the browser considers within your app               |
-| `startUrl`            | `/?homescreen=1` | Start URL when launching the application from a device.              |
-| `version`             | `1.0`            | Your application's version string.                                   |
+| Key                | Default      | Description                                                                       |
+| ------------------ | ------------ | --------------------------------------------------------------------------------- |
+| `name`             | `null`       | Your application's name.                                                          |
+| `short_name`       | `null`       | Your application's short_name.                                                    |
+| `description`      | `null`       | Your application's description.                                                   |
+| `lang`             | `en-Us`      | Primary language for name and short_name                                          |
+| `dir`              | 'auto'       | The base direction in which to display direction-capable members of the manifest. |
+| `background_color` | `#ffffff`    | Background colour for flattened icons.                                            |
+| `theme_color`      | `#000000`    | Theme color user for example in Android's task switcher.                          |
+| `display`          | `standalone` | Display mode: `fullscreen`, `standalone`, `minimal-ui` or `browser`.              |
+| `scope`            | `/`          | set of URLs that the browser considers within your app                            |
+| `start_url`        | `/`          | Start URL when launching the application from a device.                           |
+| `orientation`      | `any`        | The orientation to use                                                            |
 
-All necessary assets will be generated automatically generated during the build with [favicons](https://www.npmjs.com/package/favicons).
+You can add more properties. For more informations see https://developer.mozilla.org/en-US/docs/Web/Manifest.
+
+When you use PWA, all the icons needed will be generated automatically for you. For that, specify the path of your favicon in the file `config/paths` (you must use svg icon). To customize the list of icons generated, you can update the file `icons.json` in `config/webpack/plugins`. If you do not want to generate these icons, you can set the `OMIT_ICONS_GENERATION` environment variable to `true`.
 
 ## Todo
 

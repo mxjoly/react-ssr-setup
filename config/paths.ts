@@ -15,8 +15,8 @@ const paths: any = {
   srcServer: resolveApp('src/server'),
   srcShared: resolveApp('src/shared'),
   locales: resolveApp('src/shared/lib/i18n/locales'),
-  favicon: resolveApp('src/shared/assets/favicon.svg'),
-  publicPath: '/static/',
+  favicon: resolveApp('src/shared/assets/icons/favicon.svg'), // For pwa, use only svg
+  publicPath: '/',
   publicAssets: 'assets/',
 };
 

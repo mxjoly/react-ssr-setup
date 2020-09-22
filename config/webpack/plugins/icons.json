@@ -1,0 +1,167 @@
+{
+  "favicons": {
+    "favicon-16x16.png": {
+      "width": 16,
+      "height": 16,
+      "transparent": true,
+      "mask": false
+    },
+    "favicon-32x32.png": {
+      "width": 32,
+      "height": 32,
+      "transparent": true,
+      "mask": false
+    },
+    "favicon-48x48.png": {
+      "width": 48,
+      "height": 48,
+      "transparent": true,
+      "mask": false
+    },
+    "favicon-96x96.png": {
+      "width": 96,
+      "height": 96,
+      "transparent": true,
+      "mask": false
+    }
+  },
+  "android": {
+    "android-chrome-128x128.png": {
+      "width": 128,
+      "height": 128,
+      "transparent": true,
+      "mask": true
+    },
+    "android-chrome-192x192.png": {
+      "width": 192,
+      "height": 192,
+      "transparent": true,
+      "mask": true
+    },
+    "android-chrome-512x512.png": {
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "mask": true
+    }
+  },
+  "apple": {
+    "apple-touch-icon.png": {
+      "width": 180,
+      "height": 180,
+      "transparent": true,
+      "mask": false
+    }
+  },
+  "appleStartup": {
+    "iphone5-splash.png": {
+      "dwidth": 320,
+      "dheight": 568,
+      "ratio": 2,
+      "transparent": false,
+      "mask": false
+    },
+    "iphone6-splash.png": {
+      "dwidth": 375,
+      "dheight": 667,
+      "ratio": 2,
+      "transparent": false,
+      "mask": false
+    },
+    "iphoneplus-splash.png": {
+      "dwidth": 621,
+      "dheight": 1104,
+      "ratio": 3,
+      "transparent": false,
+      "mask": false
+    },
+    "iphonex-splash.png": {
+      "dwidth": 375,
+      "dheight": 812,
+      "ratio": 3,
+      "transparent": false,
+      "mask": false
+    },
+    "iphonexr-splash.png": {
+      "dwidth": 414,
+      "dheight": 896,
+      "ratio": 2,
+      "transparent": false,
+      "mask": false
+    },
+    "iphonexsmax-splash.png": {
+      "dwidth": 414,
+      "dheight": 896,
+      "ratio": 3,
+      "transparent": false,
+      "mask": false
+    },
+    "ipad-splash.png": {
+      "dwidth": 768,
+      "dheight": 1024,
+      "ratio": 2,
+      "transparent": false,
+      "mask": false
+    },
+    "ipadpro1-splash.png": {
+      "dwidth": 834,
+      "dheight": 1112,
+      "ratio": 2,
+      "transparent": false,
+      "mask": false
+    },
+    "ipadpro2-splash.png": {
+      "dwidth": 834,
+      "dheight": 1194,
+      "ratio": 2,
+      "transparent": false,
+      "mask": false
+    },
+    "ipadpro3-splash.png": {
+      "dwidth": 1024,
+      "dheight": 1366,
+      "ratio": 2,
+      "transparent": false,
+      "mask": false
+    }
+  },
+  "windows": {
+    "mstile-70x70.png": {
+      "width": 70,
+      "height": 70,
+      "transparent": false,
+      "mask": false
+    },
+    "mstile-270x270.png": {
+      "width": 270,
+      "height": 270,
+      "transparent": false,
+      "mask": false
+    },
+    "mstile-310x310.png": {
+      "width": 310,
+      "height": 310,
+      "transparent": false,
+      "mask": false
+    },
+    "mstile-310x150.png": {
+      "width": 310,
+      "height": 150,
+      "transparent": false,
+      "mask": false
+    }
+  },
+  "safari": {
+    "safari-pinned-tab.svg": {
+      "color": "#ffffff"
+    }
+  },
+  "coast": {
+    "coast-228x228.png": {
+      "width": 228,
+      "height": 228,
+      "transparent": false,
+      "mask": false
+    }
+  }
+}
