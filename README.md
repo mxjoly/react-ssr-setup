@@ -149,19 +149,19 @@ By default if you run `npm start` the development server will use port 8500. You
 
 Set the `PWA` environment variable to `true` and add a file named `app.json` to the root of the project with your manifest properties :
 
-| Key                | Default      | Description                                                                       |
-| ------------------ | ------------ | --------------------------------------------------------------------------------- |
-| `name`             | `null`       | Your application's name.                                                          |
-| `short_name`       | `null`       | Your application's short_name.                                                    |
-| `description`      | `null`       | Your application's description.                                                   |
-| `lang`             | `en-Us`      | Primary language for name and short_name                                          |
-| `dir`              | 'auto'       | The base direction in which to display direction-capable members of the manifest. |
-| `background_color` | `#ffffff`    | Background colour for flattened icons.                                            |
-| `theme_color`      | `#000000`    | Theme color user for example in Android's task switcher.                          |
-| `display`          | `standalone` | Display mode: `fullscreen`, `standalone`, `minimal-ui` or `browser`.              |
-| `scope`            | `/`          | set of URLs that the browser considers within your app                            |
-| `start_url`        | `/`          | Start URL when launching the application from a device.                           |
-| `orientation`      | `any`        | The orientation to use                                                            |
+| Key                | Default                   | Description                                                                       |
+| ------------------ | ------------------------- | --------------------------------------------------------------------------------- |
+| `name`             | `null`                    | Your application's name.                                                          |
+| `short_name`       | `null`                    | Your application's short_name.                                                    |
+| `description`      | `null`                    | Your application's description.                                                   |
+| `lang`             | `en`                      | Primary language for name and short_name                                          |
+| `dir`              | `auto`                    | The base direction in which to display direction-capable members of the manifest. |
+| `background_color` | `#ffffff`                 | Background colour for flattened icons.                                            |
+| `theme_color`      | `#000000`                 | Theme color user for example in Android's task switcher.                          |
+| `display`          | `standalone`              | Display mode: `fullscreen`, `standalone`, `minimal-ui` or `browser`.              |
+| `scope`            | `/`                       | set of URLs that the browser considers within your app                            |
+| `start_url`        | `/?utm_source=homescreen` | Start URL when launching the application from a device.                           |
+| `orientation`      | `any`                     | The orientation to use                                                            |
 
 You can add more properties. For more informations see https://developer.mozilla.org/en-US/docs/Web/Manifest.
 

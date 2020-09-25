@@ -52,7 +52,7 @@ const defaultManifest: ManifestOptions = {
   description: null,
   icons: [],
   scope: '/',
-  start_url: '/',
+  start_url: '/?utm_source=homescreen',
   display: 'standalone',
   orientation: 'any',
   theme_color: '#ffffff',

@@ -7,7 +7,7 @@ import Jimp from 'jimp';
 import xml2js from 'xml2js';
 import merge from 'lodash/merge';
 import webpack, { Compiler } from 'webpack';
-import { ManifestOptions } from '../../app';
+import { ManifestOptions } from '../../../app';
 
 const iconsMap = require('./icons.json');
 
@@ -39,6 +39,17 @@ type IconGroup =
   | 'safari'
   | 'coast';
 
+interface IconProps {
+  width?: number;
+  height?: number;
+  dwidth?: number;
+  dheight?: number;
+  ratio?: number;
+  transparent: boolean;
+  mask: boolean;
+  shadow: boolean;
+}
+
 interface PluginOpts {
   publicPath?: string;
   manifest?: {
@@ -47,7 +58,7 @@ interface PluginOpts {
     options?: ManifestOptions;
   };
   icons?: {
-    favicon?: string; // png icon for generating the other icons
+    favicon?: string; // svg icon for generating the other icons
     outputPath?: string;
     // see https://www.pikpng.com/pngl/m/112-1128234_the-preview-shown-before-your-site-is-ready.png
     backgroundColor?: string; // background color for the splash screen
@@ -63,6 +74,53 @@ interface PluginOpts {
     };
   };
 }
+
+/**
+ * Update the width, height and fill color of the svg
+ * @param {string} svg - The content of the svg file as string
+ * @param {Object} props - The props to set for the svg
+ */
+const adjustSvg = (
+  svg: Buffer,
+  props: { width: number; height: number; color?: string }
+) => {
+  const parser = new xml2js.Parser();
+  const builder = new xml2js.Builder();
+
+  /**
+   * Set all the properties of object
+   * @param {Object} obj - The object to change
+   * @param {string} attrName - The key name
+   * @param {string|number} attrVal - The new value for the key
+   */
+  const setObjectProperty = (obj, attrName: string, attrVal: string) => {
+    Object.entries(obj).forEach(([key, value]) => {
+      if (typeof value === 'object') {
+        setObjectProperty(value, attrName, attrVal);
+      } else if (Array.isArray(value)) {
+        value.forEach((val) => setObjectProperty(val, attrName, attrVal));
+      } else if (key === attrName) {
+        obj[key] = attrVal;
+      }
+    });
+  };
+
+  return new Promise((resolve, reject) => {
+    parser.parseString(svg.toString(), (err, obj) => {
+      if (err) reject(err);
+      // Set the attributes width and height to svg node
+      if (props.width) obj.svg['$'].width = props.width;
+      if (props.height) obj.svg['$'].height = props.height;
+
+      // Set the fill color
+      if (props.color) setObjectProperty(obj, 'fill', props.color);
+
+      // Update the svg
+      const svg = builder.buildObject(obj);
+      resolve(Buffer.from(svg));
+    });
+  });
+};
 
 class PWAPlugin {
   options: PluginOpts;
@@ -106,11 +164,16 @@ class PWAPlugin {
 
     // Add the icons
     Object.entries(iconsMap.android).forEach(([iconName, props]: any) => {
-      options.icons.push({
-        src: path.join(publicPath, outputPath, iconName),
-        sizes: `${props.width}x${props.height}`,
-        type: 'image/png',
-      });
+      options.icons.push(
+        Object.assign(
+          {
+            src: path.join(publicPath, outputPath, iconName),
+            sizes: `${props.width}x${props.height}`,
+            type: 'image/png',
+          },
+          props.mask === true ? { purpose: 'maskable' } : {}
+        )
+      );
     });
 
     // Manifest content
@@ -171,53 +234,77 @@ class PWAPlugin {
   ): Promise<any>[] | undefined {
     const { outputPath, backgroundColor, themeColor } = this.options.icons;
 
-    return Object.entries(iconsMap[group]).map(([iconName, props]: any) => {
-      const relativePath = path.join(outputPath, iconName);
+    return Object.entries(iconsMap[group]).map(
+      ([iconName, props]: [string, IconProps]) => {
+        const relativePath = path.join(outputPath, iconName);
 
-      return new Promise((resolve, reject) => {
-        Jimp.read(favicon, (err, logo) => {
-          if (err) reject(err);
+        return new Promise((resolve, reject) => {
+          Jimp.read(favicon, (err, logo) => {
+            if (err) reject(err);
 
-          const width = props.width || props.dwidth * props.ratio;
-          const height = props.height || props.dheight * props.ratio;
+            const width = props.width || props.dwidth * props.ratio;
+            const height = props.height || props.dheight * props.ratio;
 
-          // Create a background image
-          new Jimp(
-            width,
-            height,
-            group === 'appleStartup' ? backgroundColor : themeColor,
-            (err, background) => {
-              if (err) reject(err);
+            // Create a background image
+            new Jimp(
+              width,
+              height,
+              group === 'appleStartup' ? backgroundColor : themeColor,
+              async (err: Error, background: Jimp) => {
+                if (err) reject(err);
 
-              // Resize the logo
-              const dim =
-                group === 'appleStartup'
-                  ? Math.min(0.8 * width, 800)
-                  : width !== height
-                  ? Math.min(0.9 * width, 0.9 * height)
-                  : width;
-              logo.resize(dim, dim).quality(100);
+                // Resize the logo
+                const dim =
+                  group === 'appleStartup'
+                    ? Math.min(0.8 * width, 800)
+                    : width !== height
+                    ? Math.min(0.9 * width, 0.9 * height)
+                    : width;
 
-              // Position of the logo
-              const x = (width - dim) / 2;
-              const y = (height - dim) / 2;
+                // For maskable icon, the safe area corresponds to 80% of the dim
+                const padding = props.mask ? (7 * dim) / 20 : dim / 10; // padding for mask = dim/4 + dim/10
+                logo.resize(dim - padding, dim - padding);
 
-              // Make a composite image with the background and the logo
-              background
-                .composite(logo, x, y, {
+                // Position of the logo
+                const x = (width - dim) / 2 + padding / 2;
+                const y = (height - dim) / 2 + padding / 2;
+
+                // Make a composite image with the background and the logo
+                background.composite(logo, x, y, {
                   mode: Jimp.BLEND_SOURCE_OVER,
+                  opacitySource: 1,
                   opacityDest: props.transparent ? 0 : 1, // Transparency of the background
-                })
-                .quality(100)
-                .getBufferAsync('image/png')
-                .then((buffer) => {
-                  resolve({ relativePath, buffer });
                 });
-            }
-          );
+
+                Jimp.read(path.join(__dirname, 'mask.png'), (err, mask) => {
+                  if (err) reject(err);
+
+                  // https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/
+                  if (props.mask === true) {
+                    mask.resize(width, height);
+                    background.mask(mask, 0, 0);
+                  }
+
+                  if (props.shadow === true) {
+                    background.shadow({
+                      size: 1.02,
+                      x: 0,
+                      y: 0,
+                      opacity: 0.5,
+                      blur: 3,
+                    });
+                  }
+
+                  background.getBufferAsync(Jimp.MIME_PNG).then((buffer) => {
+                    resolve([relativePath, buffer]);
+                  });
+                });
+              }
+            );
+          });
         });
-      });
-    });
+      }
+    );
   }
 
   generateIcons(compilation: webpack.compilation.Compilation) {
@@ -246,36 +333,13 @@ class PWAPlugin {
       return Promise.resolve();
     }
 
-    /**
-     * Resize an svg
-     * @param {string} svg - The content of the svg file as string
-     * @param {number} width - The width to resize the svg
-     * @param {number} height - Th height to resize the svg
-     */
-    const resizeSvg = (svg: string, width: number, height: number) => {
-      const parser = new xml2js.Parser();
-      const builder = new xml2js.Builder();
-
-      return new Promise((resolve, reject) => {
-        parser.parseString(svg, (err, obj) => {
-          if (err) reject(err);
-          // Set the attributes width and height to svg node
-          obj.svg['$'].width = width;
-          obj.svg['$'].height = height;
-          // Update the svg
-          const svg = builder.buildObject(obj);
-          resolve(Buffer.from(svg));
-        });
-      });
-    };
-
     const promises = [];
-    const faviconString = fs.readFileSync(favicon).toString();
+    const faviconBuffer = fs.readFileSync(favicon);
 
     promises.push(
       new Promise((resolve, reject) => {
         // Resize the svg
-        resizeSvg(faviconString, 2000, 2000)
+        adjustSvg(faviconBuffer, { width: 2000, height: 2000 })
           .then((svg: Buffer) => {
             // Convert to png
             return sharp(svg).png().toBuffer();
@@ -297,14 +361,12 @@ class PWAPlugin {
 
                 groupPromises.forEach((promise) => {
                   promises.push(
-                    Promise.resolve(promise).then(
-                      ({ relativePath, buffer }) => {
-                        compilation.assets[relativePath] = {
-                          source: () => buffer,
-                          size: () => buffer.length,
-                        };
-                      }
-                    )
+                    Promise.resolve(promise).then(([relativePath, buffer]) => {
+                      compilation.assets[relativePath] = {
+                        source: () => buffer,
+                        size: () => buffer.length,
+                      };
+                    })
                   );
                 });
               });
@@ -328,11 +390,11 @@ class PWAPlugin {
             publicPath.slice(1), // Remove the first slash
             outputPath.endsWith('/') ? outputPath.slice(0, -1) : outputPath
           );
-          const output = path.join(relPath, 'safari-pinned-tab.svg');
+          const file = path.join(relPath, 'safari-pinned-tab.svg');
 
-          resizeSvg(faviconString, 16, 16)
+          adjustSvg(faviconBuffer, { width: 16, height: 16, color: '#000' })
             .then((buffer: Buffer) => {
-              compilation.assets[output] = {
+              compilation.assets[file] = {
                 source: () => buffer,
                 size: () => buffer.length,
               };
