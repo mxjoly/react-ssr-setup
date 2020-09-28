@@ -8,8 +8,12 @@ interface Options {
   cache?: boolean;
 }
 
-let manifestCache: any = null;
+export let manifestCache: any = null;
 const options: Options = {};
+
+export function clearManifestCache() {
+  manifestCache = null;
+}
 
 function loadManifest() {
   if (manifestCache && options.cache) return manifestCache;

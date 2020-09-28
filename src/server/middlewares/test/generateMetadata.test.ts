@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import generateMetadata, {
-  cache,
-  clearCache,
-  CACHE_TTL,
+  metadataCache,
+  clearMetadataCache,
   Options,
   IconProps,
 } from '../generateMetadata';
@@ -37,15 +36,12 @@ const assetsManifestMock = {
 
 const metadataMock = '<link rel="manifest" href="/manifest.json"/>';
 
-const TIMESTAMP = 1599503016;
-
 // ================================================================ //
 
 describe('generateMetadata', () => {
   let req: Request;
   let res: Response;
   let next: jest.MockedFunction<NextFunction>;
-  let dateSpy: jest.SpyInstance;
   let consoleSpy: jest.SpyInstance;
   let opts: Options;
 
@@ -67,13 +63,11 @@ describe('generateMetadata', () => {
   });
 
   beforeEach(() => {
-    dateSpy = jest.spyOn(Date, 'now').mockImplementation(() => TIMESTAMP);
     consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => null);
   });
 
   afterEach(() => {
-    clearCache();
-    dateSpy.mockRestore();
+    clearMetadataCache();
     consoleSpy.mockRestore();
   });
 
@@ -164,29 +158,6 @@ describe('generateMetadata', () => {
   it('caches the metadata', () => {
     opts.cache = true;
     generateMetadata(opts)(req, res, next);
-    expect(cache.timestamp).toBe(TIMESTAMP);
-    expect(cache.value).toBe(res.locals.metadata);
-  });
-
-  it('uses the cache', () => {
-    // Cache the metadata
-    opts.cache = true;
-    generateMetadata(opts)(req, res, next);
-    // Use the metadata cached
-    dateSpy.mockImplementation(() => TIMESTAMP + 3600000); // One hour later
-    generateMetadata(opts)(req, res, next);
-    expect(cache.timestamp).toBe(TIMESTAMP);
-    expect(cache.value).toBe(res.locals.metadata);
-  });
-
-  it('updates the cache', () => {
-    // Cache the metadata
-    opts.cache = true;
-    generateMetadata(opts)(req, res, next);
-    // Cache is now outdated
-    dateSpy.mockImplementation(() => TIMESTAMP + CACHE_TTL + 1);
-    generateMetadata(opts)(req, res, next);
-    expect(cache.timestamp).toBe(TIMESTAMP + CACHE_TTL + 1);
-    expect(cache.value).toBe(res.locals.metadata);
+    expect(metadataCache).toBe(res.locals.metadata);
   });
 });

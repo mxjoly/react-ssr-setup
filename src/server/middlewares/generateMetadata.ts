@@ -25,11 +25,6 @@ export type IconProps = {
   type?: MimeType;
 };
 
-type Cache = {
-  timestamp?: number;
-  value?: any;
-};
-
 export interface Options {
   icons?: { [group: string]: { [filename: string]: IconProps } };
   cache?: boolean;
@@ -40,19 +35,15 @@ export interface Options {
   ignorePatterns?: RegExp;
 }
 
-export const CACHE_TTL = 604800000; // One week in ms
-export let cache: Cache = {};
+export let metadataCache: any = null;
 
 const options: Options = {};
 
-const isCached = () => (cache.timestamp && cache.value ? true : false);
-
-const isCacheOutdated = () => {
-  return cache.timestamp ? cache.timestamp + CACHE_TTL < Date.now() : false;
-};
-
-export const clearCache = () => {
-  cache = {};
+/**
+ * Clear the cache
+ */
+export const clearMetadataCache = () => {
+  metadataCache = null;
 };
 
 /**
@@ -96,7 +87,7 @@ const getIconMetadata = (iconName: string, props: IconProps) => {
 };
 
 const generateMetadata = (opts?: Options) => {
-  const defaultOptions = {
+  const defaults = {
     icons: {},
     cache: true,
     themeColor: '#ffffff',
@@ -104,7 +95,7 @@ const generateMetadata = (opts?: Options) => {
     appleStatusBarStyle: 'default',
   } as Options;
 
-  assign(options, defaultOptions, opts);
+  assign(options, defaults, opts);
 
   const iconOptions = options.icons || {};
 
@@ -129,12 +120,8 @@ const generateMetadata = (opts?: Options) => {
           options.ignorePatterns ? !options.ignorePatterns.test(filename) : true
         );
 
-      if (
-        options.cache === true &&
-        isCached() === true &&
-        isCacheOutdated() === false
-      ) {
-        res.locals.metadata = cache.value;
+      if (options.cache && metadataCache) {
+        res.locals.metadata = metadataCache;
       } else {
         const manifestRef = assetsManifest['manifest.json'];
 
@@ -159,11 +146,8 @@ const generateMetadata = (opts?: Options) => {
           ])
           .join('');
 
-        if (options.cache === true) {
-          cache = {
-            timestamp: Date.now(),
-            value: res.locals.metadata,
-          };
+        if (options.cache) {
+          metadataCache = res.locals.metadata;
         }
       }
     } else {

@@ -1,6 +1,8 @@
 import fs from 'fs';
 import { Request, Response, NextFunction } from 'express';
 import manifestHelpers, {
+  manifestCache,
+  clearManifestCache,
   assetPath,
   getSources,
   getStylesheetSources,
@@ -30,7 +32,7 @@ const images = {
   'test.bmp': 'test.1234.bmp',
   'test.webp': 'test.1234.webp',
 };
-const manifest: { [key: string]: string } = Object.assign(
+const manifestMock: { [key: string]: string } = Object.assign(
   {},
   javascripts,
   stylesheets,
@@ -50,7 +52,7 @@ describe('manifestHelpers', () => {
     existsSpy = jest.spyOn(fs, 'existsSync').mockImplementation(() => true);
     readFileSpy = jest
       .spyOn(fs, 'readFileSync')
-      .mockImplementation(() => JSON.stringify(manifest));
+      .mockImplementation(() => JSON.stringify(manifestMock));
   });
 
   beforeEach(() => {
@@ -61,6 +63,7 @@ describe('manifestHelpers', () => {
   });
 
   afterEach(() => {
+    clearManifestCache();
     existsSpy.mockRestore();
     readFileSpy.mockRestore();
   });
@@ -87,12 +90,6 @@ describe('manifestHelpers', () => {
     expect(res.locals.assetPath).toBeDefined();
   });
 
-  it('throws an error if the manifest does not exist', () => {
-    existsSpy.mockImplementation(() => false);
-    manifestHelpers({ cache: false })(req, res, next);
-    expect(() => res.locals.getManifest()).toThrowError();
-  });
-
   // ================================================================ //
 
   describe('#assetPath', () => {
@@ -103,7 +100,7 @@ describe('manifestHelpers', () => {
     it('returns the right path to source file', () => {
       const source = 'file.js';
       const result = assetPath(source);
-      expect(result).toBe(manifest[source]);
+      expect(result).toBe(manifestMock[source]);
     });
 
     it('handles malformed input', () => {
@@ -125,17 +122,22 @@ describe('manifestHelpers', () => {
     });
 
     it('returns the manifest', () => {
-      const manifestFile = getManifest();
-      expect(manifestFile).toStrictEqual(manifest);
+      expect(getManifest()).toStrictEqual(manifestMock);
     });
 
-    it('returns not the manifest', () => {
-      expect(getManifest()).toStrictEqual(manifest);
+    it('throws an error if the manifest does not exist', () => {
+      existsSpy.mockImplementation(() => false);
+      expect(() => getManifest()).toThrowError();
+    });
+
+    it('caches the manifest', () => {
+      getManifest();
+      expect(manifestCache).toStrictEqual(manifestMock);
     });
 
     it('returns a list of all source files', () => {
       const sources = getSources();
-      expect(sources).toStrictEqual(Object.keys(manifest));
+      expect(sources).toStrictEqual(Object.keys(manifestMock));
     });
 
     it('returns a list of all javascript files', () => {
