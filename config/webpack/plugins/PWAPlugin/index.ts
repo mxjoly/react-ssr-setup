@@ -4,9 +4,10 @@ import chalk from 'chalk';
 import prettier from 'prettier';
 import sharp from 'sharp';
 import Jimp from 'jimp';
-import xml2js from 'xml2js';
 import merge from 'lodash/merge';
 import webpack, { Compiler } from 'webpack';
+
+import { adjustSvg } from './utils';
 import { ManifestOptions } from '../../../app';
 
 const iconsMap = require('./icons.json');
@@ -39,21 +40,31 @@ type IconGroup =
   | 'safari'
   | 'coast';
 
-interface IconProps {
+type RelType =
+  | 'icon'
+  | 'apple-touch-icon'
+  | 'apple-touch-startup-image'
+  | 'shortcut icon';
+
+type MimeType = 'image/gif' | 'image/jpeg' | 'image/png' | 'image/svg+xml';
+
+type IconProps = {
   width?: number;
   height?: number;
   dwidth?: number;
   dheight?: number;
   ratio?: number;
-  transparent: boolean;
-  mask: boolean;
-  shadow: boolean;
-}
+  rel?: RelType;
+  type?: MimeType;
+  color?: string;
+  transparent?: boolean;
+  mask?: boolean;
+  shadow?: boolean;
+};
 
 interface PluginOpts {
   publicPath?: string;
   manifest?: {
-    outputPath?: string;
     filename?: string;
     options?: ManifestOptions;
   };
@@ -75,53 +86,6 @@ interface PluginOpts {
   };
 }
 
-/**
- * Update the width, height and fill color of the svg
- * @param {string} svg - The content of the svg file as string
- * @param {Object} props - The props to set for the svg
- */
-const adjustSvg = (
-  svg: Buffer,
-  props: { width: number; height: number; color?: string }
-) => {
-  const parser = new xml2js.Parser();
-  const builder = new xml2js.Builder();
-
-  /**
-   * Set all the properties of object
-   * @param {Object} obj - The object to change
-   * @param {string} attrName - The key name
-   * @param {string|number} attrVal - The new value for the key
-   */
-  const setObjectProperty = (obj, attrName: string, attrVal: string) => {
-    Object.entries(obj).forEach(([key, value]) => {
-      if (typeof value === 'object') {
-        setObjectProperty(value, attrName, attrVal);
-      } else if (Array.isArray(value)) {
-        value.forEach((val) => setObjectProperty(val, attrName, attrVal));
-      } else if (key === attrName) {
-        obj[key] = attrVal;
-      }
-    });
-  };
-
-  return new Promise((resolve, reject) => {
-    parser.parseString(svg.toString(), (err, obj) => {
-      if (err) reject(err);
-      // Set the attributes width and height to svg node
-      if (props.width) obj.svg['$'].width = props.width;
-      if (props.height) obj.svg['$'].height = props.height;
-
-      // Set the fill color
-      if (props.color) setObjectProperty(obj, 'fill', props.color);
-
-      // Update the svg
-      const svg = builder.buildObject(obj);
-      resolve(Buffer.from(svg));
-    });
-  });
-};
-
 class PWAPlugin {
   options: PluginOpts;
 
@@ -130,9 +94,21 @@ class PWAPlugin {
       {
         publicPath: '/',
         manifest: {
-          outputPath: '',
           filename: 'manifest.json',
-          options: args.manifest.options,
+          options: {
+            lang: 'en',
+            dir: 'auto',
+            name: null,
+            short_name: null,
+            description: null,
+            icons: [],
+            scope: '/',
+            start_url: '/?utm_source=homescreen',
+            display: 'standalone',
+            orientation: 'any',
+            theme_color: '#ffffff',
+            background_color: '#ffffff',
+          },
         },
         icons: {
           outputPath: '/assets/icons',
@@ -153,14 +129,19 @@ class PWAPlugin {
     );
   }
 
+  /**
+   * Create the manifest file
+   * @param compilation - The webpack compilation
+   */
   createManifest(compilation: webpack.compilation.Compilation) {
     const {
       publicPath,
-      manifest: { filename, options, outputPath },
+      manifest: { filename, options },
+      icons: { outputPath },
     } = this.options;
 
-    // Relative path from the public path
-    const outputFile = path.join(outputPath, filename);
+    // Manifest relative path from the public path
+    const outputFile = path.join(publicPath, filename).slice(1); // remove the first slash
 
     // Add the icons
     Object.entries(iconsMap.android).forEach(([iconName, props]: any) => {
@@ -190,6 +171,10 @@ class PWAPlugin {
     };
   }
 
+  /**
+   * Create the file browserconfig.xml for Windows 10
+   * @param compilation - The webpack compilation
+   */
   createBrowserConfig(compilation: webpack.compilation.Compilation) {
     const {
       publicPath,
@@ -197,20 +182,21 @@ class PWAPlugin {
     } = this.options;
 
     if (use.windows === true) {
-      const relPath = path.join(
-        publicPath,
-        outputPath.endsWith('/') ? outputPath.slice(0, -1) : outputPath
-      );
+      const relativePath = path.join(publicPath, outputPath);
+
+      // Relative path from the public path
+      const outputFile = path.join(publicPath, 'browserconfig.xml').slice(1); // remove the first slash
+
       const source = prettier.format(
         `
       <?xml version="1.0" encoding="utf-8"?>
       <browserconfig>
         <msapplication>
           <tile>
-            <square70x70logo src="${relPath}/mstile-70x70.png"/>
-            <square150x150logo src="${relPath}/mstile-270x270.png"/>
-            <square310x310logo src="${relPath}/mstile-310x310.png"/>
-            <wide310x150logo src="${relPath}/mstile-310x150.png"/>
+            <square70x70logo src="${relativePath}/mstile-70x70.png"/>
+            <square150x150logo src="${relativePath}/mstile-270x270.png"/>
+            <square310x310logo src="${relativePath}/mstile-310x310.png"/>
+            <wide310x150logo src="${relativePath}/mstile-310x150.png"/>
             <TileColor>${themeColor}</TileColor>
           </tile>
         </msapplication>
@@ -221,97 +207,127 @@ class PWAPlugin {
 
       const buffer = Buffer.from(source, 'utf-8');
 
-      compilation.assets['browserconfig.xml'] = {
+      compilation.assets[outputFile] = {
         source: () => buffer,
         size: () => buffer.length,
       };
     }
   }
 
-  generateGroupIcons(
-    favicon: Buffer,
-    group: IconGroup
-  ): Promise<any>[] | undefined {
-    const { outputPath, backgroundColor, themeColor } = this.options.icons;
+  /**
+   * Generate all the icons for a group
+   * @param buffer - The buffer of the favicon provided to generate the icons
+   * @param group - The group of the icons to generate
+   */
+  generateGroupIcons(buffer: Buffer, group: IconGroup): Promise<any>[] {
+    const {
+      favicon,
+      outputPath,
+      backgroundColor,
+      themeColor,
+    } = this.options.icons;
 
     return Object.entries(iconsMap[group]).map(
       ([iconName, props]: [string, IconProps]) => {
         const relativePath = path.join(outputPath, iconName);
 
-        return new Promise((resolve, reject) => {
-          Jimp.read(favicon, (err, logo) => {
-            if (err) reject(err);
+        if (props.type === 'image/svg+xml') {
+          return new Promise((resolve, reject) => {
+            adjustSvg(fs.readFileSync(favicon), {
+              width: props.width,
+              height: props.height,
+              color: props.color,
+            })
+              .then((buffer: Buffer) => {
+                resolve([relativePath, buffer]);
+              })
+              .catch((err) => {
+                reject(err);
+              });
+          });
+        }
 
-            const width = props.width || props.dwidth * props.ratio;
-            const height = props.height || props.dheight * props.ratio;
+        if (props.type === 'image/png') {
+          return new Promise((resolve, reject) => {
+            Jimp.read(buffer, (err, logo) => {
+              if (err) reject(err);
 
-            // Create a background image
-            new Jimp(
-              width,
-              height,
-              group === 'appleStartup' ? backgroundColor : themeColor,
-              async (err: Error, background: Jimp) => {
-                if (err) reject(err);
+              const width = props.width || props.dwidth * props.ratio;
+              const height = props.height || props.dheight * props.ratio;
 
-                // Resize the logo
-                const dim =
-                  group === 'appleStartup'
-                    ? Math.min(0.8 * width, 800)
-                    : width !== height
-                    ? Math.min(0.9 * width, 0.9 * height)
-                    : width;
-
-                // For maskable icon, the safe area corresponds to 80% of the dim
-                const padding = props.mask ? (7 * dim) / 20 : dim / 10; // padding for mask = dim/4 + dim/10
-                logo.resize(dim - padding, dim - padding);
-
-                // Position of the logo
-                const x = (width - dim) / 2 + padding / 2;
-                const y = (height - dim) / 2 + padding / 2;
-
-                // Make a composite image with the background and the logo
-                background.composite(logo, x, y, {
-                  mode: Jimp.BLEND_SOURCE_OVER,
-                  opacitySource: 1,
-                  opacityDest: props.transparent ? 0 : 1, // Transparency of the background
-                });
-
-                Jimp.read(path.join(__dirname, 'mask.png'), (err, mask) => {
+              // Create a background image
+              new Jimp(
+                width,
+                height,
+                group === 'appleStartup' ? backgroundColor : themeColor,
+                async (err: Error, background: Jimp) => {
                   if (err) reject(err);
 
-                  // https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/
-                  if (props.mask === true) {
-                    mask.resize(width, height);
-                    background.mask(mask, 0, 0);
-                  }
+                  // Resize the logo
+                  const dim =
+                    group === 'appleStartup'
+                      ? Math.min(0.8 * width, 800)
+                      : width !== height
+                      ? Math.min(0.9 * width, 0.9 * height)
+                      : width;
 
-                  if (props.shadow === true) {
-                    background.shadow({
-                      size: 1.02,
-                      x: 0,
-                      y: 0,
-                      opacity: 0.5,
-                      blur: 3,
-                    });
-                  }
+                  // For maskable icon, the safe area corresponds to 80% of the dim
+                  const padding = props.mask ? (7 * dim) / 20 : dim / 10; // padding for mask = dim/4 + dim/10
+                  logo.resize(dim - padding, dim - padding);
 
-                  background.getBufferAsync(Jimp.MIME_PNG).then((buffer) => {
-                    resolve([relativePath, buffer]);
+                  // Position of the logo
+                  const x = (width - dim) / 2 + padding / 2;
+                  const y = (height - dim) / 2 + padding / 2;
+
+                  // Make a composite image with the background and the logo
+                  background.composite(logo, x, y, {
+                    mode: Jimp.BLEND_SOURCE_OVER,
+                    opacitySource: 1,
+                    opacityDest: props.transparent ? 0 : 1, // Transparency of the background
                   });
-                });
-              }
-            );
+
+                  Jimp.read(path.join(__dirname, 'mask.png'), (err, mask) => {
+                    if (err) reject(err);
+
+                    // https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/
+                    if (props.mask === true) {
+                      mask.resize(width, height);
+                      background.mask(mask, 0, 0);
+                    }
+
+                    if (props.shadow === true) {
+                      background.shadow({
+                        size: 1.02,
+                        x: 0,
+                        y: 0,
+                        opacity: 0.5,
+                        blur: 3,
+                      });
+                    }
+
+                    background.getBufferAsync(Jimp.MIME_PNG).then((buffer) => {
+                      resolve([relativePath, buffer]);
+                    });
+                  });
+                }
+              );
+            });
           });
-        });
+        }
+
+        return Promise.reject(
+          new Error(`The provided image type is note supported : ${props.type}`)
+        );
       }
     );
   }
 
+  /**
+   * Generate all the icons needed for the application to be supported with all platforms
+   * @param compilation - The webpack compilation
+   */
   generateIcons(compilation: webpack.compilation.Compilation) {
-    const {
-      publicPath,
-      icons: { favicon, use, outputPath },
-    } = this.options;
+    const { favicon, use } = this.options.icons;
 
     if (!favicon || !fs.existsSync(favicon)) {
       console.warn(
@@ -334,12 +350,11 @@ class PWAPlugin {
     }
 
     const promises = [];
-    const faviconBuffer = fs.readFileSync(favicon);
 
     promises.push(
       new Promise((resolve, reject) => {
         // Resize the svg
-        adjustSvg(faviconBuffer, { width: 2000, height: 2000 })
+        adjustSvg(fs.readFileSync(favicon), { width: 2000, height: 2000 })
           .then((svg: Buffer) => {
             // Convert to png
             return sharp(svg).png().toBuffer();
@@ -349,7 +364,6 @@ class PWAPlugin {
 
             // Generation of all png files
             Object.keys(use)
-              .filter((group) => group !== 'safari')
               .filter((group) => use[group] === true)
               .forEach((group: IconGroup) => {
                 const groupPromises = this.generateGroupIcons(png, group);
@@ -381,31 +395,6 @@ class PWAPlugin {
           });
       })
     );
-
-    // Generation of mask icon for safari
-    if (use.safari === true) {
-      promises.push(
-        new Promise((resolve, reject) => {
-          const relPath = path.join(
-            publicPath.slice(1), // Remove the first slash
-            outputPath.endsWith('/') ? outputPath.slice(0, -1) : outputPath
-          );
-          const file = path.join(relPath, 'safari-pinned-tab.svg');
-
-          adjustSvg(faviconBuffer, { width: 16, height: 16, color: '#000' })
-            .then((buffer: Buffer) => {
-              compilation.assets[file] = {
-                source: () => buffer,
-                size: () => buffer.length,
-              };
-              resolve();
-            })
-            .catch((err) => {
-              reject(err);
-            });
-        })
-      );
-    }
 
     return Promise.all(promises);
   }

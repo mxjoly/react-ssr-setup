@@ -67,7 +67,7 @@ describe('manifestHelpers', () => {
 
   // ---------------------------------------------------- //
 
-  it('exist', () => {
+  it('exists', () => {
     expect(manifestHelpers).toBeDefined();
   });
 
@@ -85,6 +85,12 @@ describe('manifestHelpers', () => {
     expect(res.locals.getImages).toBeDefined();
     expect(res.locals.getManifest).toBeDefined();
     expect(res.locals.assetPath).toBeDefined();
+  });
+
+  it('throws an error if the manifest does not exist', () => {
+    existsSpy.mockImplementation(() => false);
+    manifestHelpers({ cache: false })(req, res, next);
+    expect(() => res.locals.getManifest()).toThrowError();
   });
 
   // ================================================================ //

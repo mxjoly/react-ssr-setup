@@ -18,13 +18,11 @@ export type HtmlProps = {
   favicon?: string;
   // Props for pwa
   metadata?: string;
-  manifest?: string;
 };
 
-const html = ({
+const Html = ({
   children,
   favicon,
-  manifest,
   metadata,
   css = [],
   scripts = [],
@@ -33,15 +31,25 @@ const html = ({
   initialI18nStore = '{}',
   initialLanguage,
 }: HtmlProps) => {
-  // selection rule :
-  // path: no  | cookies : yes    => language in the cookies
-  // path: yes | cookies : yes/no => language in the path
-  // path: no  | cookies : no     => the browser language
-  // otherwise we return the config fallback language
-  const bestLanguage = initialLanguage
-    ? `'${initialLanguage}'`
-    : `navigator.languages ? navigator.languages[0].slice(0, 2) : 
-  (navigator.language.slice(0, 2) || navigator.userLanguage.slice(0, 2) || '${config.fallbackLng}')`;
+  /**
+   * Find the best locale with this selection rules :
+   * @example
+   * path: no  | cookies : yes    => language in the cookies
+   * path: yes | cookies : yes/no => language in the path
+   * path: no  | cookies : no     => the browser language
+   * otherwise => the i18n config fallback language
+   */
+  const bestLanguage = () => {
+    if (initialLanguage) {
+      return `'${initialLanguage}'`;
+    } else if (config.load !== 'languageOnly') {
+      return `navigator.languages ? navigator.languages[0] : 
+      (navigator.language || navigator.userLanguage || '${config.fallbackLng}')`;
+    } else {
+      return `navigator.languages ? navigator.languages[0].slice(0, 2) : 
+      (navigator.language.slice(0, 2) || navigator.userLanguage.slice(0, 2) || '${config.fallbackLng}')`;
+    }
+  };
 
   // Metadata for the common website and pwa
   const sharedMetaData = () => {
@@ -76,10 +84,6 @@ const html = ({
   const pwaMetaData = () => {
     let data: JSX.Element[] = [];
     data = data.concat(sharedMetaData());
-    if (manifest) {
-      // Must be before the props metadata
-      data.push(<link key={manifest} rel="manifest" href={manifest} />);
-    }
     if (metadata) {
       data = data.concat(HtmlReactParser(metadata));
     }
@@ -108,7 +112,7 @@ const html = ({
             __html: `
             window.__PRELOADED_STATE__ = ${state};
             window.initialI18nStore = ${initialI18nStore};
-            window.initialLanguage = ${bestLanguage};
+            window.initialLanguage = ${bestLanguage()};
             `,
           }}
         />
@@ -123,4 +127,4 @@ const html = ({
   );
 };
 
-export default html;
+export default Html;

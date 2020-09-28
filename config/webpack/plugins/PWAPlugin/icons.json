@@ -3,6 +3,8 @@
     "favicon-16x16.png": {
       "width": 16,
       "height": 16,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": false,
       "shadow": false
@@ -10,6 +12,8 @@
     "favicon-32x32.png": {
       "width": 32,
       "height": 32,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": false,
       "shadow": false
@@ -17,6 +21,8 @@
     "favicon-48x48.png": {
       "width": 48,
       "height": 48,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": false,
       "shadow": false
@@ -24,6 +30,8 @@
     "favicon-96x96.png": {
       "width": 96,
       "height": 96,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": false,
       "shadow": false
@@ -33,6 +41,8 @@
     "android-chrome-128x128.png": {
       "width": 128,
       "height": 128,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": false,
       "shadow": false
@@ -40,6 +50,8 @@
     "android-chrome-128x128-maskable.png": {
       "width": 128,
       "height": 128,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": true,
       "shadow": false
@@ -47,6 +59,8 @@
     "android-chrome-192x192.png": {
       "width": 192,
       "height": 192,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": false,
       "shadow": false
@@ -54,6 +68,8 @@
     "android-chrome-192x192-maskable.png": {
       "width": 192,
       "height": 192,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": true,
       "shadow": false
@@ -61,6 +77,8 @@
     "android-chrome-512x512.png": {
       "width": 512,
       "height": 512,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": false,
       "shadow": false
@@ -68,6 +86,8 @@
     "android-chrome-512x512-maskable.png": {
       "width": 512,
       "height": 512,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": true,
       "mask": true,
       "shadow": false
@@ -77,6 +97,8 @@
     "apple-touch-icon.png": {
       "width": 180,
       "height": 180,
+      "rel": "apple-touch-icon",
+      "type": "image/png",
       "transparent": true,
       "mask": false,
       "shadow": false
@@ -87,6 +109,8 @@
       "dwidth": 320,
       "dheight": 568,
       "ratio": 2,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -95,6 +119,8 @@
       "dwidth": 375,
       "dheight": 667,
       "ratio": 2,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -103,6 +129,8 @@
       "dwidth": 621,
       "dheight": 1104,
       "ratio": 3,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -111,6 +139,8 @@
       "dwidth": 375,
       "dheight": 812,
       "ratio": 3,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -119,6 +149,8 @@
       "dwidth": 414,
       "dheight": 896,
       "ratio": 2,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -127,6 +159,8 @@
       "dwidth": 414,
       "dheight": 896,
       "ratio": 3,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -135,6 +169,8 @@
       "dwidth": 768,
       "dheight": 1024,
       "ratio": 2,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -143,6 +179,8 @@
       "dwidth": 834,
       "dheight": 1112,
       "ratio": 2,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -151,6 +189,8 @@
       "dwidth": 834,
       "dheight": 1194,
       "ratio": 2,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -159,6 +199,8 @@
       "dwidth": 1024,
       "dheight": 1366,
       "ratio": 2,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -168,6 +210,8 @@
     "mstile-70x70.png": {
       "width": 70,
       "height": 70,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -175,6 +219,8 @@
     "mstile-270x270.png": {
       "width": 270,
       "height": 270,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -182,6 +228,8 @@
     "mstile-310x310.png": {
       "width": 310,
       "height": 310,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -189,6 +237,8 @@
     "mstile-310x150.png": {
       "width": 310,
       "height": 150,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false
@@ -196,13 +246,19 @@
   },
   "safari": {
     "safari-pinned-tab.svg": {
-      "color": "#ffffff"
+      "color": "#000",
+      "width": 16,
+      "height": 16,
+      "rel": "mask-icon",
+      "type": "image/svg+xml"
     }
   },
   "coast": {
     "coast-228x228.png": {
       "width": 228,
       "height": 228,
+      "rel": "icon",
+      "type": "image/png",
       "transparent": false,
       "mask": false,
       "shadow": false

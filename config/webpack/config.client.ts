@@ -9,7 +9,7 @@ import plugins from './plugins';
 import { client as clientLoaders } from './loaders';
 
 const isDev = process.env.NODE_ENV === 'development';
-const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true;
+const generateSourceMap = process.env.SOURCEMAP === 'true' ? true : false;
 
 const config: Configuration = {
   name: 'client',

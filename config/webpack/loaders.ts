@@ -5,7 +5,7 @@ import paths from '../paths';
 import chalk from 'chalk';
 
 const isDev = process.env.NODE_ENV === 'development';
-const generateSourceMap = process.env.OMIT_SOURCEMAP === 'true' ? false : true;
+const generateSourceMap = process.env.SOURCEMAP === 'true' ? true : false;
 
 const cssModuleOptions = isDev
   ? { getLocalIdent, exportLocalsConvention: 'camelCase' }

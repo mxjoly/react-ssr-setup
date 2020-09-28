@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import serialize from 'serialize-javascript';
 
 import App from '../../shared/App';
-import Html, { HtmlProps } from '../components/html';
+import Html, { HtmlProps } from '../components/Html';
 import paths from '../../../config/paths';
 
 const renderFullPage = () => (req: Request, res: Response) => {
@@ -63,10 +63,7 @@ const renderFullPage = () => (req: Request, res: Response) => {
   }
 
   if (process.env.PWA === 'true') {
-    htmlProps.manifest = res.locals.assetPath(
-      path.join(paths.publicAssets, 'manifest.json')
-    );
-    htmlProps.metadata = '______________________________';
+    htmlProps.metadata = res.locals.metadata || '';
   }
 
   return res

@@ -15,7 +15,7 @@ describe('addStore', () => {
 
   // ---------------------------------------------------- //
 
-  it('exist', () => {
+  it('exists', () => {
     expect(addStore).toBeDefined();
   });
 
@@ -23,11 +23,11 @@ describe('addStore', () => {
     expect(typeof addStore).toBe('function');
   });
 
-  it('should add the store to the response', () => {
-    expect(res.locals.store).toBeDefined();
-  });
-
   it('calls next function', () => {
     expect(next).toBeCalled();
+  });
+
+  it('should add the store to the response', () => {
+    expect(res.locals.store).toBeDefined();
   });
 });

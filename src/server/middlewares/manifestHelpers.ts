@@ -8,33 +8,35 @@ interface Options {
   cache?: boolean;
 }
 
-let manifest: any;
+let manifestCache: any = null;
 const options: Options = {};
 
 function loadManifest() {
-  if (manifest && options.cache) return manifest;
+  if (manifestCache && options.cache) return manifestCache;
 
   if (options.manifestPath && fs.existsSync(options.manifestPath)) {
-    return JSON.parse(fs.readFileSync(options.manifestPath, 'utf8'));
+    const manifest = JSON.parse(fs.readFileSync(options.manifestPath, 'utf8'));
+    if (options.cache) {
+      manifestCache = manifest;
+    }
+    return manifest;
   } else {
-    throw new Error('Asset Manifest could not be loaded.');
+    throw new Error('Assets Manifest could not be loaded.');
   }
 }
 
 export function lookup(source: string) {
-  manifest = loadManifest();
-
+  const manifest = loadManifest();
   if (manifest[source]) return options.prependPath + manifest[source];
   else return null;
 }
 
 export function getManifest() {
-  return manifest || loadManifest();
+  return loadManifest();
 }
 
 export function getSources() {
-  manifest = manifest || loadManifest();
-  return Object.keys(manifest);
+  return Object.keys(loadManifest());
 }
 
 export function getStylesheetSources() {
@@ -73,7 +75,6 @@ export default function (opts: Options) {
     prependPath: '',
   };
 
-  manifest = null;
   assign(options, defaults, opts);
 
   return function (_req: Request, res: Response, next: NextFunction) {

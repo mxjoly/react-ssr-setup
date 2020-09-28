@@ -39,11 +39,14 @@ describe('i18nXhr', () => {
   beforeEach(() => {
     req = { params: { locale, ns } } as Request<any>;
     res = mockResponse();
-    locale = config.fallbackLng;
-    ns = config.defaultNS;
+    locale = config.fallbackLng as Locale;
+    ns = config.defaultNS as string;
     expected = fs.readFileSync(`${paths.locales}/${locale}/${ns}.json`, {
       encoding: 'utf-8',
     });
+  });
+
+  beforeEach(() => {
     dateSpy = jest
       .spyOn(Date.prototype, 'getTime')
       .mockImplementation(() => TIMESTAMP1);
@@ -58,7 +61,7 @@ describe('i18nXhr', () => {
 
   // ---------------------------------------------------- //
 
-  it('exist', () => {
+  it('exists', () => {
     expect(i18nextXhr).toBeDefined();
   });
 

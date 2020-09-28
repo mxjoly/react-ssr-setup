@@ -2,7 +2,7 @@ import React from 'react';
 import { HelmetData } from 'react-helmet-async';
 import HtmlReactParser from 'html-react-parser';
 import { shallow, ShallowWrapper } from 'enzyme';
-import Html, { HtmlProps } from './html';
+import Html, { HtmlProps } from './Html';
 
 // ================================================================ //
 
@@ -165,7 +165,6 @@ describe('Html server renderer', () => {
       beforeEach(() => {
         props.metadata =
           "<meta key='theme-color' name='theme-color' content='#ffffff' />";
-        props.manifest = '/static/assets/manifest.json';
         component = shallow(<Html {...props} />);
       });
 
@@ -178,14 +177,6 @@ describe('Html server renderer', () => {
       it('includes the metada', () => {
         const metadata = HtmlReactParser(props.metadata as string);
         expect(component.contains(metadata)).toBe(true);
-      });
-
-      it('includes the manifest', () => {
-        expect(
-          component
-            .html()
-            .includes(`<link rel="manifest" href="${props.manifest}"/>`)
-        ).toBe(true);
       });
     });
   });

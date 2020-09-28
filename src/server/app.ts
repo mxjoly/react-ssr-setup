@@ -10,6 +10,7 @@ import handleErrors from './middlewares/handleErrors';
 import renderFullPage from './middlewares/renderFullPage';
 import manifestHelpers from './middlewares/manifestHelpers';
 import i18nextXhr from './middlewares/i18nXhr';
+import generateMetadata from './middlewares/generateMetadata';
 
 const app = express.Router();
 
@@ -26,6 +27,23 @@ app.use(
 
 app.use(i18nextMiddleware.handle(i18n));
 app.get('/locales/:locale/:ns.json', i18nextXhr);
+
+if (process.env.PWA === 'true' && process.env.METADATA_GENERATION === 'true') {
+  const icons = require('../../config/webpack/plugins/PWAPlugin/icons.json');
+  const getConfig = require('../../config/app').default;
+  const config = getConfig();
+  app.use(
+    generateMetadata({
+      appName: config.name,
+      cache: true,
+      icons,
+      themeColor: config.theme_color,
+      backgroundColor: config.background_color,
+      appleStatusBarStyle: 'default',
+      ignorePatterns: /(chrome|mstile)/, // Don't generate the metadata for chrome and mstile icons
+    })
+  );
+}
 
 app.use(addStore);
 app.use(renderFullPage());

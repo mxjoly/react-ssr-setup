@@ -17,7 +17,7 @@ const isProfilerEnabled = () => process.argv.includes('--profile');
 const isDev = () => process.env.NODE_ENV === 'development';
 const isPWA = () => (process.env.PWA === 'true' ? true : false);
 const generateIcons = () =>
-  process.env.OMIT_ICONS_GENERATION === 'true' ? false : true;
+  process.env.ICONS_GENERATION === 'true' ? true : false;
 const appConfig = getAppConfig();
 
 const shared = [
@@ -57,7 +57,7 @@ const client = [
       },
       icons: {
         favicon: paths.favicon,
-        outputPath: 'assets/icons',
+        outputPath: path.join(paths.publicAssets, 'icons'),
         backgroundColor: appConfig.background_color,
         themeColor: appConfig.theme_color,
         use: {

@@ -35,7 +35,7 @@ describe('handleErrors', () => {
 
   // ---------------------------------------------------- //
 
-  it('exist', () => {
+  it('exists', () => {
     expect(handleErrors).toBeDefined();
   });
 

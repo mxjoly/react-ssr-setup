@@ -13,7 +13,8 @@ declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: 'development' | 'production' | 'test';
     PWA: 'true' | 'false' | undefined;
-    OMIT_ICONS_GENERATION: 'true' | 'false' | undefined;
+    ICONS_GENERATION: 'true' | 'false' | undefined;
+    METADATA_GENERATION: 'true' | 'false' | undefined;
   }
 }
 

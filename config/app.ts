@@ -27,12 +27,12 @@ export interface ManifestOptions {
   related_application?: [{ platform: string; url: string; id?: string }];
 }
 
-let appManifest: ManifestOptions = null;
+let manifestConfig: ManifestOptions = null;
 
 export const loadConfig = () => {
   if (process.env.PWA === 'true') {
     if (fs.existsSync('app.json')) {
-      appManifest = require('../app.json');
+      manifestConfig = require('../app.json');
     } else {
       console.log(
         chalk.yellowBright(
@@ -44,27 +44,9 @@ export const loadConfig = () => {
   }
 };
 
-const defaultManifest: ManifestOptions = {
-  lang: 'en',
-  dir: 'auto',
-  name: null,
-  short_name: null,
-  description: null,
-  icons: [],
-  scope: '/',
-  start_url: '/?utm_source=homescreen',
-  display: 'standalone',
-  orientation: 'any',
-  theme_color: '#ffffff',
-  background_color: '#ffffff',
-};
-
 export default () => {
-  if (!appManifest) {
+  if (!manifestConfig) {
     loadConfig();
   }
-  return {
-    ...defaultManifest,
-    ...appManifest,
-  };
+  return manifestConfig;
 };

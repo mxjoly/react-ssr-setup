@@ -1,3 +1,4 @@
+import { InitOptions } from 'i18next';
 import { Locale } from '../store/app/types';
 
 const locales: Locale[] = ['en', 'fr'];
@@ -14,7 +15,7 @@ const getResources = () => {
   return resources;
 };
 
-const config: any = {
+const config: InitOptions = {
   defaultNS: 'common',
   fallbackNS: namespaces,
   ns: namespaces,
