@@ -8,6 +8,7 @@ import { useSSR } from 'react-i18next';
 import '../shared/lib/i18n';
 import App from '../shared/App';
 import { configureStore } from '../shared/lib/store';
+import * as ServiceWorker from './setupWorker';
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadState = window.__PRELOADED_STATE__;
@@ -32,6 +33,10 @@ const BaseApp = () => {
 };
 
 hydrate(<BaseApp />, document.getElementById('app'));
+
+if (process.env.PWA === 'true') {
+  ServiceWorker.register();
+}
 
 if (process.env.NODE_ENV === 'development') {
   if (module.hot) {

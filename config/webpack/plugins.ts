@@ -6,6 +6,7 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { TypedCssModulesPlugin } from 'typed-css-modules-webpack-plugin';
+import WorkboxPlugin from 'workbox-webpack-plugin';
 import PWAPlugin from './plugins/PWAPlugin';
 
 import envBuilder from '../env';
@@ -18,6 +19,8 @@ const isDev = () => process.env.NODE_ENV === 'development';
 const isPWA = () => (process.env.PWA === 'true' ? true : false);
 const generateIcons = () =>
   process.env.ICONS_GENERATION === 'true' ? true : false;
+const generateSourceMap = () =>
+  process.env.SOURCEMAP === 'true' ? true : false;
 const appConfig = getAppConfig();
 
 const shared = [
@@ -85,6 +88,24 @@ const client = [
         },
       ],
     }),
+  new WorkboxPlugin.GenerateSW({
+    swDest: 'service-worker.js',
+    clientsClaim: true,
+    skipWaiting: true,
+    maximumFileSizeToCacheInBytes: 10000000,
+    manifestTransforms: [
+      (manifestEntries) => {
+        const manifest = manifestEntries.map((entry) => {
+          const regex = /^https?:\/\/localhost:\d+/;
+          if (regex.test(entry.url)) {
+            entry.url = entry.url.replace(regex, '');
+          }
+          return entry;
+        });
+        return { manifest, warnings: [] };
+      },
+    ],
+  }),
   // The plugin generates .css.d.ts file co-located with the corresponding .css file before compilation
   // phase so all CSS imports in TypeScript source code type check.
   new TypedCssModulesPlugin({

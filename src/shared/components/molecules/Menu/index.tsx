@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './styles.scss';
 
-export interface MenuProps {
+export type MenuProps = {
   items: string[];
   defaultItem?: string;
   onSelect: (item: string) => void;
@@ -11,7 +11,7 @@ export interface MenuProps {
   noDropIcon?: boolean;
   capitalize?: boolean;
   uppercase?: boolean;
-}
+};
 
 export const classNames = {
   ROOT: 'Menu',

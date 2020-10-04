@@ -39,7 +39,11 @@ export default () => {
   const raw = {
     PORT: process.env.PORT || 8500,
     NODE_ENV: process.env.NODE_ENV || 'development',
-    HOST: process.env.HOST || 'http://localhost',
+    PWA: process.env.PWA || 'false',
+    HOST: path.join(
+      process.env.HOST || `http://localhost:${process.env.PORT || 8500}`,
+      paths.publicPath
+    ),
   };
 
   // Stringify all values so we can feed into Webpack DefinePlugin

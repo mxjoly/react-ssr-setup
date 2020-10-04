@@ -12,6 +12,7 @@ declare const __SERVER__: boolean;
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: 'development' | 'production' | 'test';
+    PUBLIC_URL: string;
     PWA: 'true' | 'false' | undefined;
     ICONS_GENERATION: 'true' | 'false' | undefined;
     METADATA_GENERATION: 'true' | 'false' | undefined;
