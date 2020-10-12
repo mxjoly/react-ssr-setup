@@ -6,7 +6,7 @@ const resolveApp = (relativePath: string) =>
   path.resolve(appDirectory, relativePath);
 
 const paths: any = {
-  appTemplate: resolveApp('config/webpack/template.html'),
+  appTemplate: resolveApp('config/webpack/template.ejs'),
   clientBuild: resolveApp('build/client'),
   serverBuild: resolveApp('build/server'),
   dotenv: resolveApp('.env'),

@@ -15,6 +15,7 @@ const iconsMock = {
       height: 16,
       rel: 'icon',
       type: 'image/png',
+      emitTag: true,
     },
   },
   appleStartup: {
@@ -24,6 +25,7 @@ const iconsMock = {
       ratio: 2,
       rel: 'apple-touch-startup-image',
       type: 'image/png',
+      emitTag: true,
     },
   },
 } as { [group: string]: { [filename: string]: IconProps } };
@@ -38,7 +40,7 @@ const metadataMock = '<link rel="manifest" href="/manifest.json"/>';
 
 // ================================================================ //
 
-describe('generateMetadata', () => {
+describe('generateMetatada', () => {
   let req: Request;
   let res: Response;
   let next: jest.MockedFunction<NextFunction>;
@@ -101,12 +103,25 @@ describe('generateMetadata', () => {
     expect(() => generateMetadata(opts)(req, res, next)).toThrowError();
   });
 
+  it('does not emit the icon metatag', () => {
+    const props = { rel: 'icon', type: 'image/png', emitTag: false };
+    Object.assign(opts.icons?.favicons, {
+      'favicon-16x16.png': props,
+    });
+
+    generateMetadata(opts)(req, res, next);
+    const ref = assetsManifestMock['assets/icons/favicon-16x16.png'];
+    const link = `<link rel="${props.rel}" type="${props.type}" href="${ref}"/>`;
+    expect(res.locals.metadata.includes(link)).toBe(false);
+  });
+
   it('displays a message on the console if an icon do not have a supported type property', () => {
     Object.assign(opts.icons?.favicons, {
       'favicon-16x16.png': {
         width: 16,
         height: 16,
         type: 'image/unknown',
+        emitTag: true,
       },
     });
 
@@ -120,6 +135,7 @@ describe('generateMetadata', () => {
         width: 16,
         height: 16,
         type: 'image/png',
+        emitTag: true,
       },
     });
 
@@ -134,6 +150,7 @@ describe('generateMetadata', () => {
         dheight: 568,
         rel: 'apple-touch-startup-image',
         type: 'image/png',
+        emitTag: true,
       },
     });
 
@@ -143,7 +160,7 @@ describe('generateMetadata', () => {
 
   it('displays a message on the console if an icon do not have a size property', () => {
     // Modify a favicon in the icon props
-    const props = { rel: 'icon', type: 'image/png' };
+    const props = { rel: 'icon', type: 'image/png', emitTag: true };
     Object.assign(opts.icons?.favicons, {
       'favicon-16x16.png': { ...props },
     });

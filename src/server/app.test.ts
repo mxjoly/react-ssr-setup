@@ -39,7 +39,7 @@ describe('App router', () => {
 
   describe('Progressive web application', () => {
     beforeEach(async () => {
-      process.env = { ...OLD_ENV, PWA: 'true', METADATA_GENERATION: 'true' };
+      process.env = { ...OLD_ENV, PWA: 'true' };
       // To test always a clean server without any residue from the previous unit tests
       delete require.cache[require.resolve('./index')];
       const express: Express = require('./index').default;

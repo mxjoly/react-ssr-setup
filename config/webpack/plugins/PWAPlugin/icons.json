@@ -7,7 +7,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "favicon-32x32.png": {
       "width": 32,
@@ -16,7 +17,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "favicon-48x48.png": {
       "width": 48,
@@ -25,7 +27,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "favicon-96x96.png": {
       "width": 96,
@@ -34,7 +37,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     }
   },
   "android": {
@@ -45,7 +49,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     },
     "android-chrome-128x128-maskable.png": {
       "width": 128,
@@ -54,7 +59,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": true,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     },
     "android-chrome-192x192.png": {
       "width": 192,
@@ -63,7 +69,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     },
     "android-chrome-192x192-maskable.png": {
       "width": 192,
@@ -72,7 +79,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": true,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     },
     "android-chrome-512x512.png": {
       "width": 512,
@@ -81,7 +89,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     },
     "android-chrome-512x512-maskable.png": {
       "width": 512,
@@ -90,7 +99,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": true,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     }
   },
   "apple": {
@@ -101,7 +111,8 @@
       "type": "image/png",
       "transparent": true,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     }
   },
   "appleStartup": {
@@ -113,7 +124,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "iphone6-splash.png": {
       "dwidth": 375,
@@ -123,7 +135,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "iphoneplus-splash.png": {
       "dwidth": 621,
@@ -133,7 +146,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "iphonex-splash.png": {
       "dwidth": 375,
@@ -143,7 +157,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "iphonexr-splash.png": {
       "dwidth": 414,
@@ -153,7 +168,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "iphonexsmax-splash.png": {
       "dwidth": 414,
@@ -163,7 +179,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "ipad-splash.png": {
       "dwidth": 768,
@@ -173,7 +190,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "ipadpro1-splash.png": {
       "dwidth": 834,
@@ -183,7 +201,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "ipadpro2-splash.png": {
       "dwidth": 834,
@@ -193,7 +212,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     },
     "ipadpro3-splash.png": {
       "dwidth": 1024,
@@ -203,7 +223,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     }
   },
   "windows": {
@@ -214,7 +235,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     },
     "mstile-270x270.png": {
       "width": 270,
@@ -223,7 +245,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     },
     "mstile-310x310.png": {
       "width": 310,
@@ -232,7 +255,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     },
     "mstile-310x150.png": {
       "width": 310,
@@ -241,7 +265,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": false
     }
   },
   "safari": {
@@ -250,7 +275,8 @@
       "width": 16,
       "height": 16,
       "rel": "mask-icon",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "emitTag": true
     }
   },
   "coast": {
@@ -261,7 +287,8 @@
       "type": "image/png",
       "transparent": false,
       "mask": false,
-      "shadow": false
+      "shadow": false,
+      "emitTag": true
     }
   }
 }

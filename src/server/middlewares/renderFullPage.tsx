@@ -62,7 +62,10 @@ const renderFullPage = () => (req: Request, res: Response) => {
       res.locals.assetPath(path.join(paths.publicAssets, 'favicon.svg'));
   }
 
-  if (process.env.PWA === 'true') {
+  if (
+    process.env.PWA === 'true' &&
+    process.env.METADATA_GENERATION === 'true'
+  ) {
     htmlProps.metadata = res.locals.metadata || '';
   }
 

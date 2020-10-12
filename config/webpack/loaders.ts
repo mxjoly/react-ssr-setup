@@ -9,7 +9,10 @@ const generateSourceMap = process.env.SOURCEMAP === 'true' ? true : false;
 
 const cssModuleOptions = isDev
   ? { getLocalIdent, exportLocalsConvention: 'camelCase' }
-  : { localIdentName: '[hash:base64:8]', exportLocalsConvention: 'camelCase' };
+  : {
+      localIdentName: '[contenthash:base64:8]',
+      exportLocalsConvention: 'camelCase',
+    };
 
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -130,10 +133,13 @@ const imageLoaderClient = {
         );
         return path.join(
           'assets',
-          isDev ? '[name].[ext]' : '[name].[hash:8].[ext]'
+          isDev ? '[name].[ext]' : '[name].[contenthash:8].[ext]'
         );
       }
-      return path.join(dir, isDev ? '[name].[ext]' : '[name].[hash:8].[ext]');
+      return path.join(
+        dir,
+        isDev ? '[name].[ext]' : '[name].[contenthash:8].[ext]'
+      );
     },
     limit: 2048, // the maximum size of a file in bytes
   },
@@ -149,10 +155,13 @@ const fileLoaderClient = {
       if (dir.startsWith('node_modules/')) {
         return path.join(
           'assets',
-          isDev ? '[name].[ext]' : '[name].[hash:8].[ext]'
+          isDev ? '[name].[ext]' : '[name].[contenthash:8].[ext]'
         );
       }
-      return path.join(dir, isDev ? '[name].[ext]' : '[name].[hash:8].[ext]');
+      return path.join(
+        dir,
+        isDev ? '[name].[ext]' : '[name].[contenthash:8].[ext]'
+      );
     },
   },
 };

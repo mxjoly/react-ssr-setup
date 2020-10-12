@@ -65,10 +65,14 @@ const config: any = {
     excludeCacheFor: ['cimode'], // languages to not persist (cookie, localStorage)
   },
 
-  debug: process.env.NODE_ENV === 'development' && __BROWSER__,
+  debug:
+    process.env.NODE_ENV === 'development' && typeof window !== 'undefined',
 
   parseMissingKeyHandler: (missing: any) => {
-    if (process.env.NODE_ENV === 'development' && __BROWSER__) {
+    if (
+      process.env.NODE_ENV === 'development' &&
+      typeof window !== 'undefined'
+    ) {
       console.warn('Missing translation :', missing);
     }
     return missing;

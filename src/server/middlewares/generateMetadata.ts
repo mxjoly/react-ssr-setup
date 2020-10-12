@@ -23,6 +23,7 @@ export type IconProps = {
   ratio?: number;
   rel?: RelType;
   type?: MimeType;
+  emitTag?: boolean;
 };
 
 export interface Options {
@@ -32,7 +33,6 @@ export interface Options {
   themeColor?: string;
   backgroundColor?: string;
   appleStatusBarStyle?: AppleStatusBarStyle;
-  ignorePatterns?: RegExp;
 }
 
 export let metadataCache: any = null;
@@ -70,6 +70,7 @@ const getIconMetadata = (iconName: string, props: IconProps) => {
       const media = `(device-width: ${props.dwidth}px) and (device-height: ${props.dheight}px) and (-webkit-device-pixel-ratio: ${props.ratio})`;
       return `<link rel="${props.rel}" type="${props.type}" media="${media}" href="${ref}"/>`;
     }
+
     if (props.width && props.height) {
       return `<link rel="${props.rel}" type="${props.type}" sizes="${props.width}x${props.height}" href="${ref}"/>`;
     }
@@ -112,18 +113,15 @@ const generateMetadata = (opts?: Options) => {
   return (_req: Request, res: Response, next: NextFunction) => {
     if (res.locals.getManifest) {
       const assetsManifest = res.locals.getManifest();
-      const icons = Object.keys(assetsManifest)
-        .filter((filename) =>
-          filename.startsWith(path.join(paths.publicAssets, 'icons'))
-        )
-        .filter((filename) =>
-          options.ignorePatterns ? !options.ignorePatterns.test(filename) : true
-        );
+      const icons = Object.keys(assetsManifest).filter((filename) =>
+        filename.startsWith(path.join(paths.publicAssets, 'icons'))
+      );
 
       if (options.cache && metadataCache) {
         res.locals.metadata = metadataCache;
       } else {
         const manifestRef = assetsManifest['manifest.json'];
+        const browserConfigRef = assetsManifest['browserconfig.xml'];
 
         if (!manifestRef) {
           throw new Error(`Manifest file could not be found at ${manifestRef}`);
@@ -133,10 +131,13 @@ const generateMetadata = (opts?: Options) => {
           .map((iconPath) => {
             const iconName = path.basename(iconPath);
             const iconProps = iconsData[iconName];
-            return getIconMetadata(iconName, iconProps);
+            return iconProps.emitTag
+              ? getIconMetadata(iconName, iconProps)
+              : '';
           })
           .concat([
             `<link rel="manifest" href="${manifestRef}"/>`,
+            `<meta name="msapplication-config" content="${browserConfigRef}" />`,
             `<meta name="theme-color" content="${options.themeColor}"/>`,
             `<meta name="application-name" content="${options.appName}"/>`,
             `<meta name="mobile-web-app-capable" content="yes"/>`,

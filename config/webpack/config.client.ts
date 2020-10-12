@@ -25,7 +25,7 @@ const config: Configuration = {
   },
   output: {
     path: path.join(paths.clientBuild, paths.publicPath),
-    filename: isDev ? '[name].js' : '[name].[hash:8].js',
+    filename: isDev ? '[name].js' : '[name].[contenthash:8].js',
     publicPath: paths.publicPath,
     chunkFilename: '[name].[chunkhash:8].chunk.js',
   },
@@ -105,9 +105,10 @@ if (!isDev) {
       }),
       new OptimizeCSSAssetsPlugin({}),
     ],
-    namedModules: true,
+    moduleIds: 'named',
     noEmitOnErrors: true,
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,

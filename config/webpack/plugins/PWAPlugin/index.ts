@@ -6,6 +6,7 @@ import sharp from 'sharp';
 import Jimp from 'jimp';
 import merge from 'lodash/merge';
 import webpack, { Compiler } from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 import { adjustSvg } from './utils';
 import { ManifestOptions } from '../../../app';
@@ -60,12 +61,15 @@ type IconProps = {
   transparent?: boolean;
   mask?: boolean;
   shadow?: boolean;
+  emitTag?: boolean;
 };
 
 interface PluginOpts {
   publicPath?: string;
+  emitMetadata?: boolean;
   manifest?: {
     filename?: string;
+    outputPath?: string;
     options?: ManifestOptions;
   };
   icons?: {
@@ -88,13 +92,17 @@ interface PluginOpts {
 
 class PWAPlugin {
   options: PluginOpts;
+  _emit: boolean;
 
   constructor(args?: PluginOpts) {
+    this._emit = true;
     this.options = merge(
       {
         publicPath: '/',
+        emitMetadata: true,
         manifest: {
           filename: 'manifest.json',
+          outputPath: '/',
           options: {
             lang: 'en',
             dir: 'auto',
@@ -136,19 +144,19 @@ class PWAPlugin {
   createManifest(compilation: webpack.compilation.Compilation) {
     const {
       publicPath,
-      manifest: { filename, options },
-      icons: { outputPath },
+      manifest: { filename, outputPath: outputManifest, options },
+      icons: { outputPath: outputIcons },
     } = this.options;
 
     // Manifest relative path from the public path
-    const outputFile = path.join(publicPath, filename).slice(1); // remove the first slash
+    const outputFile = path.join(outputManifest, filename).slice(1); // remove the first slash
 
     // Add the icons
     Object.entries(iconsMap.android).forEach(([iconName, props]: any) => {
       options.icons.push(
         Object.assign(
           {
-            src: path.join(publicPath, outputPath, iconName),
+            src: path.join(publicPath, outputIcons, iconName),
             sizes: `${props.width}x${props.height}`,
             type: 'image/png',
           },
@@ -178,14 +186,17 @@ class PWAPlugin {
   createBrowserConfig(compilation: webpack.compilation.Compilation) {
     const {
       publicPath,
-      icons: { use, outputPath, themeColor },
+      manifest: { outputPath: outputManifest },
+      icons: { use, outputPath: outputIcons, themeColor },
     } = this.options;
 
     if (use.windows === true) {
-      const relativePath = path.join(publicPath, outputPath);
+      const relativePath = path.join(publicPath, outputIcons);
 
       // Relative path from the public path
-      const outputFile = path.join(publicPath, 'browserconfig.xml').slice(1); // remove the first slash
+      const outputFile = path
+        .join(outputManifest, 'browserconfig.xml')
+        .slice(1); // remove the first slash
 
       const source = prettier.format(
         `
@@ -349,6 +360,9 @@ class PWAPlugin {
       return Promise.resolve();
     }
 
+    // Do not emit icons during watch mode
+    if (!this._emit) return Promise.resolve();
+
     const promises = [];
 
     promises.push(
@@ -396,13 +410,99 @@ class PWAPlugin {
       })
     );
 
+    this._emit = false;
     return Promise.all(promises);
+  }
+
+  /**
+   * Add the metadata to the headtags of the html template file
+   * @param compilation compilation - The webpack compilation
+   */
+  generateMetadata(compilation: webpack.compilation.Compilation) {
+    const {
+      publicPath,
+      manifest: { filename, outputPath: outputManifest },
+      icons: { use, outputPath: outputIcons },
+    } = this.options;
+
+    // https://github.com/jantimon/html-webpack-plugin#events
+    HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync(
+      'PWAPlugin',
+      (data, callback) => {
+        // Generate the meta tag for the manifest file and browserconfig
+        data.assetTags.meta.push(
+          HtmlWebpackPlugin.createHtmlTagObject('link', {
+            rel: 'manifest',
+            href: path.join(outputManifest, filename),
+          })
+        );
+
+        // Generate the meta tag for the browserconfig file
+        data.assetTags.meta.push(
+          HtmlWebpackPlugin.createHtmlTagObject('meta', {
+            name: 'msapplication-config',
+            href: path.join(outputManifest, 'browserconfig.xml'),
+          })
+        );
+
+        // Generate the links foreach icons
+        Object.keys(use)
+          .filter((group) => use[group] === true)
+          .forEach((group) => {
+            const groupLinks = Object.entries(iconsMap[group])
+              .filter(([, props]: [string, IconProps]) => props.emitTag)
+              .map(([iconName, props]: [string, IconProps]) => {
+                // The path to the image
+                const href = path.join(
+                  publicPath,
+                  outputIcons,
+                  'icons',
+                  iconName
+                );
+
+                // Default attributes for the links
+                const attributes = {
+                  rel: props.rel,
+                  type: props.type,
+                  href,
+                };
+
+                if (props.type === 'image/png') {
+                  if (props.dwidth && props.dheight) {
+                    const media = `(device-width: ${props.dwidth}px) and (device-height: ${props.dheight}px) and (-webkit-device-pixel-ratio: ${props.ratio})`;
+                    Object.assign(attributes, { media });
+                  }
+
+                  if (props.width && props.height) {
+                    Object.assign(attributes, {
+                      sizes: `${props.width}x${props.height}`,
+                    });
+                  }
+                }
+
+                return HtmlWebpackPlugin.createHtmlTagObject(
+                  'link',
+                  attributes
+                );
+              });
+            data.assetTags.meta = data.assetTags.meta.concat(groupLinks);
+          });
+
+        callback(null, data);
+      }
+    );
   }
 
   apply(compiler: Compiler) {
     compiler.hooks.emit.tap('PWAPlugin', this.createManifest.bind(this));
     compiler.hooks.emit.tap('PWAPlugin', this.createBrowserConfig.bind(this));
     compiler.hooks.emit.tapPromise('PWAPlugin', this.generateIcons.bind(this));
+    if (this.options.emitMetadata) {
+      compiler.hooks.compilation.tap(
+        'PWAPlugin',
+        this.generateMetadata.bind(this)
+      );
+    }
   }
 }
 

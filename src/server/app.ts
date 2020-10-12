@@ -40,7 +40,6 @@ if (process.env.PWA === 'true' && process.env.METADATA_GENERATION === 'true') {
       themeColor: config.theme_color,
       backgroundColor: config.background_color,
       appleStatusBarStyle: 'default',
-      ignorePatterns: /(chrome|mstile)/, // Don't generate the metadata for chrome and mstile icons
     })
   );
 }
