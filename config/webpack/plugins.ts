@@ -10,7 +10,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { TypedCssModulesPlugin } from 'typed-css-modules-webpack-plugin';
 import WorkboxPlugin from 'workbox-webpack-plugin';
-import PWAPlugin from './plugins/PWAPlugin';
+import PWAPlugin from '@mxjoly/pwa-webpack-plugin';
 
 import envBuilder from '../env';
 import paths from '../paths';
@@ -91,9 +91,9 @@ const client = [
       initialI18nStore: serialize(i18nConfig.resources),
       initialLanguage:
         i18nConfig.load !== 'languageOnly'
-          ? `navigator.languages ? navigator.languages[0] : 
+          ? `navigator.languages ? navigator.languages[0] :
       (navigator.language || navigator.userLanguage || '${i18nConfig.fallbackLng}')`
-          : `navigator.languages ? navigator.languages[0].slice(0, 2) : 
+          : `navigator.languages ? navigator.languages[0].slice(0, 2) :
           (navigator.language.slice(0, 2) || navigator.userLanguage.slice(0, 2) || '${i18nConfig.fallbackLng}')`,
       appName: isPWA() ? appConfig.name : '',
     },

@@ -42,13 +42,13 @@ const Html = ({
   const bestLanguage = () => {
     if (initialLanguage) {
       return `'${initialLanguage}'`;
-    } else if (config.load !== 'languageOnly') {
+    }
+    if (config.load !== 'languageOnly') {
       return `navigator.languages ? navigator.languages[0] : 
       (navigator.language || navigator.userLanguage || '${config.fallbackLng}')`;
-    } else {
-      return `navigator.languages ? navigator.languages[0].slice(0, 2) : 
-      (navigator.language.slice(0, 2) || navigator.userLanguage.slice(0, 2) || '${config.fallbackLng}')`;
     }
+    return `navigator.languages ? navigator.languages[0].slice(0, 2) : 
+      (navigator.language.slice(0, 2) || navigator.userLanguage.slice(0, 2) || '${config.fallbackLng}')`;
   };
 
   // Metadata for the common website and pwa

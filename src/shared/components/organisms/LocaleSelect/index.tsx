@@ -7,7 +7,7 @@ import Menu from '../../molecules/Menu';
 
 const LocaleSelect: React.FC<any> = () => {
   const { i18n } = useTranslation();
-  const [curlocale, setLocale] = React.useState<Locale | undefined>(undefined);
+  const [curlocale, setLocale] = React.useState<Locale | undefined>();
   const locales = config.supportedLngs.filter((e: any) => e !== 'cimode');
 
   React.useEffect(() => {

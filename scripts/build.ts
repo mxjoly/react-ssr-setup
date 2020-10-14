@@ -3,7 +3,7 @@ import rimraf from 'rimraf';
 import chalk from 'chalk';
 
 // Ensure environment variables are read.
-require('../config/env');
+import '../config/env';
 
 import getConfig from '../config/webpack';
 import paths from '../config/paths';

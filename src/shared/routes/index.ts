@@ -62,7 +62,7 @@ export const getPath = (
   routeConfig = config
 ): string | string[] | null => {
   for (const route of routeConfig) {
-    if (route.key == key && typeof route.key === 'string') {
+    if (route.key === key && typeof route.key === 'string') {
       let path = route.path;
       if (path) {
         if (typeof path === 'string' && path.includes(':') && params) {

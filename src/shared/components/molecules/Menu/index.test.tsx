@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import Menu, { MenuProps, classNames } from './index';
+import Menu, { MenuProps, classNames } from '.';
 
 describe('<Menu />', () => {
   let component: ShallowWrapper;

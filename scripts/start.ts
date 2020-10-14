@@ -6,7 +6,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
 // Ensure environment variables are read.
-require('../config/env');
+import '../config/env';
 
 import paths from '../config/paths';
 import getConfig from '../config/webpack';
@@ -28,9 +28,9 @@ const start = async () => {
 
   const [clientConfig, serverConfig] = webpackConfig;
 
-  clientConfig.entry['bundle'] = [
+  clientConfig.entry.bundle = [
     `webpack-hot-middleware/client?path=${DEVSERVER_HOST}:${WEBPACK_PORT}/__webpack_hmr`,
-    ...clientConfig.entry['bundle'],
+    ...clientConfig.entry.bundle,
   ];
 
   clientConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';

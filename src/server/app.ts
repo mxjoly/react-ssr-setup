@@ -29,14 +29,14 @@ app.use(i18nextMiddleware.handle(i18n));
 app.get('/locales/:locale/:ns.json', i18nextXhr);
 
 if (process.env.PWA === 'true' && process.env.METADATA_GENERATION === 'true') {
-  const icons = require('../../config/webpack/plugins/PWAPlugin/icons.json');
+  const { iconsMap } = require('../../config/app');
   const getConfig = require('../../config/app').default;
   const config = getConfig();
   app.use(
     generateMetadata({
       appName: config.name,
       cache: true,
-      icons,
+      icons: iconsMap,
       themeColor: config.theme_color,
       backgroundColor: config.background_color,
       appleStatusBarStyle: 'default',

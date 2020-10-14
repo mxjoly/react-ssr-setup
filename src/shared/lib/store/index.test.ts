@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { Middleware } from 'redux';
-import { configureStore } from './index';
+import { configureStore } from '.';
 import { initialRootState } from './rootReducer';
 
 const middlewares: Middleware[] = [];

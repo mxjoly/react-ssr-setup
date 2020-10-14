@@ -6,7 +6,7 @@ export function register() {
         .register(swUrl)
         .then((registration) => {
           console.log(
-            'Service worker are registered with the scope : ',
+            'Service worker are registered with the scope :',
             registration.scope
           );
         })

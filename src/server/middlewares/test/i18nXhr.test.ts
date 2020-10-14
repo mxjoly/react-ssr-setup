@@ -81,7 +81,7 @@ describe('i18nXhr', () => {
       { params: { locale: '--' } },
       { params: { ns: '--' } },
       { params: {} },
-    ] as Request<any>[];
+    ] as Request[];
     badRequests.forEach((req) => {
       i18nextXhr(req, res, () => expect(req.statusCode).toBe(404));
     });

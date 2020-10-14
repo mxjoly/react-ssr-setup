@@ -1,3 +1,5 @@
+/** @format */
+
 import http from 'http';
 import request from 'supertest';
 import { Express } from 'express';
@@ -12,8 +14,8 @@ describe('App router', () => {
     beforeEach(async () => {
       process.env = { ...OLD_ENV, PWA: 'false' };
       // To test always a clean server without any residue from the previous unit tests
-      delete require.cache[require.resolve('./index')];
-      const express: Express = require('./index').default;
+      delete require.cache[require.resolve('.')];
+      const express: Express = require('.').default;
       server = await express.listen(PORT);
     });
 
@@ -41,8 +43,8 @@ describe('App router', () => {
     beforeEach(async () => {
       process.env = { ...OLD_ENV, PWA: 'true' };
       // To test always a clean server without any residue from the previous unit tests
-      delete require.cache[require.resolve('./index')];
-      const express: Express = require('./index').default;
+      delete require.cache[require.resolve('.')];
+      const express: Express = require('.').default;
       server = await express.listen(PORT);
     });
 

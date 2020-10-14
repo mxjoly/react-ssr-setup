@@ -1,6 +1,8 @@
 import fs from 'fs';
 import chalk from 'chalk';
 
+export { iconsMap } from '@mxjoly/pwa-webpack-plugin';
+
 // https://developer.mozilla.org/fr/docs/Web/Manifest
 export interface ManifestOptions {
   lang: string;
@@ -8,7 +10,7 @@ export interface ManifestOptions {
   name: string;
   short_name: string;
   description: string;
-  icons: { src: string; sizes: string; type: string }[];
+  icons: Array<{ src: string; sizes: string; type: string }>;
   scope: string;
   start_url: string;
   display: 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser';

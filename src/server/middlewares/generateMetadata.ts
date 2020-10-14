@@ -88,13 +88,13 @@ const getIconMetadata = (iconName: string, props: IconProps) => {
 };
 
 const generateMetadata = (opts?: Options) => {
-  const defaults = {
+  const defaults: Options = {
     icons: {},
     cache: true,
     themeColor: '#ffffff',
     backgroundColor: '#ffffff',
     appleStatusBarStyle: 'default',
-  } as Options;
+  };
 
   assign(options, defaults, opts);
 
@@ -140,8 +140,8 @@ const generateMetadata = (opts?: Options) => {
             `<meta name="msapplication-config" content="${browserConfigRef}" />`,
             `<meta name="theme-color" content="${options.themeColor}"/>`,
             `<meta name="application-name" content="${options.appName}"/>`,
-            `<meta name="mobile-web-app-capable" content="yes"/>`,
-            `<meta name="apple-mobile-web-app-capable" content="yes"/>`,
+            '<meta name="mobile-web-app-capable" content="yes"/>',
+            '<meta name="apple-mobile-web-app-capable" content="yes"/>',
             `<meta name="apple-mobile-web-app-title" content="${options.appName}"/>`,
             `<meta name="apple-mobile-web-app-status-bar-style" content="${options.appleStatusBarStyle}"/>`,
           ])

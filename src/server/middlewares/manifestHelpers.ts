@@ -24,15 +24,15 @@ function loadManifest() {
       manifestCache = manifest;
     }
     return manifest;
-  } else {
-    throw new Error('Assets Manifest could not be loaded.');
   }
+
+  throw new Error('Assets Manifest could not be loaded.');
 }
 
 export function lookup(source: string) {
   const manifest = loadManifest();
   if (manifest[source]) return options.prependPath + manifest[source];
-  else return null;
+  return null;
 }
 
 export function getManifest() {

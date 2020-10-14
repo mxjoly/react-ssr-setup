@@ -24,7 +24,7 @@ This project is a template of a server side rendering a [React](https://en.react
 
   - ⚙ Babel 7
   - 📦 Webpack 4
-  - 🔥 TypeScript (via Babel)
+  - 🔥 TypeScript 4 (via Babel)
   - 🧹 Prettier
   - 🧹 Stylelint
   - 🔦 ESLint 7
@@ -169,8 +169,9 @@ To complete the configuration of your web application, specify the path of your 
 
 ## Todo
 
-- [ ] Add offline support using [Workbox](https://developers.google.com/web/tools/workbox)
+- [x] Add offline support using [Workbox](https://developers.google.com/web/tools/workbox)
 - [ ] Import SVGs as React component
+- [ ] Migrate to Webpack 5
 
 ## License
 

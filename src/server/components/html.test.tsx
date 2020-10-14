@@ -6,7 +6,7 @@ import Html, { HtmlProps } from './Html';
 
 // ================================================================ //
 
-const mockHelmetData = {
+const mockHelmetData: HelmetData = {
   title: { toComponent: jest.fn() },
   base: { toComponent: jest.fn() },
   meta: { toComponent: jest.fn() },
@@ -17,7 +17,7 @@ const mockHelmetData = {
   titleAttributes: { toComponent: jest.fn() },
   htmlAttributes: { toComponent: jest.fn() },
   bodyAttributes: { toComponent: jest.fn() },
-} as HelmetData;
+};
 
 // ================================================================ //
 

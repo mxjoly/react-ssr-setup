@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import LocaleSelect from './index';
+import LocaleSelect from '.';
 import config from '../../../lib/i18n/config';
 import i18n from '../../../lib/i18n';
 

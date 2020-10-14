@@ -47,9 +47,8 @@ const withLocale = (WrappedComponent: React.FC) => {
     if (config.supportedLngs.includes(curLocale)) {
       if (pathname.endsWith('/')) {
         return <WrappedComponent {...props} />;
-      } else {
-        return <Redirect to={pathname + '/' + search} />;
       }
+      return <Redirect to={pathname + '/' + search} />;
     }
 
     const to = pathname

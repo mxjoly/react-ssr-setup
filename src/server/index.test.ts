@@ -9,8 +9,8 @@ describe('Server', () => {
 
   beforeEach(async () => {
     // To test always a clean server without any residue from the previous unit tests
-    delete require.cache[require.resolve('./index')];
-    const express: Express = require('./index').default;
+    delete require.cache[require.resolve('.')];
+    const express: Express = require('.').default;
     server = express.listen(PORT);
   });
 
