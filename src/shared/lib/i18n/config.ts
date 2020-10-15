@@ -1,5 +1,7 @@
 import { Locale } from '../store/app/types';
 
+const isBrowser = typeof window !== 'undefined';
+
 const locales: Locale[] = ['en', 'fr'];
 const namespaces = ['common', 'pages'];
 
@@ -65,14 +67,10 @@ const config: any = {
     excludeCacheFor: ['cimode'], // languages to not persist (cookie, localStorage)
   },
 
-  debug:
-    process.env.NODE_ENV === 'development' && typeof window !== 'undefined',
+  debug: process.env.NODE_ENV === 'development' && isBrowser,
 
   parseMissingKeyHandler: (missing: any) => {
-    if (
-      process.env.NODE_ENV === 'development' &&
-      typeof window !== 'undefined'
-    ) {
+    if (process.env.NODE_ENV === 'development' && isBrowser) {
       console.warn('Missing translation :', missing);
     }
     return missing;

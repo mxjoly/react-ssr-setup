@@ -41,6 +41,8 @@ const mockResponse = () => {
   return res;
 };
 
+const OLD_ENV = process.env;
+
 // ================================================================ //
 
 describe('renderFullPage', () => {
@@ -50,6 +52,11 @@ describe('renderFullPage', () => {
   beforeEach(() => {
     req = mockRequest() as any;
     res = mockResponse() as any;
+  });
+
+  afterEach(() => {
+    process.env = OLD_ENV; // restore old env
+    jest.resetModules();
   });
 
   // ---------------------------------------------------- //
@@ -62,7 +69,14 @@ describe('renderFullPage', () => {
     expect(typeof renderFullPage).toBe('function');
   });
 
-  it('responds with the status 200', () => {
+  it('responds with the status 200 for common website', () => {
+    process.env = { ...OLD_ENV, PWA: 'false' };
+    renderFullPage()(req, res);
+    expect(res.statusCode).toBe(200);
+  });
+
+  it('responds with the status 200 for pwa', () => {
+    process.env = { ...OLD_ENV, PWA: 'true' };
     renderFullPage()(req, res);
     expect(res.statusCode).toBe(200);
   });

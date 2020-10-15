@@ -170,6 +170,7 @@ const cssModuleLoaderServer = {
   test: cssModuleRegex,
   use: [
     require.resolve('css-hot-loader'),
+    MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
       options: {

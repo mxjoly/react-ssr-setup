@@ -175,4 +175,4 @@ To complete the configuration of your web application, specify the path of your 
 
 ## License
 
-MIT.
+[MIT.](https://github.com/mxjoly/react-ssr-setup/blob/master/LICENSE)

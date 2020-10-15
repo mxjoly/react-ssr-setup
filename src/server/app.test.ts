@@ -1,5 +1,3 @@
-/** @format */
-
 import http from 'http';
 import request from 'supertest';
 import { Express } from 'express';
@@ -13,14 +11,13 @@ describe('App router', () => {
   describe('Common website', () => {
     beforeEach(async () => {
       process.env = { ...OLD_ENV, PWA: 'false' };
-      // To test always a clean server without any residue from the previous unit tests
-      delete require.cache[require.resolve('.')];
       const express: Express = require('.').default;
       server = await express.listen(PORT);
     });
 
     afterEach(async () => {
       await server.close();
+      jest.resetModules(); // To test always a clean server without any residue from the previous unit tests
       process.env = OLD_ENV; // restore old env
     });
 
@@ -42,14 +39,13 @@ describe('App router', () => {
   describe('Progressive web application', () => {
     beforeEach(async () => {
       process.env = { ...OLD_ENV, PWA: 'true' };
-      // To test always a clean server without any residue from the previous unit tests
-      delete require.cache[require.resolve('.')];
       const express: Express = require('.').default;
       server = await express.listen(PORT);
     });
 
     afterEach(async () => {
       await server.close();
+      jest.resetModules(); // To test always a clean server without any residue from the previous unit tests
       process.env = OLD_ENV; // restore old env
     });
 
