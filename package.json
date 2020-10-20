@@ -169,7 +169,7 @@
     "stylelint-prettier": "^1.1.2",
     "stylelint-scss": "^3.18.0",
     "supertest": "^5.0.0",
-    "terser-webpack-plugin": "^5.0.0",
+    "terser-webpack-plugin": "^4.2.3",
     "ts-node": "^9.0.0",
     "typed-css-modules-webpack-plugin": "^0.2.0",
     "typescript": "^4.0.3",
