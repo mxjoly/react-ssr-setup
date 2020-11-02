@@ -44,7 +44,7 @@ This project is a template of a server side rendering a [React](https://en.react
 
 - Libs and dependencies
 
-  - ⚛ React 16.x (latest), with Hooks!
+  - ⚛ React 17!
   - ✅ Express 4.x
   - ✅ React i18next for multi language support
   - ✅ Redux + Thunk middleware
@@ -172,6 +172,7 @@ To complete the configuration of your web application, specify the path of your 
 - [x] Add offline support using [Workbox](https://developers.google.com/web/tools/workbox)
 - [ ] Import SVGs as React component
 - [ ] Migrate to Webpack 5
+- [ ] Add official enzyme adaptater for react 17
 
 ## License
 
