@@ -44,7 +44,7 @@ This project is a template of a server side rendering a [React](https://en.react
 
 - Libs and dependencies
 
-  - ⚛ React 17!
+  - ⚛ React 17
   - ✅ Express 4.x
   - ✅ React i18next for multi language support
   - ✅ Redux + Thunk middleware

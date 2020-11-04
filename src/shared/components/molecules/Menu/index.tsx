@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import './styles.scss';
 
 export type MenuProps = {
@@ -56,26 +55,25 @@ const Menu: React.FC<MenuProps> = (props: MenuProps) => {
 
   return (
     <div
-      className={classnames(classes)}
+      className={classes.join(' ')}
       onMouseOver={addVisible}
       onMouseLeave={removeVisible}
     >
       <button
-        className={
-          props.noDropIcon
-            ? classNames.BUTTON
-            : classnames(classNames.BUTTON, classNames.BUTTON_WITH_ICON)
-        }
+        className={[
+          classNames.BUTTON,
+          !props.noDropIcon && classNames.BUTTON_WITH_ICON,
+        ]
+          .filter(Boolean)
+          .join(' ')}
         onClick={toggleVisible}
       >
         {selectedItem || props.defaultItem || props.placeholder}
       </button>
       <ul
-        className={
-          visible
-            ? classnames(classNames.ITEMS, classNames.ITEMS_VISIBLE)
-            : classNames.ITEMS
-        }
+        className={[classNames.ITEMS, visible && classNames.ITEMS_VISIBLE]
+          .filter(Boolean)
+          .join(' ')}
       >
         {props.items.map((item: string) => (
           <li
