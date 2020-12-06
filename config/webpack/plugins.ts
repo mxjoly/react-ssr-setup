@@ -2,7 +2,6 @@ import path from 'path';
 import webpack from 'webpack';
 import serialize from 'serialize-javascript';
 
-import AssetsManifestPlugin from 'webpack-manifest-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
@@ -16,6 +15,8 @@ import envBuilder from '../env';
 import paths from '../paths';
 import getAppConfig from '../app';
 import i18nConfig from '../../src/shared/lib/i18n/config';
+
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 const env = envBuilder();
 const appConfig = getAppConfig();
@@ -99,7 +100,7 @@ const client = [
     },
   }),
   // Webpack plugin for generating an assets manifest.
-  new AssetsManifestPlugin({
+  new WebpackManifestPlugin({
     fileName: 'assets-manifest.json',
     publicPath: paths.publicPath,
   }),

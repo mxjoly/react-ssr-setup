@@ -26,13 +26,7 @@ const config: Configuration = {
     filename: 'server.js',
     publicPath: paths.publicPath,
   },
-  externals: [
-    nodeExternals({
-      // we still want imported css from external files to be bundled otherwise 3rd party packages
-      // which require us to include their own css would not work properly
-      allowlist: /\.css$/,
-    }),
-  ],
+  externals: [nodeExternals()] as any,
   resolve: resolvers,
   module: {
     rules: serverLoaders,

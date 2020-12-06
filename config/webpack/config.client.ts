@@ -35,8 +35,8 @@ const config: Configuration = {
   resolve: resolvers,
   devtool: generateSourceMap
     ? isDev
-      ? '#cheap-module-eval-source-map'
-      : '#source-map'
+      ? 'eval-cheap-module-source-map'
+      : 'source-map'
     : false,
   plugins: [...plugins.shared, ...plugins.client],
   performance: {
@@ -101,12 +101,11 @@ if (!isDev) {
             ascii_only: true,
           },
         },
-        sourceMap: generateSourceMap,
       }),
       new OptimizeCSSAssetsPlugin({}),
     ],
     moduleIds: 'named',
-    noEmitOnErrors: true,
+    emitOnErrors: false,
     splitChunks: {
       chunks: 'all',
       cacheGroups: {

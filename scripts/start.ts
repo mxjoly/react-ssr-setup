@@ -60,10 +60,10 @@ const start = async () => {
 
   const clientCompiler = multiCompiler.compilers.find(
     (compiler) => compiler.name === 'client'
-  );
+  ) as any;
   const serverCompiler = multiCompiler.compilers.find(
     (compiler) => compiler.name === 'server'
-  );
+  ) as any;
 
   const clientPromise = compilerPromise('client', clientCompiler);
   const serverPromise = compilerPromise('server', serverCompiler);
@@ -81,9 +81,7 @@ const start = async () => {
   app.use(
     webpackDevMiddleware(clientCompiler, {
       publicPath: clientConfig.output.publicPath,
-      stats: clientConfig.stats,
       writeToDisk: true,
-      watchOptions,
     })
   );
 

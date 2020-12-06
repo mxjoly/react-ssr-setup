@@ -23,7 +23,7 @@ This project is a template of a server side rendering a [React](https://en.react
 - General Setup
 
   - ⚙ Babel 7
-  - 📦 Webpack 4
+  - 📦 Webpack 5
   - 🔥 TypeScript 4 (via Babel)
   - 🧹 Prettier
   - 🧹 Stylelint
@@ -171,7 +171,7 @@ To complete the configuration of your web application, specify the path of your 
 
 - [x] Add offline support using [Workbox](https://developers.google.com/web/tools/workbox)
 - [ ] Import SVGs as React component
-- [ ] Migrate to Webpack 5
+- [x] Migrate to Webpack 5
 - [ ] Add official enzyme adaptater for react 17
 
 ## License
