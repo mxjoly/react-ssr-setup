@@ -75,12 +75,7 @@ const cssLoaderClient = {
   exclude: cssModuleRegex,
   use: [
     require.resolve('css-hot-loader'),
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        hmr: isDev,
-      },
-    },
+    MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
       options: { importLoaders: 1 },
@@ -97,12 +92,7 @@ const cssLoaderClient = {
 const sassLoaderClient = {
   test: sassRegex,
   use: [
-    {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        hmr: isDev,
-      },
-    },
+    MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
       options: { importLoaders: 1 },
@@ -170,7 +160,6 @@ const cssModuleLoaderServer = {
   test: cssModuleRegex,
   use: [
     require.resolve('css-hot-loader'),
-    MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
       options: {
@@ -190,13 +179,12 @@ const cssModuleLoaderServer = {
 const cssLoaderServer = {
   test: cssRegex,
   exclude: cssModuleRegex,
-  use: [MiniCssExtractPlugin.loader, 'css-loader'],
+  use: ['css-loader'],
 };
 
 const sassLoaderServer = {
   test: sassRegex,
   use: [
-    MiniCssExtractPlugin.loader,
     require.resolve('css-loader'),
     require.resolve('postcss-loader'),
     require.resolve('sass-loader'),

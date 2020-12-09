@@ -132,7 +132,7 @@ There are a few environment variables you can set to adjust the setup to your ne
 | Variable         | Default            | Description                                                      |
 | ---------------- | ------------------ | ---------------------------------------------------------------- |
 | `PORT`           | `8500`             | Port number your application will be served                      |
-| `PUBLIC_URL`     | `http://localhost` | Url (including protocol!) your application will be served on.    |
+| `HOST`           | `http://localhost` | Url (including protocol!) your application will be served on.    |
 | `DEVSERVER_HOST` | `http://localhost` | Optional. Different host for the Webpack Dev Server to be served |
 
 ## Tricks
