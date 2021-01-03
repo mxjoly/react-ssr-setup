@@ -1,5 +1,7 @@
-**/node_modules
-**/public
-**/build
+node_modules
+public
+build
+coverage
+storybook-static
 *.d.ts
 *.hbs

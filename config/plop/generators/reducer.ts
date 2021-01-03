@@ -8,7 +8,7 @@ const prompts = [
     filter: (input: string) => {
       // Convert to camel case
       return input
-        .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+        .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
           return index === 0 ? word.toLowerCase() : word.toUpperCase();
         })
         .replace(/\s+/g, '');
