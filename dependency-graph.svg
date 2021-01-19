@@ -9,11 +9,6 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1908.43)">
 <title>dependency&#45;cruiser output</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-1908.43 955.5,-1908.43 955.5,4 -4,4"/>
-<g id="clust1" class="cluster">
-<title>cluster_config</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M445.5,-71.56C445.5,-71.56 491.5,-71.56 491.5,-71.56 497.5,-71.56 503.5,-77.56 503.5,-83.56 503.5,-83.56 503.5,-141.56 503.5,-141.56 503.5,-147.56 497.5,-153.56 491.5,-153.56 491.5,-153.56 445.5,-153.56 445.5,-153.56 439.5,-153.56 433.5,-147.56 433.5,-141.56 433.5,-141.56 433.5,-83.56 433.5,-83.56 433.5,-77.56 439.5,-71.56 445.5,-71.56"/>
-<text text-anchor="middle" x="468.5" y="-142.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config</text>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_src</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-161.56C20,-161.56 931.5,-161.56 931.5,-161.56 937.5,-161.56 943.5,-167.56 943.5,-173.56 943.5,-173.56 943.5,-1861.56 943.5,-1861.56 943.5,-1867.56 937.5,-1873.56 931.5,-1873.56 931.5,-1873.56 20,-1873.56 20,-1873.56 14,-1873.56 8,-1867.56 8,-1861.56 8,-1861.56 8,-173.56 8,-173.56 8,-167.56 14,-161.56 20,-161.56"/>
@@ -48,6 +43,56 @@
 <title>cluster_src/shared</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M336,-559.56C336,-559.56 923.5,-559.56 923.5,-559.56 929.5,-559.56 935.5,-565.56 935.5,-571.56 935.5,-571.56 935.5,-1765.56 935.5,-1765.56 935.5,-1771.56 929.5,-1777.56 923.5,-1777.56 923.5,-1777.56 336,-1777.56 336,-1777.56 330,-1777.56 324,-1771.56 324,-1765.56 324,-1765.56 324,-571.56 324,-571.56 324,-565.56 330,-559.56 336,-559.56"/>
 <text text-anchor="middle" x="629.75" y="-1766.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">shared</text>
+</g>
+<g id="clust9" class="cluster">
+<title>cluster_src/shared/assets</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M672,-1233.56C672,-1233.56 718,-1233.56 718,-1233.56 724,-1233.56 730,-1239.56 730,-1245.56 730,-1245.56 730,-1273.56 730,-1273.56 730,-1279.56 724,-1285.56 718,-1285.56 718,-1285.56 672,-1285.56 672,-1285.56 666,-1285.56 660,-1279.56 660,-1273.56 660,-1273.56 660,-1245.56 660,-1245.56 660,-1239.56 666,-1233.56 672,-1233.56"/>
+<text text-anchor="middle" x="695" y="-1274.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">assets</text>
+</g>
+<g id="clust10" class="cluster">
+<title>cluster_src/shared/components</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M538,-1293.56C538,-1293.56 915.5,-1293.56 915.5,-1293.56 921.5,-1293.56 927.5,-1299.56 927.5,-1305.56 927.5,-1305.56 927.5,-1739.56 927.5,-1739.56 927.5,-1745.56 921.5,-1751.56 915.5,-1751.56 915.5,-1751.56 538,-1751.56 538,-1751.56 532,-1751.56 526,-1745.56 526,-1739.56 526,-1739.56 526,-1305.56 526,-1305.56 526,-1299.56 532,-1293.56 538,-1293.56"/>
+<text text-anchor="middle" x="726.75" y="-1740.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">components</text>
+</g>
+<g id="clust11" class="cluster">
+<title>cluster_src/shared/components/molecules</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M650,-1609.56C650,-1609.56 907.5,-1609.56 907.5,-1609.56 913.5,-1609.56 919.5,-1615.56 919.5,-1621.56 919.5,-1621.56 919.5,-1713.56 919.5,-1713.56 919.5,-1719.56 913.5,-1725.56 907.5,-1725.56 907.5,-1725.56 650,-1725.56 650,-1725.56 644,-1725.56 638,-1719.56 638,-1713.56 638,-1713.56 638,-1621.56 638,-1621.56 638,-1615.56 644,-1609.56 650,-1609.56"/>
+<text text-anchor="middle" x="778.75" y="-1714.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">molecules</text>
+</g>
+<g id="clust12" class="cluster">
+<title>cluster_src/shared/components/molecules/Menu</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M658,-1617.56C658,-1617.56 899.5,-1617.56 899.5,-1617.56 905.5,-1617.56 911.5,-1623.56 911.5,-1629.56 911.5,-1629.56 911.5,-1687.56 911.5,-1687.56 911.5,-1693.56 905.5,-1699.56 899.5,-1699.56 899.5,-1699.56 658,-1699.56 658,-1699.56 652,-1699.56 646,-1693.56 646,-1687.56 646,-1687.56 646,-1629.56 646,-1629.56 646,-1623.56 652,-1617.56 658,-1617.56"/>
+<text text-anchor="middle" x="778.75" y="-1688.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">Menu</text>
+</g>
+<g id="clust13" class="cluster">
+<title>cluster_src/shared/components/organisms</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M546,-1515.56C546,-1515.56 726,-1515.56 726,-1515.56 732,-1515.56 738,-1521.56 738,-1527.56 738,-1527.56 738,-1589.56 738,-1589.56 738,-1595.56 732,-1601.56 726,-1601.56 726,-1601.56 546,-1601.56 546,-1601.56 540,-1601.56 534,-1595.56 534,-1589.56 534,-1589.56 534,-1527.56 534,-1527.56 534,-1521.56 540,-1515.56 546,-1515.56"/>
+<text text-anchor="middle" x="636" y="-1590.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">organisms</text>
+</g>
+<g id="clust14" class="cluster">
+<title>cluster_src/shared/components/organisms/LocaleSelect</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M554,-1523.56C554,-1523.56 718,-1523.56 718,-1523.56 724,-1523.56 730,-1529.56 730,-1535.56 730,-1535.56 730,-1563.56 730,-1563.56 730,-1569.56 724,-1575.56 718,-1575.56 718,-1575.56 554,-1575.56 554,-1575.56 548,-1575.56 542,-1569.56 542,-1563.56 542,-1563.56 542,-1535.56 542,-1535.56 542,-1529.56 548,-1523.56 554,-1523.56"/>
+<text text-anchor="middle" x="636" y="-1564.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">LocaleSelect</text>
+</g>
+<g id="clust15" class="cluster">
+<title>cluster_src/shared/components/sections</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M553.5,-1301.56C553.5,-1301.56 729,-1301.56 729,-1301.56 735,-1301.56 741,-1307.56 741,-1313.56 741,-1313.56 741,-1495.56 741,-1495.56 741,-1501.56 735,-1507.56 729,-1507.56 729,-1507.56 553.5,-1507.56 553.5,-1507.56 547.5,-1507.56 541.5,-1501.56 541.5,-1495.56 541.5,-1495.56 541.5,-1313.56 541.5,-1313.56 541.5,-1307.56 547.5,-1301.56 553.5,-1301.56"/>
+<text text-anchor="middle" x="641.25" y="-1496.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">sections</text>
+</g>
+<g id="clust16" class="cluster">
+<title>cluster_src/shared/components/sections/Content</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M561.5,-1429.56C561.5,-1429.56 721,-1429.56 721,-1429.56 727,-1429.56 733,-1435.56 733,-1441.56 733,-1441.56 733,-1469.56 733,-1469.56 733,-1475.56 727,-1481.56 721,-1481.56 721,-1481.56 561.5,-1481.56 561.5,-1481.56 555.5,-1481.56 549.5,-1475.56 549.5,-1469.56 549.5,-1469.56 549.5,-1441.56 549.5,-1441.56 549.5,-1435.56 555.5,-1429.56 561.5,-1429.56"/>
+<text text-anchor="middle" x="641.25" y="-1470.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">Content</text>
+</g>
+<g id="clust17" class="cluster">
+<title>cluster_src/shared/components/sections/Footer</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M561.5,-1369.56C561.5,-1369.56 721,-1369.56 721,-1369.56 727,-1369.56 733,-1375.56 733,-1381.56 733,-1381.56 733,-1409.56 733,-1409.56 733,-1415.56 727,-1421.56 721,-1421.56 721,-1421.56 561.5,-1421.56 561.5,-1421.56 555.5,-1421.56 549.5,-1415.56 549.5,-1409.56 549.5,-1409.56 549.5,-1381.56 549.5,-1381.56 549.5,-1375.56 555.5,-1369.56 561.5,-1369.56"/>
+<text text-anchor="middle" x="641.25" y="-1410.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">Footer</text>
+</g>
+<g id="clust18" class="cluster">
+<title>cluster_src/shared/components/sections/Header</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M561.5,-1309.56C561.5,-1309.56 721,-1309.56 721,-1309.56 727,-1309.56 733,-1315.56 733,-1321.56 733,-1321.56 733,-1349.56 733,-1349.56 733,-1355.56 727,-1361.56 721,-1361.56 721,-1361.56 561.5,-1361.56 561.5,-1361.56 555.5,-1361.56 549.5,-1355.56 549.5,-1349.56 549.5,-1349.56 549.5,-1321.56 549.5,-1321.56 549.5,-1315.56 555.5,-1309.56 561.5,-1309.56"/>
+<text text-anchor="middle" x="641.25" y="-1350.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">Header</text>
 </g>
 <g id="clust19" class="cluster">
 <title>cluster_src/shared/lib</title>
@@ -104,55 +149,10 @@
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M556,-755.56C556,-755.56 718,-755.56 718,-755.56 724,-755.56 730,-761.56 730,-767.56 730,-767.56 730,-795.56 730,-795.56 730,-801.56 724,-807.56 718,-807.56 718,-807.56 556,-807.56 556,-807.56 550,-807.56 544,-801.56 544,-795.56 544,-795.56 544,-767.56 544,-767.56 544,-761.56 550,-755.56 556,-755.56"/>
 <text text-anchor="middle" x="637" y="-796.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">routes</text>
 </g>
-<g id="clust9" class="cluster">
-<title>cluster_src/shared/assets</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M672,-1233.56C672,-1233.56 718,-1233.56 718,-1233.56 724,-1233.56 730,-1239.56 730,-1245.56 730,-1245.56 730,-1273.56 730,-1273.56 730,-1279.56 724,-1285.56 718,-1285.56 718,-1285.56 672,-1285.56 672,-1285.56 666,-1285.56 660,-1279.56 660,-1273.56 660,-1273.56 660,-1245.56 660,-1245.56 660,-1239.56 666,-1233.56 672,-1233.56"/>
-<text text-anchor="middle" x="695" y="-1274.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">assets</text>
-</g>
-<g id="clust10" class="cluster">
-<title>cluster_src/shared/components</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M538,-1293.56C538,-1293.56 915.5,-1293.56 915.5,-1293.56 921.5,-1293.56 927.5,-1299.56 927.5,-1305.56 927.5,-1305.56 927.5,-1739.56 927.5,-1739.56 927.5,-1745.56 921.5,-1751.56 915.5,-1751.56 915.5,-1751.56 538,-1751.56 538,-1751.56 532,-1751.56 526,-1745.56 526,-1739.56 526,-1739.56 526,-1305.56 526,-1305.56 526,-1299.56 532,-1293.56 538,-1293.56"/>
-<text text-anchor="middle" x="726.75" y="-1740.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">components</text>
-</g>
-<g id="clust11" class="cluster">
-<title>cluster_src/shared/components/molecules</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M650,-1609.56C650,-1609.56 907.5,-1609.56 907.5,-1609.56 913.5,-1609.56 919.5,-1615.56 919.5,-1621.56 919.5,-1621.56 919.5,-1713.56 919.5,-1713.56 919.5,-1719.56 913.5,-1725.56 907.5,-1725.56 907.5,-1725.56 650,-1725.56 650,-1725.56 644,-1725.56 638,-1719.56 638,-1713.56 638,-1713.56 638,-1621.56 638,-1621.56 638,-1615.56 644,-1609.56 650,-1609.56"/>
-<text text-anchor="middle" x="778.75" y="-1714.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">molecules</text>
-</g>
-<g id="clust12" class="cluster">
-<title>cluster_src/shared/components/molecules/Menu</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M658,-1617.56C658,-1617.56 899.5,-1617.56 899.5,-1617.56 905.5,-1617.56 911.5,-1623.56 911.5,-1629.56 911.5,-1629.56 911.5,-1687.56 911.5,-1687.56 911.5,-1693.56 905.5,-1699.56 899.5,-1699.56 899.5,-1699.56 658,-1699.56 658,-1699.56 652,-1699.56 646,-1693.56 646,-1687.56 646,-1687.56 646,-1629.56 646,-1629.56 646,-1623.56 652,-1617.56 658,-1617.56"/>
-<text text-anchor="middle" x="778.75" y="-1688.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">Menu</text>
-</g>
-<g id="clust13" class="cluster">
-<title>cluster_src/shared/components/organisms</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M546,-1515.56C546,-1515.56 726,-1515.56 726,-1515.56 732,-1515.56 738,-1521.56 738,-1527.56 738,-1527.56 738,-1589.56 738,-1589.56 738,-1595.56 732,-1601.56 726,-1601.56 726,-1601.56 546,-1601.56 546,-1601.56 540,-1601.56 534,-1595.56 534,-1589.56 534,-1589.56 534,-1527.56 534,-1527.56 534,-1521.56 540,-1515.56 546,-1515.56"/>
-<text text-anchor="middle" x="636" y="-1590.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">organisms</text>
-</g>
-<g id="clust14" class="cluster">
-<title>cluster_src/shared/components/organisms/LocaleSelect</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M554,-1523.56C554,-1523.56 718,-1523.56 718,-1523.56 724,-1523.56 730,-1529.56 730,-1535.56 730,-1535.56 730,-1563.56 730,-1563.56 730,-1569.56 724,-1575.56 718,-1575.56 718,-1575.56 554,-1575.56 554,-1575.56 548,-1575.56 542,-1569.56 542,-1563.56 542,-1563.56 542,-1535.56 542,-1535.56 542,-1529.56 548,-1523.56 554,-1523.56"/>
-<text text-anchor="middle" x="636" y="-1564.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">LocaleSelect</text>
-</g>
-<g id="clust15" class="cluster">
-<title>cluster_src/shared/components/sections</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M553.5,-1301.56C553.5,-1301.56 729,-1301.56 729,-1301.56 735,-1301.56 741,-1307.56 741,-1313.56 741,-1313.56 741,-1495.56 741,-1495.56 741,-1501.56 735,-1507.56 729,-1507.56 729,-1507.56 553.5,-1507.56 553.5,-1507.56 547.5,-1507.56 541.5,-1501.56 541.5,-1495.56 541.5,-1495.56 541.5,-1313.56 541.5,-1313.56 541.5,-1307.56 547.5,-1301.56 553.5,-1301.56"/>
-<text text-anchor="middle" x="641.25" y="-1496.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">sections</text>
-</g>
-<g id="clust16" class="cluster">
-<title>cluster_src/shared/components/sections/Content</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M561.5,-1429.56C561.5,-1429.56 721,-1429.56 721,-1429.56 727,-1429.56 733,-1435.56 733,-1441.56 733,-1441.56 733,-1469.56 733,-1469.56 733,-1475.56 727,-1481.56 721,-1481.56 721,-1481.56 561.5,-1481.56 561.5,-1481.56 555.5,-1481.56 549.5,-1475.56 549.5,-1469.56 549.5,-1469.56 549.5,-1441.56 549.5,-1441.56 549.5,-1435.56 555.5,-1429.56 561.5,-1429.56"/>
-<text text-anchor="middle" x="641.25" y="-1470.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">Content</text>
-</g>
-<g id="clust17" class="cluster">
-<title>cluster_src/shared/components/sections/Footer</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M561.5,-1369.56C561.5,-1369.56 721,-1369.56 721,-1369.56 727,-1369.56 733,-1375.56 733,-1381.56 733,-1381.56 733,-1409.56 733,-1409.56 733,-1415.56 727,-1421.56 721,-1421.56 721,-1421.56 561.5,-1421.56 561.5,-1421.56 555.5,-1421.56 549.5,-1415.56 549.5,-1409.56 549.5,-1409.56 549.5,-1381.56 549.5,-1381.56 549.5,-1375.56 555.5,-1369.56 561.5,-1369.56"/>
-<text text-anchor="middle" x="641.25" y="-1410.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">Footer</text>
-</g>
-<g id="clust18" class="cluster">
-<title>cluster_src/shared/components/sections/Header</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M561.5,-1309.56C561.5,-1309.56 721,-1309.56 721,-1309.56 727,-1309.56 733,-1315.56 733,-1321.56 733,-1321.56 733,-1349.56 733,-1349.56 733,-1355.56 727,-1361.56 721,-1361.56 721,-1361.56 561.5,-1361.56 561.5,-1361.56 555.5,-1361.56 549.5,-1355.56 549.5,-1349.56 549.5,-1349.56 549.5,-1321.56 549.5,-1321.56 549.5,-1315.56 555.5,-1309.56 561.5,-1309.56"/>
-<text text-anchor="middle" x="641.25" y="-1350.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">Header</text>
+<g id="clust1" class="cluster">
+<title>cluster_config</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M445.5,-71.56C445.5,-71.56 491.5,-71.56 491.5,-71.56 497.5,-71.56 503.5,-77.56 503.5,-83.56 503.5,-83.56 503.5,-141.56 503.5,-141.56 503.5,-147.56 497.5,-153.56 491.5,-153.56 491.5,-153.56 445.5,-153.56 445.5,-153.56 439.5,-153.56 433.5,-147.56 433.5,-141.56 433.5,-141.56 433.5,-83.56 433.5,-83.56 433.5,-77.56 439.5,-71.56 445.5,-71.56"/>
+<text text-anchor="middle" x="468.5" y="-142.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config</text>
 </g>
 <!-- app.json -->
 <g id="node1" class="node">
