@@ -9,6 +9,11 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1908.43)">
 <title>dependency&#45;cruiser output</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-1908.43 955.5,-1908.43 955.5,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_config</title>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M445.5,-71.56C445.5,-71.56 491.5,-71.56 491.5,-71.56 497.5,-71.56 503.5,-77.56 503.5,-83.56 503.5,-83.56 503.5,-141.56 503.5,-141.56 503.5,-147.56 497.5,-153.56 491.5,-153.56 491.5,-153.56 445.5,-153.56 445.5,-153.56 439.5,-153.56 433.5,-147.56 433.5,-141.56 433.5,-141.56 433.5,-83.56 433.5,-83.56 433.5,-77.56 439.5,-71.56 445.5,-71.56"/>
+<text text-anchor="middle" x="468.5" y="-142.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config</text>
+</g>
 <g id="clust2" class="cluster">
 <title>cluster_src</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M20,-161.56C20,-161.56 931.5,-161.56 931.5,-161.56 937.5,-161.56 943.5,-167.56 943.5,-173.56 943.5,-173.56 943.5,-1861.56 943.5,-1861.56 943.5,-1867.56 937.5,-1873.56 931.5,-1873.56 931.5,-1873.56 20,-1873.56 20,-1873.56 14,-1873.56 8,-1867.56 8,-1861.56 8,-1861.56 8,-173.56 8,-173.56 8,-167.56 14,-161.56 20,-161.56"/>
@@ -148,11 +153,6 @@
 <title>cluster_src/shared/routes</title>
 <path fill="#ffffff" stroke="black" stroke-width="2" d="M556,-755.56C556,-755.56 718,-755.56 718,-755.56 724,-755.56 730,-761.56 730,-767.56 730,-767.56 730,-795.56 730,-795.56 730,-801.56 724,-807.56 718,-807.56 718,-807.56 556,-807.56 556,-807.56 550,-807.56 544,-801.56 544,-795.56 544,-795.56 544,-767.56 544,-767.56 544,-761.56 550,-755.56 556,-755.56"/>
 <text text-anchor="middle" x="637" y="-796.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">routes</text>
-</g>
-<g id="clust1" class="cluster">
-<title>cluster_config</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M445.5,-71.56C445.5,-71.56 491.5,-71.56 491.5,-71.56 497.5,-71.56 503.5,-77.56 503.5,-83.56 503.5,-83.56 503.5,-141.56 503.5,-141.56 503.5,-147.56 497.5,-153.56 491.5,-153.56 491.5,-153.56 445.5,-153.56 445.5,-153.56 439.5,-153.56 433.5,-147.56 433.5,-141.56 433.5,-141.56 433.5,-83.56 433.5,-83.56 433.5,-77.56 439.5,-71.56 445.5,-71.56"/>
-<text text-anchor="middle" x="468.5" y="-142.36" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="9.00">config</text>
 </g>
 <!-- app.json -->
 <g id="node1" class="node">
