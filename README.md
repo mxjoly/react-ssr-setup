@@ -117,14 +117,6 @@ Format the files with [Prettier](https://prettier.io/), [ESLint](https://eslint.
 
 Display intructions on the command line to create files easily.
 
-#### `yarn deps:check`
-
-Display the outdated versions of the dependencies.
-
-#### `yarn deps:update`
-
-Upgrade the `package.json`.
-
 ## Environment Variables
 
 There are a few environment variables you can set to adjust the setup to your needs
