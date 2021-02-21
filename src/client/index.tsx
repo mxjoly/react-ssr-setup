@@ -32,7 +32,7 @@ const BaseApp = () => {
   );
 };
 
-hydrate(<BaseApp />, document.getElementById('app'));
+hydrate(<BaseApp />, document.querySelector('#app'));
 
 if (process.env.PWA === 'true') {
   ServiceWorker.register();

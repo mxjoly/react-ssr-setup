@@ -1,5 +1,5 @@
 export default (env = 'production') => {
-  if (env.match(/(development|production|test)/)) {
+  if (/(development|production|test)/.test(env)) {
     process.env.NODE_ENV = env;
   } else {
     process.env.NODE_ENV = 'production';

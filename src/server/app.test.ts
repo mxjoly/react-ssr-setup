@@ -22,9 +22,9 @@ describe('App router', () => {
     });
 
     it('GET / responds with an html content type', async () => {
-      const res1 = await request(server).get('/');
-      expect(res1.status).toBe(200);
-      expect(res1.headers['content-type']).toContain('text/html');
+      const res = await request(server).get('/');
+      expect(res.status).toBe(200);
+      expect(res.headers['content-type']).toContain('text/html');
     });
 
     it('GET / locales/:locale/:ns.json returns the translations as a json', async () => {
@@ -50,9 +50,9 @@ describe('App router', () => {
     });
 
     it('GET / responds with an html content type', async () => {
-      const res2 = await request(server).get('/');
-      expect(res2.status).toBe(200);
-      expect(res2.headers['content-type']).toContain('text/html');
+      const res = await request(server).get('/');
+      expect(res.status).toBe(200);
+      expect(res.headers['content-type']).toContain('text/html');
     });
 
     it('GET / locales/:locale/:ns.json returns the translations as a json', async () => {

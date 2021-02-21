@@ -42,7 +42,7 @@ export const getComponentTypes = () => {
  * @param name - A string
  */
 export const isValidComponentName = (name: string) => {
-  return !name.match(/\s/) && name.match(/^(?!\d).[a-zA-Z0-9]+/);
+  return !/\s/.test(name) && name.match(/^(?!\d).[\dA-Za-z]+/);
 };
 
 /**

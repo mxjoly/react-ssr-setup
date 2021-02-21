@@ -47,14 +47,14 @@ const start = async () => {
     publicPath,
   ]
     .join('/')
-    .replace(/([^:+])\/+/g, '$1/');
+    .replace(/([^+:])\/+/g, '$1/');
 
   serverConfig.output.publicPath = [
     `${DEVSERVER_HOST}:${WEBPACK_PORT}`,
     publicPath,
   ]
     .join('/')
-    .replace(/([^:+])\/+/g, '$1/');
+    .replace(/([^+:])\/+/g, '$1/');
 
   const multiCompiler = webpack([clientConfig, serverConfig]);
 

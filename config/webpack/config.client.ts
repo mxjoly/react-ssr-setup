@@ -110,7 +110,7 @@ if (!isDev) {
       chunks: 'all',
       cacheGroups: {
         commons: {
-          test: /[\\/]node_modules[\\/]/,
+          test: /[/\\]node_modules[/\\]/,
           name: 'vendor',
           chunks: 'all',
         },
