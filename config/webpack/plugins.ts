@@ -6,6 +6,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import WebpackAssetsManifest from 'webpack-assets-manifest';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { TypedCssModulesPlugin } from 'typed-css-modules-webpack-plugin';
 import WorkboxPlugin from 'workbox-webpack-plugin';
@@ -15,8 +16,6 @@ import envBuilder from '../env';
 import paths from '../paths';
 import getAppConfig from '../app';
 import i18nConfig from '../../src/shared/lib/i18n/config';
-
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 const env = envBuilder();
 const appConfig = getAppConfig();
@@ -100,8 +99,8 @@ const client = [
     },
   }),
   // Webpack plugin for generating an assets manifest.
-  new WebpackManifestPlugin({
-    fileName: 'assets-manifest.json',
+  new WebpackAssetsManifest({
+    output: 'assets-manifest.json',
     publicPath: paths.publicPath,
   }),
   // Generate the manifest files and the icons
@@ -142,7 +141,7 @@ const client = [
         },
       ],
     }),
-  !isDev() &&
+  isPWA() &&
     new WorkboxPlugin.GenerateSW({
       swDest: 'service-worker.js',
       clientsClaim: true,

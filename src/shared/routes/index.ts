@@ -7,12 +7,12 @@ import Page1 from '../pages/page-1';
 import Page2 from '../pages/page-2';
 import Page3 from '../pages/page-3';
 
-// Does not yet work with server side rendering, waiting react 17
-// const Home = React.lazy(() => import('../../pages/home'));
-// const PageNotFound = React.lazy(() => import('../../pages/404'));
-// const Page1 = React.lazy(() => import('../../pages/page-1'));
-// const Page2 = React.lazy(() => import('../../pages/page-2'));
-// const Page3 = React.lazy(() => import('../../pages/page-3'));
+// Does not yet work with server side rendering, waiting react updates
+// const Home = React.lazy(() => import('../pages/home'));
+// const PageNotFound = React.lazy(() => import('../pages/404'));
+// const Page1 = React.lazy(() => import('../pages/page-1'));
+// const Page2 = React.lazy(() => import('../pages/page-2'));
+// const Page3 = React.lazy(() => import('../pages/page-3'));
 
 const config: RouteConfig[] = [
   {

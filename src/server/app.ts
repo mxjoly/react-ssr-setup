@@ -12,8 +12,6 @@ import manifestHelpers from './middlewares/manifestHelpers';
 import i18nextXhr from './middlewares/i18nXhr';
 import generateMetadata from './middlewares/generateMetadata';
 
-const { getConfigurationFile } = require('@mxjoly/pwa-webpack-plugin');
-
 const app = express.Router();
 
 app.use(
@@ -32,6 +30,7 @@ app.get('/locales/:locale/:ns.json', i18nextXhr);
 
 if (process.env.PWA === 'true' && process.env.METADATA_GENERATION === 'true') {
   const getConfig = require('../../config/app').default;
+  const { getConfigurationFile } = require('@mxjoly/pwa-webpack-plugin');
   const config = getConfig();
   app.use(
     generateMetadata({

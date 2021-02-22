@@ -23,7 +23,7 @@ const config: any = {
 
   fallbackLng: locales[0],
   supportedLngs: locales,
-  preload: [locales[0]],
+  preload: locales,
   load: 'languageOnly',
 
   backend: {
@@ -35,11 +35,6 @@ const config: any = {
   // This option is necessary to tell i18next to try loading missing resources via
   // i18next-http-backend, otherwise no calls will be made if resources are defined.
   partialBundledLanguages: true,
-
-  react: {
-    useSuspense: false,
-    wait: true,
-  },
 
   detection: {
     // order and from where user language should be detected

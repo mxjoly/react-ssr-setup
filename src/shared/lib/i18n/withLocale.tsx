@@ -34,12 +34,18 @@ const withLocale = (WrappedComponent: React.FC) => {
             .concat(pathname.endsWith('/') ? '' : '/')
             .concat(search)
         );
+      }
+      if (
+        config.detection.caches.includes('cookie') &&
+        config.detection.order.includes('cookie') &&
+        cookie.get(config.detection.lookupCookie) !== i18n.language
+      ) {
         cookie.set(config.detection.lookupCookie, i18n.language);
       }
     }, [i18n.language, storeLocale, history, pathname, search, store]);
 
     if (pathname === '/') {
-      return <Redirect to={pathname + i18n.language + '/'} />;
+      return <Redirect to={`/${i18n.language}/`} />;
     }
 
     const curLocale = pathname.split('/')[1];

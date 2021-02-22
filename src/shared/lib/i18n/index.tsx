@@ -4,7 +4,7 @@ import { LanguageDetector } from 'i18next-http-middleware';
 import { initReactI18next } from 'react-i18next';
 import config from './config';
 
-i18next.use(Backend).use(LanguageDetector).use(initReactI18next);
+i18next.use(Backend).use(initReactI18next).use(LanguageDetector);
 
 if (!i18next.isInitialized) {
   i18next.init(config);

@@ -3,8 +3,8 @@ import { HelmetData } from 'react-helmet-async';
 import HtmlReactParser from 'html-react-parser';
 import path from 'path';
 
-import config from '../../shared/lib/i18n/config';
 import { Locale } from '../../shared/lib/store/app/types';
+import config from '../../shared/lib/i18n/config';
 
 export type HtmlProps = {
   children: string;
@@ -31,23 +31,15 @@ const Html = ({
   initialI18nStore = '{}',
   initialLanguage,
 }: HtmlProps) => {
-  /**
-   * Find the best locale with this selection rules :
-   * @example
-   * path: no  | cookies : yes    => language in the cookies
-   * path: yes | cookies : yes/no => language in the path
-   * path: no  | cookies : no     => the browser language
-   * otherwise => the i18n config fallback language
-   */
   const bestLanguage = () => {
     if (initialLanguage) {
       return `'${initialLanguage}'`;
     }
     if (config.load !== 'languageOnly') {
-      return `navigator.languages ? navigator.languages[0] : 
+      return `navigator.languages ? navigator.languages[0] :
       (navigator.language || navigator.userLanguage || '${config.fallbackLng}')`;
     }
-    return `navigator.languages ? navigator.languages[0].slice(0, 2) : 
+    return `navigator.languages ? navigator.languages[0].slice(0, 2) :
       (navigator.language.slice(0, 2) || navigator.userLanguage.slice(0, 2) || '${config.fallbackLng}')`;
   };
 
@@ -85,7 +77,7 @@ const Html = ({
     let data: JSX.Element[] = [];
     data = data.concat(sharedMetaData());
     if (metadata) {
-      data = data.concat(HtmlReactParser(metadata));
+      data = data.concat(HtmlReactParser(metadata) as JSX.Element);
     }
     return data;
   };
