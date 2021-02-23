@@ -178,7 +178,7 @@ To complete the configuration of your web application, specify the path of your 
 [license-url]: https://github.com/mxjoly/react-ssr-setup/blob/master/LICENSE
 [repo-url]: https://github.com/mxjoly/react-ssr-setup
 [dependency-url]: https://david-dm.org/mxjoly/react-ssr-setup
-[prettier-url]: https://github.com/prettier/prettier
+[prettier-url]: https://prettier.io/
 [react-url]: https://en.reactjs.org/
 [webpack-url]: https://webpack.js.org/
 [express-url]: https://expressjs.com/
