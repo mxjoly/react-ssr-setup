@@ -1,10 +1,10 @@
-[![Dependency Status](https://img.shields.io/david/mxjoly/react-ssr-setup.svg)](https://david-dm.org/mxjoly/react-ssr-setup)
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![License](https://img.shields.io/github/license/mxjoly/react-ssr-setup.svg)](https://github.com/mxjoly/react-ssr-setup)
+[![Dependency Status][dependency-shield]][repo-url]
+[![styled with prettier][prettier-shield]][prettier-url]
+[![License][licence-shield]][license-url]
 
 # ⚛ React + Express (Setup)
 
-This project is a template of a server side rendering a [React](https://en.reactjs.org/) application.
+This project is a template of a server side rendering a [React][react-url] application.
 
 ## Summary
 
@@ -63,7 +63,7 @@ There are npm scripts for all the relevant things. The server will always be sta
 
 #### `yarn start`
 
-Starts the app in development mode: creates a new client and server dev build using [Webpack](https://webpack.js.org/), starts the [Express](https://expressjs.com/) server build (for both file serving and server side pre-rendering) and keeps webpack open in watchmode. Updates the app (if possible) on change using HMR.
+Starts the app in development mode: creates a new client and server dev build using [Webpack][webpack-url], starts the [Express][express-url] server build (for both file serving and server side pre-rendering) and keeps webpack open in watchmode. Updates the app (if possible) on change using HMR.
 
 #### `yarn build`
 
@@ -73,21 +73,21 @@ Creates a new build optimized for production.
 
 Clean the build folder.
 
-### `yarn test`
+#### `yarn test`
 
 Run all tests using Jest.
 
 #### `yarn lint:js`
 
-Run [ESLint](https://eslint.org/) for all JavaScript and TypeScript files.
+Run [ESLint][eslint-url] for all JavaScript and TypeScript files.
 
 #### `yarn lint:css`
 
-Run [Stylelint](https://stylelint.io/) for all CSS files.
+Run [Stylelint][stylelint-url] for all CSS files.
 
 #### `yarn lint:sass`
 
-Run [Stylelint](https://stylelint.io/) for all SASS files.
+Run [Stylelint][stylelint-url] for all SASS files.
 
 #### `yarn lint`
 
@@ -99,19 +99,19 @@ Starts `webpack-bundle-analyzer` to give you the opportunity to analyze your bun
 
 #### `yarn depgraph`
 
-Creates an image of your dependency graph. Requires [GraphVIZ](https://www.graphviz.org/).
+Creates an image of your dependency graph. Requires [GraphVIZ][graphviz-url].
 
 #### `yarn storybook`
 
-Run the [Storybook](https://storybook.js.org/) interface on the port 6006.
+Run the [Storybook][storybook-url] interface on the port 6006.
 
 #### `yarn build:storybook`
 
-Generate the static resources for [Storybook](https://storybook.js.org/). Useful to host online.
+Generate the static resources for [Storybook][storybook-url]. Useful to host online.
 
 #### `yarn format`
 
-Format the files with [Prettier](https://prettier.io/), [ESLint](https://eslint.org/) and [Stylelint](https://stylelint.io/).
+Format the files with [Prettier][prettier-url], [ESLint][eslint-url] and [Stylelint][stylelint-url].
 
 #### `yarn plop`
 
@@ -161,11 +161,29 @@ To complete the configuration of your web application, specify the path of your 
 
 ## Todo
 
-- [x] Add offline support using [Workbox](https://developers.google.com/web/tools/workbox)
+- [x] Add offline support using [Workbox][workbox-url]
 - [ ] Import SVGs as React component
 - [x] Migrate to Webpack 5
 - [ ] Add official enzyme adaptater for react 17
 
 ## License
 
-[MIT.](https://github.com/mxjoly/react-ssr-setup/blob/master/LICENSE)
+[MIT.][license-url]
+
+<!-- MARKDOWN LINKS -->
+
+[dependency-shield]: https://img.shields.io/david/mxjoly/react-ssr-setup.svg
+[prettier-shield]: https://img.shields.io/badge/styled_with-prettier-ff69b4.svg
+[licence-shield]: https://img.shields.io/github/license/mxjoly/react-ssr-setup.svg
+[license-url]: https://github.com/mxjoly/react-ssr-setup/blob/master/LICENSE
+[repo-url]: https://github.com/mxjoly/react-ssr-setup
+[dependency-url]: https://david-dm.org/mxjoly/react-ssr-setup
+[prettier-url]: https://github.com/prettier/prettier
+[react-url]: https://en.reactjs.org/
+[webpack-url]: https://webpack.js.org/
+[express-url]: https://expressjs.com/
+[eslint-url]: https://eslint.org/
+[stylelint-url]: https://stylelint.io/
+[graphviz-url]: https://www.graphviz.org/
+[storybook-url]: https://storybook.js.org/
+[workbox-url]: https://developers.google.com/web/tools/workbox
