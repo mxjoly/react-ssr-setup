@@ -28,8 +28,6 @@ const initialLanguage =
 // Create Redux store with initial state or use the store
 const store = window.store || configureStore({ initialState: preloadState });
 
-console.log('hey');
-
 const BaseApp = () => {
   useSSR(window.initialI18nStore, initialLanguage);
   return (
