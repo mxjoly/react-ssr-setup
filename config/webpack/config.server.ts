@@ -31,7 +31,7 @@ const config: Configuration = {
   module: {
     rules: serverLoaders,
   },
-  plugins: [...plugins.shared, ...plugins.server],
+  plugins: [...plugins.shared, ...plugins.server] as any,
   performance: {
     hints: isDev ? false : 'warning',
   },

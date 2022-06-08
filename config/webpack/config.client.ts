@@ -1,7 +1,7 @@
 import path from 'path';
 import { Configuration } from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
-import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 import paths from '../paths';
 import resolvers from './resolvers';
@@ -38,7 +38,7 @@ const config: Configuration = {
       ? 'eval-cheap-module-source-map'
       : 'source-map'
     : false,
-  plugins: [...plugins.shared, ...plugins.client],
+  plugins: [...plugins.shared, ...plugins.client] as any,
   performance: {
     hints: isDev ? false : 'warning',
   },
@@ -66,12 +66,7 @@ if (!isDev) {
       new TerserPlugin({
         terserOptions: {
           parse: {
-            // We want terser to parse ecma 8 code. However, we don't want it
-            // to apply any minification steps that turns valid ecma 5 code
-            // into invalid ecma 5 code. This is why the 'compress' and 'output'
-            // sections only apply transformations that are ecma 5 safe
-            // https://github.com/facebook/create-react-app/pull/4234
-            ecma: 8,
+            ecma: 2018,
           },
           compress: {
             ecma: 5,
@@ -102,7 +97,7 @@ if (!isDev) {
           },
         },
       }),
-      new OptimizeCSSAssetsPlugin({}),
+      new CssMinimizerPlugin(),
     ],
     moduleIds: 'named',
     emitOnErrors: false,
