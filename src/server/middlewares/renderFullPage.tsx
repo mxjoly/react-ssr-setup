@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import serialize from 'serialize-javascript';
 
 import App from '../../shared/App';
-import Html, { HtmlProps } from '../components/Html';
+import Html, { HtmlProps } from '../components/html';
 import paths from '../../../config/paths';
 
 const renderFullPage = () => (req: Request, res: Response) => {
