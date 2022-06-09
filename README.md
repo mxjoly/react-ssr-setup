@@ -1,8 +1,7 @@
-[![Dependency Status][dependency-shield]][repo-url]
-[![styled with prettier][prettier-shield]][prettier-url]
-[![License][licence-shield]][license-url]
+![styled with prettier][prettier-shield]
+![License][licence-shield]
 
-# ⚛ React + Express (Setup)
+# ⚛ React + Express (Setup) + Webpack
 
 This project is a template of a server side rendering a [React][react-url] application.
 
