@@ -39,10 +39,10 @@
     display: none;
     width: inherit;
     height: auto;
-    margin-top: 0px;
+    margin-top: 0;
     text-align: center;
     background: #fff;
-    box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.35);
+    box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 35%);
     transform: translateX(-50%);
 
     &_visible {
@@ -59,7 +59,7 @@
     cursor: pointer;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 10%);
     }
   }
 }

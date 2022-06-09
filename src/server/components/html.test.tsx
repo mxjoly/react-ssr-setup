@@ -1,12 +1,12 @@
 import React from 'react';
-import { HelmetData } from 'react-helmet-async';
+import { HelmetServerState } from 'react-helmet-async';
 import HtmlReactParser from 'html-react-parser';
 import { shallow, ShallowWrapper } from 'enzyme';
-import Html, { HtmlProps } from './Html';
+import Html, { HtmlProps } from './html';
 
 // ================================================================ //
 
-const mockHelmetData: HelmetData = {
+const mockHelmetData: HelmetServerState = {
   title: { toComponent: jest.fn() },
   base: { toComponent: jest.fn() },
   meta: { toComponent: jest.fn() },
@@ -17,6 +17,7 @@ const mockHelmetData: HelmetData = {
   titleAttributes: { toComponent: jest.fn() },
   htmlAttributes: { toComponent: jest.fn() },
   bodyAttributes: { toComponent: jest.fn() },
+  priority: { toComponent: jest.fn(), toString: jest.fn() },
 };
 
 // ================================================================ //

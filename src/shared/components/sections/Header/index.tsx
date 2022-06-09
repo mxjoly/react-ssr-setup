@@ -42,6 +42,8 @@ const RouteList = React.memo(
   }
 );
 
+RouteList.displayName = 'RouteList';
+
 const Header: React.FC<any> = () => {
   const { i18n } = useTranslation();
   return (
@@ -59,5 +61,7 @@ const Header: React.FC<any> = () => {
     </div>
   );
 };
+
+Header.displayName = 'Header';
 
 export default React.memo(Header);

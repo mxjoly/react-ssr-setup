@@ -1,5 +1,5 @@
 import React from 'react';
-import { HelmetData } from 'react-helmet-async';
+import { HelmetServerState } from 'react-helmet-async';
 import HtmlReactParser from 'html-react-parser';
 import path from 'path';
 
@@ -10,7 +10,7 @@ export type HtmlProps = {
   children: string;
   css: string[];
   scripts: string[];
-  helmetContext: { helmet: HelmetData };
+  helmetContext: { helmet: HelmetServerState };
   state: string;
   initialI18nStore: string;
   initialLanguage: Locale;
@@ -87,7 +87,7 @@ const Html = ({
       <head>
         {helmet.title.toComponent()}
         {helmet.base.toComponent()}
-        <meta charSet="utf-8" />
+        <meta charSet="utf8" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"

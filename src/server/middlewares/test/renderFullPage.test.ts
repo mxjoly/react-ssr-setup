@@ -83,6 +83,7 @@ describe('renderFullPage', () => {
 
   it('returns the html content', () => {
     const result: any = renderFullPage()(req, res);
+    // eslint-disable-next-line prettier/prettier
     const expectedHtml = /^<!doctype\shtml><html(\s?[\w-]+=".*")*><head>(.|\n)*<\/head><body>(.|\n)*<\/body><\/html>$/i;
     expect(expectedHtml.test(result)).toBe(true);
   });

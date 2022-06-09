@@ -22,8 +22,8 @@ const mockResponse = () => {
   return res;
 };
 
-const TIMESTAMP1 = 1599503016;
-const TIMESTAMP2 = 1599503338;
+const TIMESTAMP1 = 1_599_503_016;
+const TIMESTAMP2 = 1_599_503_338;
 
 // ================================================================ //
 
@@ -42,7 +42,7 @@ describe('i18nXhr', () => {
     locale = config.fallbackLng as Locale;
     ns = config.defaultNS as string;
     expected = fs.readFileSync(`${paths.locales}/${locale}/${ns}.json`, {
-      encoding: 'utf-8',
+      encoding: 'utf8',
     });
   });
 

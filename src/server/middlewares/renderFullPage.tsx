@@ -49,7 +49,7 @@ const renderFullPage = () => (req: Request, res: Response) => {
       res.locals.assetPath('bundle.js'),
       res.locals.assetPath('vendor.js'),
     ],
-    helmetContext,
+    helmetContext: helmetContext,
     state,
     initialI18nStore,
     initialLanguage,

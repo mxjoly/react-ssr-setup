@@ -39,7 +39,7 @@ const loadAndCache = (locale: string, ns: string) => {
   translationCache[locale] = {
     [ns]: {
       values: fs.readFileSync(`${localesDir}/${locale}/${ns}.json`, {
-        encoding: 'utf-8',
+        encoding: 'utf8',
       }),
       updatedAt: new Date(
         fs.statSync(path.resolve(`${localesDir}/${locale}/${ns}.json`)).mtime
@@ -78,7 +78,7 @@ export default (
       .header('Last-Modified', new Date(updatedAt).toUTCString())
       .status(200)
       .send(values);
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message);
     return res.status(404).send(null);
   }
